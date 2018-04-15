@@ -24,7 +24,7 @@ def price_coin(request):
     coin_price = {}
     coin_price['btc_price'] = bid_Finex('btcusd')
     coin_price['eth_price'] = bid_Finex('ethusd')
-    coin_price['gimp'] = gimp()
+    # coin_price['gimp'] = gimp()
     volume = '100000'
     # gimp = gimp()
     # context = {'coin_price': coin_price, 'volume': volume, 'gimp':gimp}

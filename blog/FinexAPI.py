@@ -34,23 +34,24 @@ def bid_Finex(symbol):
 	bid = rep['bid']
 	return bid
 
-# coinone API
-def bid_Coinone():
-	URL = "https://api.coinone.co.kr/ticker/"
-	response = requests.request("GET", URL)
-	rep = response.json()
-	bid = rep['last']
-	return bid
-
-def gimp():
-	finex = float(bid_Finex('btcusd'))
-	coinone = int(bid_Coinone())
-	gimp_btc = float(coinone/finex/1069-1)
-	return str(format(gimp_btc*100, '.2f')+"%")
-
-print(gimp())
-
-
+# # coinone API
+# def bid_Coinone():
+# 	URL = "https://api.coinone.co.kr/ticker/"
+# 	response = requests.request("GET", URL)
+# 	rep = response.json()
+# 	bid = rep['last']
+# 	return bid
+# 
+# def gimp():
+# 	finex = float(bid_Finex('btcusd'))
+# 	coinone = int(bid_Coinone())
+# 	gimp_btc = float(coinone/finex/1069-1)
+# 	return str(format(gimp_btc*100, '.2f')+"%")
+#
+# print(gimp())
+#
+# a=bid_Coinone()
+# print(a)
 
 # Bitcoinchart API
 #
