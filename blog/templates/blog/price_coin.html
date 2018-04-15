@@ -2,9 +2,19 @@
 
 {% block content %}
         <div>
-            <h1>Price List in Bitfinex.com</h1>
+            <h2><a href="http://bitfinex.com">Price List in Bitfinex.com</a></h2>
+            <ul>
             {% for key, value in coin_price.items %}
-              <h2>{{ key|upper }} is {{ value }}.</h2>
+              <h3><li>{{ key|upper }} is {{ value }}.</li></h3>
             {% endfor %}
+          </ul>
+        </div>
+        <div>
+            <h2><a href="http://coinone.co.kr/chart/">Price List in Bithumb.com</a></h2>
+            <ul>
+            {% for key, value in coin_price_bithumb.items %}
+              <h3><li>{{ key }} is {{ value }}.</li></h3>
+            {% endfor %}
+            </ul>
         </div>
 {% endblock %}

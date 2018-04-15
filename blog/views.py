@@ -25,11 +25,16 @@ def price_coin(request):
     coin_price = {}
     for symbol in symbols:
         coin_price[symbol] = bid_Finex(symbol)
+    # coin_price = sorted(coin_price.item)
     # coin_price['gimp'] = gimp()
-    volume = '100000'
+    symbols_bithumb = symbol_list_bithumb()
+    coin_price_bithumb = {}
+    for symbol in symbols_bithumb:
+        coin_price_bithumb[symbol] = bid_bithumb(symbol)
+    # coin_price_bithumb = sorted(coin_price_bithumb.item)
     # gimp = gimp()
     # context = {'coin_price': coin_price, 'volume': volume, 'gimp':gimp}
-    context = {'coin_price': coin_price, 'volume': volume}
+    context = {'coin_price': coin_price, 'coin_price_bithumb': coin_price_bithumb}
 
     return render(request, 'blog/price_coin.html', context)
     # return HttpResponse("BTC is %d$" % volume)
