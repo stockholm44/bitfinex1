@@ -21,9 +21,10 @@ from blog.FinexAPI import *
 # def hello(request):
 #     return HttpResponse("Hello world")
 def price_coin(request):
+    symbols = symbol_list()
     coin_price = {}
-    coin_price['btc_price'] = bid_Finex('btcusd')
-    coin_price['eth_price'] = bid_Finex('ethusd')
+    for symbol in symbols:
+        coin_price[symbol] = bid_Finex(symbol)
     # coin_price['gimp'] = gimp()
     volume = '100000'
     # gimp = gimp()

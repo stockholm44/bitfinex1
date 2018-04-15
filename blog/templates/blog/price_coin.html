@@ -2,8 +2,9 @@
 
 {% block content %}
         <div>
-            <h1>BTC is {{ coin_price.btc_price }}.</h1>
-            <!-- <h1>Gimchi Premium is {{ coin_price.gimp }}</h1> -->
-            <h1>ETH is {{ coin_price.eth_price }}.</h1>
+            <h1>Price List in Bitfinex.com</h1>
+            {% for key, value in coin_price.items %}
+              <h2>{{ key|upper }} is {{ value }}.</h2>
+            {% endfor %}
         </div>
 {% endblock %}
