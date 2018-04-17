@@ -5,5 +5,4 @@ from blog.views import *
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'', include('blog.urls')),
-    url(r'^keyboard/', 'blog.views.keyboard'),
 ]
