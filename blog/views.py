@@ -2,7 +2,7 @@ from django.utils import timezone
 from .models import Post
 from django.shortcuts import render, get_object_or_404, redirect
 from .forms import PostForm
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 import datetime
 from django.template import Template, Context
 from django.template.loader import get_template, render_to_string
@@ -20,6 +20,12 @@ from blog.FinexAPI import *
 #     return HttpResponse(html)
 # def hello(request):
 #     return HttpResponse("Hello world")
+def keyboard(request):
+
+    return JsonResponse({
+        'type' : 'buttons',
+        'buttons' : ['1', '2', '3', '4', '5']
+    })
 def price_coin(request):
     symbols = symbol_list()
     coin_price = {}
