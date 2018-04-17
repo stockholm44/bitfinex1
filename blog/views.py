@@ -30,19 +30,19 @@ def keyboard(request):
         'buttons' : ['BTC', 'ETH', 'XRP']
     })
 @csrf_exempt
-def answer(request):
+def message(request):
     symbol_list = ['BTC', 'ETH', 'XRP']
     json_str = ((request.body).decode('utf-8'))
     received_json_data = json.loads(json_str)
     data = received_json_data['content']
-    if data in symbol_list:
-            symbol = data
-            price = bid_bithumb(symbol)
+    # if data in symbol_list:
+    #         symbol = data
+    #         price = bid_bithumb(symbol)
     today_date = datetime.date.today().strftime("%m월 %d일")
 
     return JsonResponse({
             'message': {
-                'text': today_date + '의 ' + symbol + '시세는 ' + price +' 입니다.'
+                'text': today_date + '의 ' + data + '시세는 ' + price +' 입니다.'
             },
             'keyboard': {
                 'type': 'buttons',
