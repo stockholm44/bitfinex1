@@ -7,6 +7,9 @@ import datetime
 from django.template import Template, Context
 from django.template.loader import get_template, render_to_string
 from blog.FinexAPI import *
+from django.views.decorators.csrf import csrf_exempt
+
+
 # def current_datetime(request):
 #     now = datetime.datetime.now()
 #     return render(request, 'current_datetime.html',{'current_time': now})
@@ -26,6 +29,25 @@ def keyboard(request):
         'type' : 'buttons',
         'buttons' : ['1', '2', '3', '4', '5']
     })
+def answer(request):
+    symbol_list = ['BTC', 'ETH', 'XRP']
+    json_str = ((request.body).decode('utf-8'))
+    received_json_data = json.loads(json_str)
+    data = received_json_data['content']
+    if data in symbol_list:
+            symbol = data
+    today_date = datetime.date.today().strftime("%m월 %d일")
+
+    return JsonResponse({
+            'message': {
+                'text': today_date + '의 ' + symbol + '시세는 ' + bid_bithumb(symbol) +' 입니다.'
+            },
+            'keyboard': {
+                'type': 'buttons',
+                'buttons': ['1', '2', '3', '4', '5']
+            }
+
+        })
 def price_coin(request):
     symbols = symbol_list()
     coin_price = {}
