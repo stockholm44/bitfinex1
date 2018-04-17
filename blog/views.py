@@ -27,7 +27,7 @@ def keyboard(request):
 
     return JsonResponse({
         'type' : 'buttons',
-        'buttons' : ['1', '2', '3', '4', '5']
+        'buttons' : ['BTC', 'ETH', 'XRP']
     })
 def answer(request):
     symbol_list = ['BTC', 'ETH', 'XRP']
@@ -44,7 +44,7 @@ def answer(request):
             },
             'keyboard': {
                 'type': 'buttons',
-                'buttons': ['1', '2', '3', '4', '5']
+                'buttons': ['BTC', 'ETH', 'XRP']
             }
 
         })
