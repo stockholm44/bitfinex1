@@ -51,7 +51,7 @@ def message(request):
                 }
 
             })
-    elif data == "ETH"
+    elif data == "ETH":
         return JsonResponse({
                 "message": {
                     "text": "ETH 가격??? 몰라이 십새야. 비탈릭 십세"
@@ -62,10 +62,21 @@ def message(request):
                 }
 
             })
-    elif data == "XRP"
+    elif data == "XRP":
         return JsonResponse({
                 "message": {
                     "text": today_date + "의 " + data + "시세는 " + str(price) +" 입니다."
+                },
+                "keyboard": {
+                    "type": "buttons",
+                    "buttons": ['BTC', 'ETH', 'XRP']
+                }
+
+            })
+    else:
+        return JsonResponse({
+                "message": {
+                    "text": "개놈의 새끼"
                 },
                 "keyboard": {
                     "type": "buttons",
