@@ -34,6 +34,12 @@ def bid_Finex(symbol):
 	bid = rep['bid']
 	return bid
 
+a = [1,2,3,4,5]
+b = [8,7,6,5,4]
+print(a)
+print(b)
+c = a + b
+print(c)
 # def symbol_list():
 # 	URL = "https://api.bitfinex.com/v1/symbols"
 # 	response = requests.request("GET", URL)

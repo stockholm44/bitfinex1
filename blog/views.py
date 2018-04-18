@@ -34,6 +34,7 @@ def message(request):
     symbol_list = list(symbol_list().keys())
     symbol_list_bitfinex = symbol_list()
     symbol_list_bithumb = symbol_list_bithumb()
+    symbol_list_total = symbol_list + symbol_list_bithumb
     json_str = ((request.body).decode('utf-8'))
     received_json_data = json.loads(json_str)
     data = received_json_data['content']
@@ -49,7 +50,7 @@ def message(request):
     today_date = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     # today_date = datetime.date.today().strftime("%m월 %d일")
 
-    if data in symbol_list & data in symbol_list_bithumb:
+    if data in symbol_list and data in symbol_list_bithumb:
         response_1 = str(today_date) + " 의 시세\n" + str(data) + " USD in Bitfinex : " + str(price_usd) + "\n" + str(data) + " KRW in Bitthumb : " + str(price_krw)
     elif data in symbol_list:
         response_1 = str(today_date) + " 의 시세\n" + str(data) + " USD in Bitfinex : " + str(price_usd)
@@ -58,7 +59,7 @@ def message(request):
 
     response_message = str(response_1)
 
-    if data in symbol_list + symbol_list_bithumb:
+    if data in symbol_list_total:
         return JsonResponse({
                 "message": {
                     "text": response_message
