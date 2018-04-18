@@ -65,7 +65,7 @@ def message(request):
     elif data == "XRP":
         return JsonResponse({
                 "message": {
-                    "text": today_date + "의 " + data + "시세는 " + str(price) +" 입니다."
+                    "text": str(today_date) + "의 " + stt(data) + "시세는 " + str(price) +" 입니다."
                 },
                 "keyboard": {
                     "type": "buttons",
