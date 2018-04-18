@@ -39,8 +39,9 @@ def message(request):
     #         symbol = data
     #         price = bid_bithumb(symbol)
     today_date = datetime.date.today().strftime("%m월 %d일")
-    response_1 = str(today_date) + "의 " + stt(data) + "시세는 " + str(price) +" 입니다."
+    response_1 = str(today_date) + "의 " + str(data) + "시세는 " + str(price) +" 입니다."
     response_message = str(response_1)
+
     if data =="BTC":
         return JsonResponse({
                 "message": {
