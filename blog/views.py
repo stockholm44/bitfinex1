@@ -42,7 +42,7 @@ def message(request):
     today_date = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     # today_date = datetime.date.today().strftime("%m월 %d일")
 
-    response_1 = "현시간 " + str(today_date) + " 의 " + str(data) + "시세는 " + price_won + "원 입니다."
+    response_1 = str(today_date) + " 의 " + str(data) + "시세는 " + str(price_won) + "원 입니다."
     response_message = str(response_1)
 
     if data =="BTC":
