@@ -38,7 +38,7 @@ def message(request):
     if data in symbol_list:
             symbol = data
             price = bid_bithumb(symbol)
-            price_won = format(price,',')
+            # price_won = format(price,',')
     today_date = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     # today_date = datetime.date.today().strftime("%m월 %d일")
 
