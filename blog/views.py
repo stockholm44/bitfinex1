@@ -41,15 +41,25 @@ def message(request):
     today_date = datetime.date.today().strftime("%m월 %d일")
 
     return JsonResponse({
-            'message': {
-                'text': today_date + '의 ' + data + '시세는 ' + price +' 입니다.'
+            "message": {
+                "text": '알라카솜~~~~~'
             },
-            'keyboard': {
-                'type': 'buttons',
-                'buttons': ['BTC', 'ETH', 'XRP']
+            "keyboard": {
+                "type": "buttons",
+                "buttons": ['BTC', 'ETH', 'XRP']
             }
 
         })
+    # return JsonResponse({
+    #         'message': {
+    #             'text': today_date + '의 ' + data + '시세는 ' + price +' 입니다.'
+    #         },
+    #         'keyboard': {
+    #             'type': 'buttons',
+    #             'buttons': ['BTC', 'ETH', 'XRP']
+    #         }
+    #
+    #     })
 def price_coin(request):
     symbols = symbol_list()
     coin_price = {}

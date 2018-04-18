@@ -1,5 +1,6 @@
 from django.conf.urls import url
 from . import *
+from . import views
 
 urlpatterns = [
     url(r'^$', views.price_coin, name='price_coin'),
