@@ -31,7 +31,7 @@ def keyboard(request):
     })
 @csrf_exempt
 def message(request):
-    symbol_list = ['BTC', 'ETH', 'XRP']
+    # symbol_list = ['BTC', 'ETH', 'XRP']
     json_str = ((request.body).decode('utf-8'))
     received_json_data = json.loads(json_str)
     data = received_json_data['content']
