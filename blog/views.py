@@ -27,7 +27,7 @@ def keyboard(request):
 
     return JsonResponse({
         'type' : 'buttons',
-        'buttons' : ['BTC', 'ETH', 'XRP']
+        'buttons' : ['BTC', 'ETH', 'XRP', 'VAR']
     })
 @csrf_exempt
 def message(request):
@@ -39,7 +39,8 @@ def message(request):
     #         symbol = data
     #         price = bid_bithumb(symbol)
     today_date = datetime.date.today().strftime("%m월 %d일")
-
+    response_1 = str(today_date) + "의 " + stt(data) + "시세는 " + str(price) +" 입니다."
+    response_message = str(response_1)
     if data =="BTC":
         return JsonResponse({
                 "message": {
@@ -47,7 +48,7 @@ def message(request):
                 },
                 "keyboard": {
                     "type": "buttons",
-                    "buttons": ['BTC', 'ETH', 'XRP']
+                    "buttons": ['BTC', 'ETH', 'XRP', 'VAR']
                 }
 
             })
@@ -58,18 +59,29 @@ def message(request):
                 },
                 "keyboard": {
                     "type": "buttons",
-                    "buttons": ['BTC', 'ETH', 'XRP']
+                    "buttons": ['BTC', 'ETH', 'XRP', 'VAR']
                 }
 
             })
     elif data == "XRP":
         return JsonResponse({
                 "message": {
-                    "text": str(today_date) + "의 " + stt(data) + "시세는 " + str(price) +" 입니다."
+                    "text": response_message
                 },
                 "keyboard": {
                     "type": "buttons",
-                    "buttons": ['BTC', 'ETH', 'XRP']
+                    "buttons": ['BTC', 'ETH', 'XRP', 'VAR']
+                }
+
+            })
+    elif data == "VAR":
+        return JsonResponse({
+                "message": {
+                    "text": 11 + 12
+                },
+                "keyboard": {
+                    "type": "buttons",
+                    "buttons": ['BTC', 'ETH', 'XRP', 'VAR']
                 }
 
             })
@@ -80,7 +92,7 @@ def message(request):
                 },
                 "keyboard": {
                     "type": "buttons",
-                    "buttons": ['BTC', 'ETH', 'XRP']
+                    "buttons": ['BTC', 'ETH', 'XRP', 'VAR']
                 }
 
             })
