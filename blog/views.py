@@ -39,17 +39,40 @@ def message(request):
     #         symbol = data
     #         price = bid_bithumb(symbol)
     today_date = datetime.date.today().strftime("%m월 %d일")
-    response_message = "%s의 시세는  %f 입니다. 이현희 십세" % (data, price)
-    return JsonResponse({
-            "message": {
-                "text": response_message
-            },
-            "keyboard": {
-                "type": "buttons",
-                "buttons": ['BTC', 'ETH', 'XRP']
-            }
 
-        })
+    if data =="BTC":
+        return JsonResponse({
+                "message": {
+                    "text": "BTC가격??? 몰라이이십새야"
+                },
+                "keyboard": {
+                    "type": "buttons",
+                    "buttons": ['BTC', 'ETH', 'XRP']
+                }
+
+            })
+    elif data == "ETH"
+        return JsonResponse({
+                "message": {
+                    "text": "ETH 가격??? 몰라이 십새야. 비탈릭 십세"
+                },
+                "keyboard": {
+                    "type": "buttons",
+                    "buttons": ['BTC', 'ETH', 'XRP']
+                }
+
+            })
+    elif data == "XRP"
+        return JsonResponse({
+                "message": {
+                    "text": today_date + "의 " + data + "시세는 " + str(price) +" 입니다."
+                },
+                "keyboard": {
+                    "type": "buttons",
+                    "buttons": ['BTC', 'ETH', 'XRP']
+                }
+
+            })
     # return JsonResponse({
     #         'message': {
     #             'text': today_date + '의 ' + data + '시세는 ' + price +' 입니다.'
