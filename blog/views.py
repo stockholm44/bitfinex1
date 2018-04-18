@@ -32,13 +32,14 @@ def keyboard(request):
 @csrf_exempt
 def message(request):
     symbol_list = list(symbol_list().keys())
+    symbol_list_bitfinex = symbol_list()
     symbol_list_bithumb = symbol_list_bithumb()
     json_str = ((request.body).decode('utf-8'))
     received_json_data = json.loads(json_str)
     data = received_json_data['content']
     if data in symbol_list:
             symbol_1 = data
-            symbol = symbol_list[symbol_1]
+            symbol = symbol_list_bitfinex[symbol_1]
             price_usd = bid_Finex(symbol)
             # price_won = format(price,',')
     if data in symbol_list_bithumb:
