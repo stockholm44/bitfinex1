@@ -27,79 +27,50 @@ def keyboard(request):
 
     return JsonResponse({
         'type' : 'buttons',
-        'buttons' : ['BTC', 'ETH', 'XRP', 'VAR']
+        'buttons' : ['BTC', 'ETH', 'EOS', 'XRP', 'IOTA', 'BCH', 'NEO', 'QTUM']
     })
 @csrf_exempt
 def message(request):
-    symbol_list = ['BTC', 'ETH', 'XRP']
+    symbol_list = list(symbol_list().keys())
+    symbol_list_bithumb = symbol_list_bithumb()
     json_str = ((request.body).decode('utf-8'))
     received_json_data = json.loads(json_str)
     data = received_json_data['content']
     if data in symbol_list:
-            symbol = data
-            price = bid_bithumb(symbol)
+            symbol_1 = data
+            symbol = symbol_list[symbol_1]
+            price_usd = bid_Finex(symbol)
             # price_won = format(price,',')
+    if data in symbol_list_bithumb:
+            symbol = data
+            price_krw = bid_bithumb(symbol)
+
     today_date = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     # today_date = datetime.date.today().strftime("%m월 %d일")
 
-    response_1 = str(today_date) + " 의 " + str(data) + "시세는 " + str(price) + "원 입니다."
+    if data in symbol_list & data in symbol_list_bithumb:
+        response_1 = str(today_date) + " 의 시세\n" + str(data) + " USD in Bitfinex : " + str(price_usd) + "\n" + str(data) + " KRW in Bitthumb : " + str(price_krw)
+    elif data in symbol_list:
+        response_1 = str(today_date) + " 의 시세\n" + str(data) + " USD in Bitfinex : " + str(price_usd)
+    elif data in symbol_list_bithumb:
+        response_1 = str(today_date) + " 의 시세\n" + str(data) + " KRW in Bitthumb : " + str(price_krw)
+
     response_message = str(response_1)
 
-    if data =="BTC":
-        return JsonResponse({
-                "message": {
-                    "text": "BTC가격??? 몰라 이 이현희 십새야. \n" + response_message
-                },
-                "keyboard": {
-                    "type": "buttons",
-                    "buttons": ['BTC', 'ETH', 'XRP', 'VAR']
-                }
-
-            })
-    elif data == "ETH":
-        return JsonResponse({
-                "message": {
-                    "text": "ETH 가격??? 개떡같은새끼. 비탈릭 십세\n" + response_message
-                },
-                "keyboard": {
-                    "type": "buttons",
-                    "buttons": ['BTC', 'ETH', 'XRP', 'VAR']
-                }
-
-            })
-    elif data == "XRP":
+    if data in symbol_list + symbol_list_bithumb:
         return JsonResponse({
                 "message": {
                     "text": response_message
                 },
                 "keyboard": {
                     "type": "buttons",
-                    "buttons": ['BTC', 'ETH', 'XRP', 'VAR']
+                    "buttons": ['BTC', 'ETH', 'EOS', 'XRP', 'IOTA', 'BCH', 'NEO', 'QTUM']
                 }
 
             })
-    elif data == "VAR":
-        return JsonResponse({
-                "message": {
-                    "text": '★★★★★★★ 십봉새뀌'
-                },
-                "keyboard": {
-                    "type": "buttons",
-                    "buttons": ['BTC', 'ETH', 'XRP', 'VAR']
-                }
 
-            })
-    else:
-        return JsonResponse({
-                "message": {
-                    "text": "개놈의 새끼"
-                },
-                "keyboard": {
-                    "type": "buttons",
-                    "buttons": ['BTC', 'ETH', 'XRP', 'VAR']
-                }
 
-            })
+
     # return JsonResponse({
     #         'message': {
     #             'text': today_date + '의 ' + data + '시세는 ' + price +' 입니다.'

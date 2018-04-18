@@ -41,13 +41,26 @@ def bid_Finex(symbol):
 # 	return rep
 
 def symbol_list():
-	symbols = ('btcusd', 'ethusd', 'eosusd', 'xrpusd', 'iotusd', 'bchusd', 'neousd', 'qtmusd')
+	symbols = {}
+	symbols_1 = ('btcusd', 'ethusd', 'eosusd', 'xrpusd', 'iotusd', 'bchusd', 'neousd', 'qtmusd')
+	symbols_2 =('BTC', 'ETH', 'EOS', 'XRP', 'IOTA', 'BCH', 'NEO', 'QTUM')
+	a = len(symbols_1)
+	b = len(symbols_2)
+	# for symbol_1 in symbols_1:
+	# 	for symbol_2 in symbols_2:
+	# 		symbols[symbol_1] = symbol_2
+	for i in range(a-1):
+		symbols[symbols_2[i]] = symbols_1[i]
+
+
 	# ('rrtusd', 'rrtbtc', 'zecusd', 'zecbtc', 'xmrusd', 'xmrbtc', 'dshusd', 'dshbtc', 'btceur', 'btcjpy', 'xrpusd', 'xrpbtc', 'iotusd', 'iotbtc', 'ioteth', 'eosusd', 'eosbtc')
 
 	# ('eoseth', 'sanusd', 'sanbtc', 'saneth', 'omgusd', 'omgbtc', 'omgeth', 'bchusd', 'bchbtc', 'bcheth', 'neousd', 'neobtc', 'neoeth', 'etpusd', 'etpbtc', 'etpeth', 'qtmusd', 'qtmbtc', 'qtmeth', 'avtusd', 'avtbtc', 'avteth', 'edousd', 'edobtc', 'edoeth', 'btgusd', 'btgbtc', 'datusd', 'datbtc', 'dateth', 'qshusd', 'qshbtc', 'qsheth', 'yywusd', 'yywbtc', 'yyweth', 'gntusd', 'gntbtc', 'gnteth', 'sntusd', 'sntbtc', 'snteth', 'ioteur', 'batusd', 'batbtc', 'bateth', 'mnausd', 'mnabtc', 'mnaeth', 'funusd', 'funbtc', 'funeth', 'zrxusd', 'zrxbtc', 'zrxeth', 'tnbusd', 'tnbbtc', 'tnbeth', 'spkusd', 'spkbtc', 'spketh', 'trxusd', 'trxbtc', 'trxeth', 'rcnusd', 'rcnbtc', 'rcneth', 'rlcusd', 'rlcbtc', 'rlceth', 'aidusd', 'aidbtc', 'aideth', 'sngusd', 'sngbtc', 'sngeth', 'repusd', 'repbtc', 'repeth', 'elfusd', 'elfbtc', 'elfeth', 'btcgbp', 'etheur', 'ethjpy', 'ethgbp', 'neoeur', 'neojpy', 'neogbp', 'eoseur', 'eosjpy', 'eosgbp', 'iotjpy', 'iotgbp', 'iosusd', 'iosbtc', 'ioseth', 'aiousd', 'aiobtc', 'aioeth', 'requsd', 'reqbtc', 'reqeth', 'rdnusd', 'rdnbtc', 'rdneth', 'lrcusd', 'lrcbtc', 'lrceth', 'waxusd', 'waxbtc', 'waxeth', 'daiusd', 'daibtc', 'daieth', 'cfiusd', 'cfibtc', 'cfieth', 'agiusd', 'agibtc', 'agieth', 'bftusd', 'bftbtc', 'bfteth', 'mtnusd', 'mtnbtc', 'mtneth', 'odeusd', 'odebtc', 'odeeth')
 	return symbols
 
-
+a = symbol_list()
+b = list(a.keys())
+print(b)
 # Bithumb API
 def bid_bithumb(symbol):
 	URL = "https://api.bithumb.com/public/ticker/%s" % symbol
