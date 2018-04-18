@@ -44,7 +44,7 @@ def message(request):
     if data =="BTC":
         return JsonResponse({
                 "message": {
-                    "text": "BTC가격??? 몰라이이십새야"
+                    "text": "BTC가격??? 몰라 이 이현희 십새야. "
                 },
                 "keyboard": {
                     "type": "buttons",
@@ -55,7 +55,7 @@ def message(request):
     elif data == "ETH":
         return JsonResponse({
                 "message": {
-                    "text": "ETH 가격??? 몰라이 십새야. 비탈릭 십세"
+                    "text": "ETH 가격??? 개떡같은새끼. 비탈릭 십세"
                 },
                 "keyboard": {
                     "type": "buttons",
