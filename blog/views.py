@@ -38,7 +38,7 @@ def message(request):
     if data in symbol_list:
             symbol = data
             price = bid_bithumb(symbol)
-    today_date = datetime.date.today()
+    today_date = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     # today_date = datetime.date.today().strftime("%m월 %d일")
 
     response_1 = str(today_date) + "의 " + str(data) + "시세는 " + str(price) +" 입니다."
@@ -47,7 +47,7 @@ def message(request):
     if data =="BTC":
         return JsonResponse({
                 "message": {
-                    "text": "BTC가격??? 몰라 이 이현희 십새야. " + response_message
+                    "text": "BTC가격??? 몰라 이 이현희 십새야. \n" + response_message
                 },
                 "keyboard": {
                     "type": "buttons",
@@ -58,7 +58,7 @@ def message(request):
     elif data == "ETH":
         return JsonResponse({
                 "message": {
-                    "text": "ETH 가격??? 개떡같은새끼. 비탈릭 십세" + response_message
+                    "text": "ETH 가격??? 개떡같은새끼. 비탈릭 십세\n" + response_message
                 },
                 "keyboard": {
                     "type": "buttons",
