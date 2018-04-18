@@ -42,7 +42,7 @@ def message(request):
     today_date = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     # today_date = datetime.date.today().strftime("%m월 %d일")
 
-    response_1 = str(today_date) + " 의 " + str(data) + "시세는 " + str(price) + "원 입니다."
+    response_1 = str(today_date) + " 의 " + str(data) + "시세는 " + str(format(price,',')) + "원 입니다."
     response_message = str(response_1)
 
     if data =="BTC":
@@ -81,7 +81,7 @@ def message(request):
     elif data == "VAR":
         return JsonResponse({
                 "message": {
-                    "text": "뭘 알고 누른거냐 씨빠썌끼야?"
+                    "text": '★★★★★★★ 십봉새뀌'
                 },
                 "keyboard": {
                     "type": "buttons",
