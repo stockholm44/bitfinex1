@@ -34,12 +34,12 @@ def bid_Finex(symbol):
 	bid = rep['bid']
 	return bid
 
-a = [1,2,3,4,5]
-b = [8,7,6,5,4]
-print(a)
-print(b)
-c = a + b
-print(c)
+# a = [1,2,3,4,5]
+# b = [8,7,6,5,4]
+# print(a)
+# print(b)
+# c = a + b
+# print(c)
 # def symbol_list():
 # 	URL = "https://api.bitfinex.com/v1/symbols"
 # 	response = requests.request("GET", URL)
@@ -48,8 +48,8 @@ print(c)
 
 def symbol_list():
 	symbols = {}
-	symbols_1 = ('btcusd', 'ethusd', 'eosusd', 'xrpusd', 'iotusd', 'bchusd', 'neousd', 'qtmusd')
-	symbols_2 =('BTC', 'ETH', 'EOS', 'XRP', 'IOTA', 'BCH', 'NEO', 'QTUM')
+	symbols_1 = ['btcusd', 'ethusd', 'eosusd', 'xrpusd', 'iotusd', 'bchusd', 'neousd', 'qtmusd']
+	symbols_2 = ['BTC', 'ETH', 'EOS', 'XRP', 'IOTA', 'BCH', 'NEO', 'QTUM']
 	a = len(symbols_1)
 	b = len(symbols_2)
 	# for symbol_1 in symbols_1:
@@ -77,7 +77,7 @@ def bid_bithumb(symbol):
 	return bid
 
 def symbol_list_bithumb():
-	symbols = ('BTC','ETH','EOS','XRP','BCH','QTUM')
+	symbols = ['BTC','ETH','EOS','XRP','BCH','QTUM']
 	return symbols
 
 # a = bid_bithumb('BTC')
