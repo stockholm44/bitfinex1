@@ -42,7 +42,7 @@ def message(request):
 
     return JsonResponse({
             "message": {
-                "text": '알라카솜~~~~~'
+                "text": today_date + "의 " + data + "시세는 " + price +" 입니다. 이현희 십세"
             },
             "keyboard": {
                 "type": "buttons",
