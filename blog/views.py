@@ -38,10 +38,11 @@ def message(request):
     if data in symbol_list:
             symbol = data
             price = bid_bithumb(symbol)
+            price_won = format(price,',')
     today_date = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     # today_date = datetime.date.today().strftime("%m월 %d일")
 
-    response_1 = "현시간 " + str(today_date) + " 의 " + str(data) + "시세는 " + format(price,',') + "원 입니다."
+    response_1 = "현시간 " + str(today_date) + " 의 " + str(data) + "시세는 " + price_won + "원 입니다."
     response_message = str(response_1)
 
     if data =="BTC":
