@@ -39,7 +39,7 @@ def message(request):
     #         symbol = data
     #         price = bid_bithumb(symbol)
     today_date = datetime.date.today().strftime("%m월 %d일")
-    response_message = "%s의 시세는  %0.2f 입니다. 이현희 십세" % (data, price)
+    response_message = "%s의 시세는  %f 입니다. 이현희 십세" % (data, price)
     return JsonResponse({
             "message": {
                 "text": response_message
