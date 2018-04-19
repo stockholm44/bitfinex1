@@ -41,7 +41,7 @@ def message(request):
             price_krw = int(price_krw)
             price_krw = format(price_krw,',')
     if data in symbol_list_keys and data in symbol_list_bithumb:
-            gimp = float(price_krw)/ float(price_usd) / 1096
+            gimp = float(price_krw)/ float(price_usd) / 1096 * 100
 
 
     today_date = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
