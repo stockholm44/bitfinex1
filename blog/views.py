@@ -76,10 +76,14 @@ def message():
 
             })
 def price_coin(request):
+    symbol_list_bitfinex = symbol_list()
+    symbol_list_keys = list(symbol_list().keys())
     symbols = symbol_list()
     coin_price = {}
-    for symbol in symbols:
-        coin_price[symbol] = bid_Finex(symbol)
+    for symbol in symbol_list_keys:
+        symbol_1 = symbol
+        symbol_2 = symbol_list_bitfinex[symbol_1]
+        coin_price[symbol_2] = bid_Finex(symbol_2)
     # coin_price = sorted(coin_price.item)
     # coin_price['gimp'] = gimp()
     symbols_bithumb = symbol_list_bithumb()
