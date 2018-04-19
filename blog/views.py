@@ -69,15 +69,16 @@ def message(request):
     # today_date = datetime.date.today().strftime("%m월 %d일")
 
     if data in symbol_list_keys and data in symbol_list_bithumb:
-        response_1 = str(today_date) + " 의 시세\n" + str(data) + " USD in Bitfinex : " + str(price_usd) + "\n" + str(data) + " KRW in Bitthumb : " + str(price_krw)
+        response_1 = str(today_date) + " 의 시세\n" + str(data) + " USD in Bitfinex : " + str(price_usd) + "$\n" + str(data) + " KRW in Bitthumb : " + str(price_krw) + "원"
     elif data in symbol_list_keys:
-        response_1 = str(today_date) + " 의 시세\n" + str(data) + " USD in Bitfinex : " + str(price_usd)
+        response_1 = str(today_date) + " 의 시세\n" + str(data) + " USD in Bitfinex : " + str(price_usd) + "$"
     elif data in symbol_list_bithumb:
-        response_1 = str(today_date) + " 의 시세\n" + str(data) + " KRW in Bitthumb : " + str(price_krw)
+        response_1 = str(today_date) + " 의 시세\n" + str(data) + " KRW in Bitthumb : " + str(price_krw) + "원"
 
     if data == "ETH":
         response_1 = str(today_date) + " 의 시세\n" + str(data) + " USD in Bitfinex : " + str(price_usd) + "\n" + str(data) + " KRW in Bitthumb : " + str(price_krw) + "\n★★★★★★★★★★★★★★★★★★\n현재 심봉&진우의 ETH는 각각\n" + str(cym_ETH) + "원이다 십생키들아.\n" + "즉 초기 대비 현재 " + cym_ETH_Ratio + "% 인것이다.\n그래서 현재 투자 결과는 " + plusminus
-
+    elif data == "XRP"
+        response_1 += "\n★★★★★★★★★★★★★★★\n심재리플 리플심재"
 
     response_message = str(response_1)
 
