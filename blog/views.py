@@ -9,12 +9,13 @@ from django.template.loader import get_template, render_to_string
 from blog.FinexAPI import *
 from django.views.decorators.csrf import csrf_exempt
 import json
+import random
 
 def keyboard(request):
 
     return JsonResponse({
         'type' : 'buttons',
-        'buttons' : ['BTC', 'ETH', 'EOS', 'XRP', 'IOTA', 'BCH', 'NEO', 'QTUM']
+        'buttons' : ['밥뭐먹지?','BTC', 'ETH', 'EOS', 'XRP', 'IOTA', 'BCH', 'NEO', 'QTUM']
     })
 @csrf_exempt
 # def message(request):
@@ -58,7 +59,9 @@ def message(request):
             cym_ETH = format(cym_ETH, ',')
             cym_ETH_gap = format(cym_ETH_gap, ',')
 
-
+    if data == "밥뭐먹지?":
+        bab_list = ['볶음밥','짜장면','짬뽕','간짜장','양념치킨','걍치킨','순살치킨','신라면','진라면','컵라면큰사발','컵라면','불닭볶음밥','굶어시바라','닭도리탕','새우깡','보쌈','고르곤졸라피자','불고기피자','김치에계란','계란말이','회','스시','초밥','간장게장','양념게장']
+        bab_select = random.choice(bab_list)
 
 
     # if data in symbol_list_keys and data in symbol_list_bithumb:
@@ -80,6 +83,9 @@ def message(request):
     elif data == "XRP":
         response_1 += "\n★★★★★★★★★★★★★★★\n심재리플 리플심재"
 
+    if data == "밥뭐먹지?":
+        response_1 = "오늘 먹을 식사는 아래와 같습니다.\n★★★★★★★★★★★★★\n" + bab_select + "\n★★★★★★★★★★★★★"
+
     response_message = str(response_1)
 
     if data in symbol_list_total:
@@ -89,7 +95,7 @@ def message(request):
                 },
                 "keyboard": {
                     "type": "buttons",
-                    "buttons": ['BTC', 'ETH', 'EOS', 'XRP', 'IOTA', 'BCH', 'NEO', 'QTUM']
+                    "buttons": ['밥뭐먹지?','BTC', 'ETH', 'EOS', 'XRP', 'IOTA', 'BCH', 'NEO', 'QTUM']
                 }
 
             })
@@ -100,7 +106,7 @@ def message(request):
                 },
                 "keyboard": {
                     "type": "buttons",
-                    "buttons": ['BTC', 'ETH', 'EOS', 'XRP', 'IOTA', 'BCH', 'NEO', 'QTUM']
+                    "buttons": ['밥뭐먹지?','BTC', 'ETH', 'EOS', 'XRP', 'IOTA', 'BCH', 'NEO', 'QTUM']
                 }
 
             })
