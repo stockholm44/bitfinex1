@@ -18,7 +18,7 @@ def keyboard(request):
     })
 @csrf_exempt
 # def message(request):
-def message():
+def message(request):
     symbol_list_bitfinex = symbol_list()
     symbol_list_bithumb = ['BTC','ETH','EOS','XRP','BCH','QTUM']
     #원래는 FinexAPI()에서 list를 return 할려고 했는데 계속 지역에러가 떠서 그냥 리스트를 함수내에서 정의함.ㅜㅜ
