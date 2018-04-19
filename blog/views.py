@@ -41,7 +41,8 @@ def message(request):
             price_krw = int(price_krw)
             price_krw = format(price_krw,',')
     if data == "ETH":
-            cym_ETH = 20.86 * int(bid_bithumb("ETH"))
+            cym_ETH = 20.86 * int(bid_bithumb("ETH"))/3
+            cym_ETH = int(cym_ETH)
 
     # if data in symbol_list_keys and data in symbol_list_bithumb:
     #         gimp = float(price_krw)/ float(price_usd) / 1096 * 100
