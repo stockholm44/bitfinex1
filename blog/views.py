@@ -44,7 +44,7 @@ def message(request):
             cym_ETH = 20.86 * int(bid_bithumb("ETH"))/3
             cym_ETH = int(cym_ETH)
             cym_ETH_Ratio = cym_ETH / 5000000 * 100
-            cym_ETH_gap = 5000000-cym_ETH
+            cym_ETH_gap = cym_ETH-5000000
             cym_ETH_Ratio = float(cym_ETH_Ratio)
 
             if cym_ETH_gap > 0:
