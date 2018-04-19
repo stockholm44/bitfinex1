@@ -51,7 +51,7 @@ def message():
     elif data in symbol_list_bithumb:
         response_1 = str(today_date) + " 의 시세\n" + str(data) + " KRW in Bitthumb : " + str(price_krw)
 
-    response_message = response_1
+    response_message = str(response_1)
 
     if data in symbol_list_total:
         return JsonResponse({
