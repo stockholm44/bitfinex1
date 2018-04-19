@@ -40,12 +40,15 @@ def message(request):
             price_krw = bid_bithumb(symbol)
             price_krw = int(price_krw)
             price_krw = format(price_krw,',')
+    if data in symbol_list_keys and data in symbol_list_bithumb:
+            gimp = float(price_krw)/ float(price_usd) / 1096
+
 
     today_date = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     # today_date = datetime.date.today().strftime("%m월 %d일")
 
     if data in symbol_list_keys and data in symbol_list_bithumb:
-        response_1 = str(today_date) + " 의 시세\n" + str(data) + " USD in Bitfinex : " + str(price_usd) + "\n" + str(data) + " KRW in Bitthumb : " + str(price_krw)
+        response_1 = str(today_date) + " 의 시세\n" + str(data) + " USD in Bitfinex : " + str(price_usd) + "\n" + str(data) + " KRW in Bitthumb : " + str(price_krw) + "\n Gimcho Premium is " + str(gimp)
     elif data in symbol_list_keys:
         response_1 = str(today_date) + " 의 시세\n" + str(data) + " USD in Bitfinex : " + str(price_usd)
     elif data in symbol_list_bithumb:
