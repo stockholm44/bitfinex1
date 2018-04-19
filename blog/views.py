@@ -40,6 +40,9 @@ def message(request):
             price_krw = bid_bithumb(symbol)
             price_krw = int(price_krw)
             price_krw = format(price_krw,',')
+    if data == "ETH":
+            cym_ETH = 20.86 * int(bid_bithumb("ETH"))
+
     # if data in symbol_list_keys and data in symbol_list_bithumb:
     #         gimp = float(price_krw)/ float(price_usd) / 1096 * 100
 
@@ -53,6 +56,10 @@ def message(request):
         response_1 = str(today_date) + " 의 시세\n" + str(data) + " USD in Bitfinex : " + str(price_usd)
     elif data in symbol_list_bithumb:
         response_1 = str(today_date) + " 의 시세\n" + str(data) + " KRW in Bitthumb : " + str(price_krw)
+
+    if data == "ETH"
+        response_1 = str(today_date) + " 의 시세\n" + str(data) + " USD in Bitfinex : " + str(price_usd) + "\n" + str(data) + " KRW in Bitthumb : " + str(price_krw) + "\n현재 심봉&진우의 ETH는 각각 " + str(cym_ETH) + "원이다 십생키들아."
+
 
     response_message = str(response_1)
 
