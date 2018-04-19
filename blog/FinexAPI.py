@@ -13,7 +13,7 @@ from urllib.request import urlopen, Request
 # print(response.text)
 
 
-# __all__ = ['ticker', 'today', 'orderbook', 'lendbook', 'stats', 'trades', 'lends', 'symbols', 'place_order', 'delete_order', 'delete_all_order', 'status_order', 'active_orders', 'active_positions', 'place_offer', 'cancel_offer', 'status_offer', 'active_offers', 'past_trades', 'balances', 'claim_position', 'close_position', 'withdraw']
+__all__ = ['bid_Finex', 'symbol_list', 'bid_bithumb', 'symbol_list_bithumb']
 #
 # URL = "https://api.bitfinex.com/v1"
 
@@ -79,6 +79,9 @@ def bid_bithumb(symbol):
 def symbol_list_bithumb():
 	symbols = ['BTC','ETH','EOS','XRP','BCH','QTUM']
 	return symbols
+
+# a = symbol_list_bithumb()
+# print(a[0])
 
 # a = bid_bithumb('BTC')
 # print(a)

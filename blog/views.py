@@ -10,19 +10,6 @@ from blog.FinexAPI import *
 from django.views.decorators.csrf import csrf_exempt
 
 
-# def current_datetime(request):
-#     now = datetime.datetime.now()
-#     return render(request, 'current_datetime.html',{'current_time': now})
-# def hours_ahead(request, offset):
-#     try:
-#          offset=int(offset)
-#     except ValueError:
-#         raise Http404()
-#     dt = datetime.datetime.now() + datetime.timedelta(hours=offset)
-#     html = "<html><body>In %s times, it will be %s.</body></html)" % (offset,dt)
-#     return HttpResponse(html)
-# def hello(request):
-#     return HttpResponse("Hello world")
 def keyboard(request):
 
     return JsonResponse({
@@ -30,10 +17,11 @@ def keyboard(request):
         'buttons' : ['BTC', 'ETH', 'EOS', 'XRP', 'IOTA', 'BCH', 'NEO', 'QTUM']
     })
 @csrf_exempt
-def message(request):
+# def message(request):
+def message():
     symbol_list_keys = list(symbol_list().keys())
     symbol_list_bitfinex = symbol_list()
-    symbol_list_bithumb = symbol_list_bithumb()
+    symbol_list_bithumb = ['BTC','ETH','EOS','XRP','BCH','QTUM']
     symbol_list_total = symbol_list_keys + symbol_list_bithumb
     json_str = ((request.body).decode('utf-8'))
     received_json_data = json.loads(json_str)
@@ -42,11 +30,12 @@ def message(request):
             symbol_1 = data
             symbol = symbol_list_bitfinex[symbol_1]
             price_usd = bid_Finex(symbol)
-            print(price_usd)
-            # price_won = format(price,',')
+            price_usd = format(int(price_usd),',')
     if data in symbol_list_bithumb:
             symbol = data
             price_krw = bid_bithumb(symbol)
+            price_krw = int(price_krw)
+            price_krw = format(int(price_krw),',')
 
     today_date = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     # today_date = datetime.date.today().strftime("%m월 %d일")
