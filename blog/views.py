@@ -99,10 +99,21 @@ def message(request):
                 }
 
             })
+    elif data == "밥뭐먹지?":
+        return JsonResponse({
+                "message": {
+                    "text": response_message
+                },
+                "keyboard": {
+                    "type": "buttons",
+                    "buttons": ['밥뭐먹지?','BTC', 'ETH', 'EOS', 'XRP', 'IOTA', 'BCH', 'NEO', 'QTUM']
+                }
+
+            })
     else:
         return JsonResponse({
                 "message": {
-                    "text": "알라카솜."
+                    "text": "알라카쏨~~~"
                 },
                 "keyboard": {
                     "type": "buttons",
