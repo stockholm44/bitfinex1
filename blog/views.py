@@ -48,11 +48,11 @@ def message(request):
             cym_ETH_Ratio = float(cym_ETH_Ratio)
 
             if cym_ETH_gap > 0:
-                plusminus = "이익이다."
+                plusminus = "이익이다.^^"
             elif cym_ETH_gap < 0:
-                plusminus = "꼴았다."
+                plusminus = "꼴았다. ㅜㅜ"
             elif cym_ETH_gap == 0:
-                plusminus = "똔똔이다."
+                plusminus = "똔똔이다.ㅡㅡ"
 
             cym_ETH_Ratio = format(cym_ETH_Ratio, '.1f')
             cym_ETH = format(cym_ETH, ',')
@@ -76,7 +76,7 @@ def message(request):
         response_1 = str(today_date) + " 의 시세\n" + str(data) + " KRW in Bitthumb : " + str(price_krw)
 
     if data == "ETH":
-        response_1 = str(today_date) + " 의 시세\n" + str(data) + " USD in Bitfinex : " + str(price_usd) + "\n" + str(data) + " KRW in Bitthumb : " + str(price_krw) + "\n★★★★★★★★★★★★★★★★★★\n현재 심봉&진우의 ETH는 각각\n" + str(cym_ETH) + "원이다 십생키들아.\n" + "즉 초기 대비 현재 " + cym_ETH_Ratio + "% 인것이다.\n그래서 현재 투자 결과는 " + plusminus + "이다."
+        response_1 = str(today_date) + " 의 시세\n" + str(data) + " USD in Bitfinex : " + str(price_usd) + "\n" + str(data) + " KRW in Bitthumb : " + str(price_krw) + "\n★★★★★★★★★★★★★★★★★★\n현재 심봉&진우의 ETH는 각각\n" + str(cym_ETH) + "원이다 십생키들아.\n" + "즉 초기 대비 현재 " + cym_ETH_Ratio + "% 인것이다.\n그래서 현재 투자 결과는 " + plusminus
 
 
     response_message = str(response_1)
