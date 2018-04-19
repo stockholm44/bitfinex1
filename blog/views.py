@@ -48,7 +48,7 @@ def message(request):
     # today_date = datetime.date.today().strftime("%m월 %d일")
 
     if data in symbol_list_keys and data in symbol_list_bithumb:
-        response_1 = str(today_date) + " 의 시세\n" + str(data) + " USD in Bitfinex : " + str(price_usd) + "\n" + str(data) + " KRW in Bitthumb : " + str(price_krw) + "\n Gimcho Premium is " + str(gimp)
+        response_1 = str(today_date) + " 의 시세\n" + str(data) + " USD in Bitfinex : " + str(price_usd) + "\n" + str(data) + " KRW in Bitthumb : " + str(price_krw) + "\n Gimcho Premium is " + str(gimp) + "."
     elif data in symbol_list_keys:
         response_1 = str(today_date) + " 의 시세\n" + str(data) + " USD in Bitfinex : " + str(price_usd)
     elif data in symbol_list_bithumb:
