@@ -33,12 +33,13 @@ def message():
             symbol_1 = data
             symbol = symbol_list_bitfinex[symbol_1]
             price_usd = bid_Finex(symbol)
-            price_usd = format(int(price_usd),',')
+            price_usd = float(price_usd)
+            price_usd = format(price_usd,',')
     if data in symbol_list_bithumb:
             symbol = data
             price_krw = bid_bithumb(symbol)
             price_krw = int(price_krw)
-            price_krw = format(int(price_krw),',')
+            price_krw = format(price_krw,',')
 
     today_date = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     # today_date = datetime.date.today().strftime("%m월 %d일")
