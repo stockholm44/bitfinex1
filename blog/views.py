@@ -8,7 +8,7 @@ from django.template import Template, Context
 from django.template.loader import get_template, render_to_string
 from blog.FinexAPI import *
 from django.views.decorators.csrf import csrf_exempt
-
+import json
 
 def keyboard(request):
 
