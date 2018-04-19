@@ -51,12 +51,10 @@ def message():
     elif data in symbol_list_bithumb:
         response_1 = str(today_date) + " 의 시세\n" + str(data) + " KRW in Bitthumb : " + str(price_krw)
 
-    response_message = str(response_1)
-
     if data in symbol_list_total:
         return JsonResponse({
                 "message": {
-                    "text": response_message
+                    "text": response_1
                 },
                 "keyboard": {
                     "type": "buttons",
@@ -66,12 +64,12 @@ def message():
             })
     else:
         return JsonResponse({
-                'message': {
-                    'text': '알라카솜~~~'
+                "message": {
+                    "text": "알라카솜."
                 },
-                'keyboard': {
-                    'type': 'buttons',
-                    'buttons': ['BTC', 'ETH', 'XRP']
+                "keyboard": {
+                    "type": "buttons",
+                    "buttons": ['BTC', 'ETH', 'EOS', 'XRP', 'IOTA', 'BCH', 'NEO', 'QTUM']
                 }
 
             })
