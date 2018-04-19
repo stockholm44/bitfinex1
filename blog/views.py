@@ -45,7 +45,7 @@ def message(request):
             cym_ETH = int(cym_ETH)
             cym_ETH_Ratio = cym_ETH / 5000000 * 100
             cym_ETH_Ratio = float(cym_ETH_Ratio)
-            cym_ETH_Ratio = format(cym_ETH_Ratio, '1f')
+            cym_ETH_Ratio = format(cym_ETH_Ratio, '.1f')
             cym_ETH = format(cym_ETH, ',')
 
 
