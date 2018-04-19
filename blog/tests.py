@@ -29,19 +29,19 @@ def message():
     # json_str = ((request.body).decode('utf-8'))
     # received_json_data = json.loads(json_str)
     # data = rec    eived_json_data['content']
-    data = 'BTC'
+    data = 'QTUM'
+
     if data in symbol_list_keys:
             symbol_1 = data
             symbol = symbol_list_bitfinex[symbol_1]
             price_usd = bid_Finex(symbol)
             price_usd = format(int(price_usd),',')
-            print(price_usd)
     if data in symbol_list_bithumb:
             symbol = data
             price_krw = bid_bithumb(symbol)
             price_krw = int(price_krw)
             price_krw = format(int(price_krw),',')
-            print(price_krw)
+
     today_date = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     # today_date = datetime.date.today().strftime("%m월 %d일")
 

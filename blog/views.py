@@ -19,13 +19,16 @@ def keyboard(request):
 @csrf_exempt
 # def message(request):
 def message():
-    symbol_list_keys = list(symbol_list().keys())
     symbol_list_bitfinex = symbol_list()
     symbol_list_bithumb = ['BTC','ETH','EOS','XRP','BCH','QTUM']
+    #원래는 FinexAPI()에서 list를 return 할려고 했는데 계속 지역에러가 떠서 그냥 리스트를 함수내에서 정의함.ㅜㅜ
+    symbol_list_keys = list(symbol_list().keys())
+
     symbol_list_total = symbol_list_keys + symbol_list_bithumb
     json_str = ((request.body).decode('utf-8'))
     received_json_data = json.loads(json_str)
     data = received_json_data['content']
+
     if data in symbol_list_keys:
             symbol_1 = data
             symbol = symbol_list_bitfinex[symbol_1]
@@ -60,19 +63,17 @@ def message():
                 }
 
             })
+    else:
+        return JsonResponse({
+                'message': {
+                    'text': '알라카솜~~~'
+                },
+                'keyboard': {
+                    'type': 'buttons',
+                    'buttons': ['BTC', 'ETH', 'XRP']
+                }
 
-
-
-    # return JsonResponse({
-    #         'message': {
-    #             'text': today_date + '의 ' + data + '시세는 ' + price +' 입니다.'
-    #         },
-    #         'keyboard': {
-    #             'type': 'buttons',
-    #             'buttons': ['BTC', 'ETH', 'XRP']
-    #         }
-    #
-    #     })
+            })
 def price_coin(request):
     symbols = symbol_list()
     coin_price = {}
