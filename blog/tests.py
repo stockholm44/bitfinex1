@@ -75,11 +75,13 @@ def message1():
     #원래는 FinexAPI()에서 list를 return 할려고 했는데 계속 지역에러가 떠서 그냥 리스트를 함수내에서 정의함.ㅜㅜ
     symbol_list_keys = list(symbol_list().keys())
 
-    symbol_list_total = symbol_list_keys + symbol_list_bithumb
+    # symbol_list_total = symbol_list_keys + symbol_list_bithumb
     # json_str = ((request.body).decode('utf-8'))
     # received_json_data = json.loads(json_str)
     # data = received_json_data['content']
-    data = input()
+
+    data = input("입력해")
+
     if data in symbol_list_keys:
             symbol_1 = data
             symbol = symbol_list_bitfinex[symbol_1]
@@ -102,7 +104,7 @@ def message1():
     elif data in symbol_list_bithumb:
         response_1 = str(today_date) + " 의 시세\n" + str(data) + " KRW in Bitthumb : " + str(price_krw)
 
-    print(response_1)
+    return response_1
 
     # if data in symbol_list_total:
     #     return JsonResponse({
@@ -135,4 +137,5 @@ def message1():
 # print(type(c))
 # price = 10000
 
-b = message1()
+a = message1()
+print(a)
