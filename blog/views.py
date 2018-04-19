@@ -43,6 +43,9 @@ def message(request):
     if data == "ETH":
             cym_ETH = 20.86 * int(bid_bithumb("ETH"))/3
             cym_ETH = int(cym_ETH)
+            cym_ETH_Ratio = cym_ETH / 5000000 * 100
+            cym_ETH_Ratio = float(cym_ETH_Ratio)
+            cym_ETH_Ratio = format(cym_ETH_Ratio, '1f')
 
     # if data in symbol_list_keys and data in symbol_list_bithumb:
     #         gimp = float(price_krw)/ float(price_usd) / 1096 * 100
@@ -59,7 +62,7 @@ def message(request):
         response_1 = str(today_date) + " 의 시세\n" + str(data) + " KRW in Bitthumb : " + str(price_krw)
 
     if data == "ETH":
-        response_1 = str(today_date) + " 의 시세\n" + str(data) + " USD in Bitfinex : " + str(price_usd) + "\n" + str(data) + " KRW in Bitthumb : " + str(price_krw) + "\n현재 심봉&진우의 ETH는 각각 " + str(cym_ETH) + "원이다 십생키들아."
+        response_1 = str(today_date) + " 의 시세\n" + str(data) + " USD in Bitfinex : " + str(price_usd) + "\n" + str(data) + " KRW in Bitthumb : " + str(price_krw) + "\n현재 심봉&진우의 ETH는 각각\n" + str(cym_ETH) + "원이다 십생키들아.\n" + "즉 초기 대비 현재 " + cym_ETH_Ratio + "% 인것이다."
 
 
     response_message = str(response_1)
