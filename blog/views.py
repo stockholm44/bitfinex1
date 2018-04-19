@@ -46,6 +46,8 @@ def message(request):
             cym_ETH_Ratio = cym_ETH / 5000000 * 100
             cym_ETH_Ratio = float(cym_ETH_Ratio)
             cym_ETH_Ratio = format(cym_ETH_Ratio, '1f')
+            cym_ETH = format(cym_ETH, ',')
+
 
     # if data in symbol_list_keys and data in symbol_list_bithumb:
     #         gimp = float(price_krw)/ float(price_usd) / 1096 * 100
