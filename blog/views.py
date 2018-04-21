@@ -7,6 +7,7 @@ import datetime
 from django.template import Template, Context
 from django.template.loader import get_template, render_to_string
 from blog.FinexAPI import *
+from blog.FinexAPI import *
 from django.views.decorators.csrf import csrf_exempt
 import json
 import random
@@ -54,24 +55,26 @@ def message(request):
     for i in range(coin_count):
         rank = int(coin_data[i]['rank'])
         name = coin_data[i]['name']
-        price_usd = format(float(coin_data[i]['price_usd']),',.2f') # 1000단위 + 소수점2자리
-        price_krw = format(float(coin_data[i]['price_krw']),',.0f') # 1000단위 + 소수점 0자리
+        price_usd = float(coin_data[i]['price_usd']) # float
+        price_krw = float(coin_data[i]['price_krw']) # float
+        str_price_usd = format(float(coin_data[i]['price_usd']),',.2f') # str_1000단위 + 소수점2자리
+        str_price_krw = format(float(coin_data[i]['price_krw']),',.0f') # str_1000단위 + 소수점 0자리
         percent_change_24h = format(float(coin_data[i]['percent_change_24h']),'.2f')
-        if percent_change_24h > 0:
+        if float(percent_change_24h) > 0:
             change_mark = '▲'
             add_change_mark = '+'
-        elif percent_change_24h == 0:
+        elif float(percent_change_24h) == 0:
             change_mark = '-'
             add_change_mark = ''
-        elif percent_change_24h < 0:
+        elif float(percent_change_24h) < 0:
             change_mark = '▼'
             add_change_mark = ''
 
         volume_usd = float(coin_data[i]['24h_volume_usd'])
         available_supply = float(coin_data[i]['available_supply'])
         # 회전율
-        circul_rate = format(float(volume_usd/available_supply/price_usd*100),'.2f')
-        message_this_coin = rank + '위: ' + name +' - '+ price_usd +'$/' + price_krw + '원 (' + change_mark + percent_change_24h + change_mark + ') - 회전율:' + circul_rate + '%\n'
+        circul_rate = format(float(volume_usd/available_supply/float(price_usd)*100),'.2f')
+        message_this_coin = str(rank) + '위: ' + name +' - '+ str_price_usd +'$/' + str_price_krw + '원 (' + change_mark + percent_change_24h + change_mark + ') - 회전율:' + circul_rate + '%\n'
 
         response_message += message_this_coin
 
