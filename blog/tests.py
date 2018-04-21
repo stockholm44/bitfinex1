@@ -103,7 +103,6 @@ def message():
     today_date = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     # today_date = datetime.date.today().strftime("%m월 %d일")
 
-    print(response_message)
     return response_message
     # if data in coin_rate_selector:
     #     return JsonResponse({
