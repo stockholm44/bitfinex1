@@ -8,6 +8,8 @@ import hashlib
 import time
 from urllib.request import urlopen, Request
 
+__all__ = ['ticker']
+
 def ticker(number):
 	URL = "https://api.coinmarketcap.com/v1/ticker/?convert=KRW&limit=%d" % number
 	response = requests.request("GET", URL)
