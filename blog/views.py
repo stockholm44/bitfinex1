@@ -77,7 +77,7 @@ def message(request):
         message_this_coin = str(rank) + '위\n┌ ' + name +' - '+ str_price_usd +'$/' + str_price_krw + '원\n├ 변화율   ' + add_change_mark + percent_change_24h + change_mark + '%\n└ 회전율   ' + circul_rate + '%\n---------------------\n'
 
         response_message += message_this_coin
-        response_1 = str(response_message)
+        # response_1 = str(response_message)
 
 
 
@@ -87,7 +87,7 @@ def message(request):
     if data in coin_rate_selector:
         return JsonResponse({
                 "message": {
-                    "text": response_1
+                    "text": response_message
                 },
                 "keyboard": {
                     "type": "buttons",
