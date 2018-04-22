@@ -74,7 +74,7 @@ def message(request):
         available_supply = float(coin_data[i]['available_supply'])
         # 회전율
         circul_rate = format(float(volume_usd/available_supply/float(price_usd)*100),'.2f')
-        message_this_coin = str(rank) + '위\n ' + name +' - '+ str_price_usd +'$/' + str_price_krw + '원\n변화율:' + add_change_mark + percent_change_24h + change_mark + '%\n회전율:' + circul_rate + '%\n'
+        message_this_coin = str(rank) + '위\n┌ ' + name +' - '+ str_price_usd +'$/' + str_price_krw + '원\n├ 변화율   ' + add_change_mark + percent_change_24h + change_mark + '%\n└ 회전율   ' + circul_rate + '%\n----------------------'
 
         response_message += message_this_coin
         response_1 = str(response_message)
