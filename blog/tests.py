@@ -12,15 +12,14 @@ from cmc import *
 import json
 import random
 
-def message():
+def message(data):
 
     # Kakao 플러스친구에서의 input Data
     # json_str = ((request.body).decode('utf-8'))
     # received_json_data = json.loads(json_str)
     # data = received_json_data['content']    # 카카오 플러스친구가 받는 input 값.
-    data = 'Coin 순위(1~10위)'
 
-
+    # data = "Coin 순위(1~10위)""
     # 전체적으로 1. 밥뭐먹지 2.코인순위(10,20,50단위) 3. 개별코인정보(BTC,ETH,XRP)
     # response_message를 만들기 전까지 준비데이터들을 아래와 같이 만든다.
 
@@ -72,60 +71,18 @@ def message():
         message_this_coin = str(rank) + '위: ' + name +' - '+ str_price_usd +'$/' + str_price_krw + '원 (' + change_mark + percent_change_24h + change_mark + ') - 회전율:' + circul_rate + '%\n'
 
         response_message += message_this_coin
-
-
-
-
-
-
-    #
-    # if data == "ETH":
-    #         cym_ETH = 20.86 * int(bid_bithumb("ETH"))/3
-    #         cym_ETH = int(cym_ETH)
-    #         cym_ETH_Ratio = cym_ETH / 5000000 * 100
-    #         cym_ETH_gap = cym_ETH-5000000
-    #         cym_ETH_Ratio = float(cym_ETH_Ratio)
-    #
-    #         if cym_ETH_gap > 0:
-    #             plusminus = "이익이다.^^"
-    #         elif cym_ETH_gap < 0:
-    #             plusminus = "꼴았다. ㅜㅜ"
-    #         elif cym_ETH_gap == 0:
-    #             plusminus = "똔똔이다.ㅡㅡ"
-    #
-    #         cym_ETH_Ratio = format(cym_ETH_Ratio, '.1f')
-    #         cym_ETH = format(cym_ETH, ',')
-    #         cym_ETH_gap = format(cym_ETH_gap, ',')
-
+        response_1 = str(response_message)
 
 
 
     today_date = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     # today_date = datetime.date.today().strftime("%m월 %d일")
 
-    return response_message
-    # if data in coin_rate_selector:
-    #     return JsonResponse({
-    #             "message": {
-    #                 "text": response_message
-    #             },
-    #             "keyboard": {
-    #                 "type": "buttons",
-    #                 "buttons": ['밥뭐먹지?','BTC', 'ETH', 'EOS', 'XRP', 'IOTA', 'BCH', 'NEO', 'QTUM']
-    #             }
-    #
-    #         })
-    # elif data == "밥뭐먹지?":
-    #     return JsonResponse({
-    #             "message": {
-    #                 "text": "오늘 먹을 식사는 아래와 같습니다.\n★★★★★★★★★★★★★\n" + bab_select + "\n★★★★★★★★★★★★★"
-    #             },
-    #             "keyboard": {
-    #                 "type": "buttons",
-    #                 "buttons": ['밥뭐먹지?','BTC', 'ETH', 'EOS', 'XRP', 'IOTA', 'BCH', 'NEO', 'QTUM']
-    #             }
-    #
-    #         })
+    if data in coin_rate_selector:
+        return response_1
 
-a = message()
+    elif data == "밥뭐먹지?":
+        return "오늘 먹을 식사는 아래와 같습니다.\n★★★★★★★★★★★★★\n" + bab_select + "\n★★★★★★★★★★★★★"
+
+a = message("Coin 순위(1~10위)")
 print(a)
