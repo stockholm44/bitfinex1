@@ -76,7 +76,7 @@ def message(request):
         circul_rate = format(float(volume_usd/available_supply/float(price_usd)*100),'.2f')
 
     # 2. 코인순위의 message_response
-        message_this_coin = str(rank) + '위\n┌ ' + name +' - '+ str_price_usd +'$/' + str_price_krw + '원\n├ 변화율   ' + add_change_mark + percent_change_24h + change_mark + '%\n└ 회전율   ' + circul_rate + '%\n---------------------\n'
+        message_this_coin = str(rank) + '위\n┌ ' + name +' - '+ str_price_usd +'$/' + str_price_krw + '원\n├ 변화율   ' + add_change_mark + percent_change_24h + "% (" +change_mark + ')\n└ 회전율   ' + circul_rate + '%\n---------------------\n'
         response_message += message_this_coin
 
     # 3. 기타 코인관련 잡기능 BTC, ETH, XRP 들의 개별 dATA + 잡 코멘트 넣기.
@@ -104,7 +104,7 @@ def message(request):
     # 회전율
         circul_rate = format(float(volume_usd/available_supply/float(price_usd)*100),'.2f')
 
-        response_message = str(rank) + '위\n┌ ' + name +' - '+ str_price_usd +'$/' + str_price_krw + '원\n├ 변화율   ' + add_change_mark + percent_change_24h + change_mark + '%\n└ 회전율   ' + circul_rate + '%\n---------------------\n'
+        response_message = str(rank) + '위\n┌ ' + name +' - '+ str_price_usd +'$/' + str_price_krw + '원\n├ 변화율   ' + add_change_mark + percent_change_24h + "% (" +change_mark + ')\n└ 회전율   ' + circul_rate + '%\n---------------------\n'
         if data == 'BTC':
             message_this_coin = '\n 기축코인 비트코인 떡락 ㄱ ㄱ'
         elif data == 'ETH':
