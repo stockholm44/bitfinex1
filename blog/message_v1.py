@@ -6,7 +6,7 @@ import json
 import random
 
 @csrf_exempt
-def message(request): 구버전.
+# def message(request): 구버전.
 def message(request):
     symbol_list_bitfinex = symbol_list()
     symbol_list_bithumb = ['BTC','ETH','EOS','XRP','BCH','QTUM']

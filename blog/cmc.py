@@ -8,7 +8,7 @@ import hashlib
 import time
 from urllib.request import urlopen, Request
 
-__all__ = ['ticker']
+__all__ = ['ticker1','ticker2']
 
 def ticker1(number):
 	URL = "https://api.coinmarketcap.com/v1/ticker/?convert=KRW&limit=%d" % number
@@ -27,9 +27,10 @@ def ticker2(data):
 	rep = response.json()
 	# bid = rep['bid']
 	return rep
-
-a = ticker2('BTC')
-print(a)
+# 
+# a = ticker2('BTC')
+# print(a)
+# print(a[0])
 
 # coin_symbols = {'BTC':'Bitcoin', 'ETH':'Ethereum', 'XRP':'Ripple'}
 # coin_keys = coin_symbols.keys()

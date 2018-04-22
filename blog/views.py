@@ -81,14 +81,15 @@ def message(request):
 
     # 3. 기타 코인관련 잡기능 BTC, ETH, XRP 들의 개별 dATA + 잡 코멘트 넣기.
     coin_list_top3 = ['BTC', 'ETH', 'XRP']
-    if data in range(coin_list_top3):
-        rank = int(coin_data[i]['rank'])
-        name = coin_data[i]['name']
-        price_usd = float(coin_data[i]['price_usd']) # float
-        price_krw = float(coin_data[i]['price_krw']) # float
-        str_price_usd = format(float(coin_data[i]['price_usd']),',.2f') # str_1000단위 + 소수점2자리
-        str_price_krw = format(float(coin_data[i]['price_krw']),',.0f') # str_1000단위 + 소수점 0자리
-        percent_change_24h = format(float(coin_data[i]['percent_change_24h']),'.2f')
+    if data in coin_list_top3:
+        coin_data = ticker2(data)[0]
+        rank = int(coin_data['rank'])
+        name = coin_data['name']
+        price_usd = float(coin_data['price_usd']) # float
+        price_krw = float(coin_data['price_krw']) # float
+        str_price_usd = format(float(coin_data['price_usd']),',.2f') # str_1000단위 + 소수점2자리
+        str_price_krw = format(float(coin_data['price_krw']),',.0f') # str_1000단위 + 소수점 0자리
+        percent_change_24h = format(float(coin_data['percent_change_24h']),'.2f')
         if float(percent_change_24h) > 0:
             change_mark = '▲'
             add_change_mark = '+'
@@ -98,6 +99,11 @@ def message(request):
         elif float(percent_change_24h) < 0:
             change_mark = '▼'
             add_change_mark = ''
+        volume_usd = float(coin_data['24h_volume_usd'])
+        available_supply = float(coin_data['available_supply'])
+    # 회전율
+        circul_rate = format(float(volume_usd/available_supply/float(price_usd)*100),'.2f')
+
         response_message = str(rank) + '위\n┌ ' + name +' - '+ str_price_usd +'$/' + str_price_krw + '원\n├ 변화율   ' + add_change_mark + percent_change_24h + change_mark + '%\n└ 회전율   ' + circul_rate + '%\n---------------------\n'
         if data == 'BTC':
             message_this_coin = '\n 기축코인 비트코인 떡락 ㄱ ㄱ'
@@ -123,16 +129,10 @@ def message(request):
         elif data =='XRP':
             message_this_coin = "\n★★★★★★★★★★★★★★★\n심재리플 리플심재"
 
-
-
-
-
-
-
-
     today_date = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     # today_date = datetime.date.today().strftime("%m월 %d일")
 
+    # 최종 결과 : 카카오톡 플러스로 보내는 output
     if data in coin_rate_selector:
         return JsonResponse({
                 "message": {
@@ -155,7 +155,7 @@ def message(request):
                 }
 
             })
-    elif data in range(coin_list_top3):
+    elif data in coin_list_top3:
         return JsonResponse({
                 "message": {
                     "text": response_message + message_this_coin
