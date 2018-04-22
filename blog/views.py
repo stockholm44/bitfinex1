@@ -7,17 +7,17 @@ import datetime
 from django.template import Template, Context
 from django.template.loader import get_template, render_to_string
 from blog.FinexAPI import *
-from blog.FinexAPI import *
+from blog.cmc import *
 from django.views.decorators.csrf import csrf_exempt
 import json
 import random
 
 def keyboard(request):
-
     return JsonResponse({
         'type' : 'buttons',
         'buttons' : ['Bab?','Coin_Rank_Top 10', 'Coin_Rank_Top 20','Coin_Rank_Top 50','BTC', 'ETH', 'XRP']
     })
+
 @csrf_exempt
 def message(request):
 
