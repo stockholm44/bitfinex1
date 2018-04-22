@@ -15,7 +15,7 @@ import random
 def keyboard(request):
     return JsonResponse({
         'type' : 'buttons',
-        'buttons' : ['Bab?','Coin_Rank_Top 5', 'Coin_Rank_Top 10','Coin_Rank_Top 40','BTC', 'ETH', 'XRP']
+        'buttons' : ['Bab?','Coin_Rank_Top 5', 'Coin_Rank_Top 10','Coin_Rank_Top 20','BTC', 'ETH', 'XRP']
     })
 
 @csrf_exempt
@@ -36,14 +36,14 @@ def message(request):
 
     # 2. 코인순위의 Data
     # 원하는 코인순위 범위 정하기
-    coin_rate_selector = ['Coin_Rank_Top 5', 'Coin_Rank_Top 10','Coin_Rank_Top 40']
+    coin_rate_selector = ['Coin_Rank_Top 5', 'Coin_Rank_Top 10','Coin_Rank_Top 20']
 
     if data == 'Coin_Rank_Top 5':
         coin_count = 5
     elif data == 'Coin_Rank_Top 10':
         coin_count = 10
-    elif data == 'Coin_Rank_Top 40':
-        coin_count = 40
+    elif data == 'Coin_Rank_Top 20':
+        coin_count = 20
     else:
         coin_count = 0
 
@@ -91,7 +91,7 @@ def message(request):
                 },
                 "keyboard": {
                     "type": "buttons",
-                    "buttons": ['Bab?','Coin_Rank_Top 5', 'Coin_Rank_Top 10','Coin_Rank_Top 40','BTC', 'ETH', 'XRP']
+                    "buttons": ['Bab?','Coin_Rank_Top 5', 'Coin_Rank_Top 10','Coin_Rank_Top 20','BTC', 'ETH', 'XRP']
                 }
 
             })
@@ -102,7 +102,7 @@ def message(request):
                 },
                 "keyboard": {
                     "type": "buttons",
-                    "buttons": ['Bab?','Coin_Rank_Top 5', 'Coin_Rank_Top 10','Coin_Rank_Top 40','BTC', 'ETH', 'XRP']
+                    "buttons": ['Bab?','Coin_Rank_Top 5', 'Coin_Rank_Top 10','Coin_Rank_Top 20','BTC', 'ETH', 'XRP']
                 }
 
             })
