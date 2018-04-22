@@ -36,7 +36,7 @@ class Message:
             coin_count = 5
         elif data == 'Coin_Rank_Top 10':
             coin_count = 10
-        elif data == 'Coin_Rank_Top 100':
+        elif data == 'Coin_Rank_Top 200':
             coin_count = 100
         else:
             coin_count = 0

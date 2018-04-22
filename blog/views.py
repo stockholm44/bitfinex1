@@ -48,7 +48,7 @@ def message(request):
         coin_count = 0
 
     # coinmarketcap 에서 Data 끌어오기.
-    coin_data = ticker(coin_count)
+    coin_data = ticker1(coin_count)
 
     # 2. 코인순위의 response_message
     response_message = ""
@@ -72,12 +72,61 @@ def message(request):
 
         volume_usd = float(coin_data[i]['24h_volume_usd'])
         available_supply = float(coin_data[i]['available_supply'])
-        # 회전율
+    # 회전율
         circul_rate = format(float(volume_usd/available_supply/float(price_usd)*100),'.2f')
-        message_this_coin = str(rank) + '위\n┌ ' + name +' - '+ str_price_usd +'$/' + str_price_krw + '원\n├ 변화율   ' + add_change_mark + percent_change_24h + change_mark + '%\n└ 회전율   ' + circul_rate + '%\n---------------------\n'
 
+    # 2. 코인순위의 message_response
+        message_this_coin = str(rank) + '위\n┌ ' + name +' - '+ str_price_usd +'$/' + str_price_krw + '원\n├ 변화율   ' + add_change_mark + percent_change_24h + change_mark + '%\n└ 회전율   ' + circul_rate + '%\n---------------------\n'
         response_message += message_this_coin
-        # response_1 = str(response_message)
+
+    # 3. 기타 코인관련 잡기능 BTC, ETH, XRP 들의 개별 dATA + 잡 코멘트 넣기.
+    coin_list_top3 = ['BTC', 'ETH', 'XRP']
+    if data in range(coin_list_top3):
+        rank = int(coin_data[i]['rank'])
+        name = coin_data[i]['name']
+        price_usd = float(coin_data[i]['price_usd']) # float
+        price_krw = float(coin_data[i]['price_krw']) # float
+        str_price_usd = format(float(coin_data[i]['price_usd']),',.2f') # str_1000단위 + 소수점2자리
+        str_price_krw = format(float(coin_data[i]['price_krw']),',.0f') # str_1000단위 + 소수점 0자리
+        percent_change_24h = format(float(coin_data[i]['percent_change_24h']),'.2f')
+        if float(percent_change_24h) > 0:
+            change_mark = '▲'
+            add_change_mark = '+'
+        elif float(percent_change_24h) == 0:
+            change_mark = ''
+            add_change_mark = ''
+        elif float(percent_change_24h) < 0:
+            change_mark = '▼'
+            add_change_mark = ''
+        response_message = str(rank) + '위\n┌ ' + name +' - '+ str_price_usd +'$/' + str_price_krw + '원\n├ 변화율   ' + add_change_mark + percent_change_24h + change_mark + '%\n└ 회전율   ' + circul_rate + '%\n---------------------\n'
+        if data == 'BTC':
+            message_this_coin = '\n 기축코인 비트코인 떡락 ㄱ ㄱ'
+        elif data == 'ETH':
+            cym_ETH = 20.86 /3 * price_krw
+            cym_ETH = int(cym_ETH)
+            cym_ETH_Ratio = cym_ETH / 5000000 * 100
+            cym_ETH_gap = cym_ETH-5000000
+            cym_ETH_Ratio = float(cym_ETH_Ratio)
+
+            if cym_ETH_gap > 0:
+                plusminus = "이익이다.^^"
+            elif cym_ETH_gap < 0:
+                plusminus = "꼴았다. ㅜㅜ"
+            elif cym_ETH_gap == 0:
+                plusminus = "똔똔이다.ㅡㅡ"
+
+            cym_ETH_Ratio = format(cym_ETH_Ratio, '.1f')
+            cym_ETH = format(cym_ETH, ',')
+            cym_ETH_gap = format(cym_ETH_gap, ',')
+
+            message_this_coin = "\n★★★★★★★★★★★★★★★★★★\n현재 심봉&진우의 ETH는 각각\n" + str(cym_ETH) + "원이다 십생키들아.\n" + "즉 초기 대비 현재 " + cym_ETH_Ratio + "% 인것이다.\n그래서 현재 투자 결과는 " + plusminus
+        elif data =='XRP':
+            message_this_coin = "\n★★★★★★★★★★★★★★★\n심재리플 리플심재"
+
+
+
+
+
 
 
 
@@ -99,6 +148,17 @@ def message(request):
         return JsonResponse({
                 "message": {
                     "text": "오늘 먹을 식사는 아래와 같습니다.\n★★★★★★★★★★★★★\n" + bab_select + "\n★★★★★★★★★★★★★"
+                },
+                "keyboard": {
+                    "type": "buttons",
+                    "buttons": ['Bab?','Coin_Rank_Top 5', 'Coin_Rank_Top 10','Coin_Rank_Top 20','BTC', 'ETH', 'XRP']
+                }
+
+            })
+    elif data in range(coin_list_top3):
+        return JsonResponse({
+                "message": {
+                    "text": response_message + message_this_coin
                 },
                 "keyboard": {
                     "type": "buttons",
