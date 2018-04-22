@@ -15,7 +15,7 @@ import random
 def keyboard(request):
     return JsonResponse({
         'type' : 'buttons',
-        'buttons' : ['Bab?','Coin_Rank_Top 5', 'Coin_Rank_Top 10','Coin_Rank_Top 20','BTC', 'ETH', 'XRP']
+        'buttons' : ['Bab?','Coin_Rank_Top 5', 'Coin_Rank_Top 10','Coin_Rank_Top 100','BTC', 'ETH', 'XRP']
     })
 
 @csrf_exempt
@@ -36,14 +36,14 @@ def message(request):
 
     # 2. 코인순위의 Data
     # 원하는 코인순위 범위 정하기
-    coin_rate_selector = ['Coin_Rank_Top 10', 'Coin_Rank_Top 20','Coin_Rank_Top 40']
+    coin_rate_selector = ['Coin_Rank_Top 5', 'Coin_Rank_Top 10','Coin_Rank_Top 100']
 
-    if data == 'Coin_Rank_Top 10':
-        coin_count = 10
-    elif data == 'Coin_Rank_Top 20':
-        coin_coint = 20
-    elif data == 'Coin_Rank_Top 50':
-        coin_count = 40
+    if data == 'Coin_Rank_Top 5':
+        coin_count = 5
+    elif data == 'Coin_Rank_Top 10':
+        coin_coint = 10
+    elif data == 'Coin_Rank_Top 100':
+        coin_count = 100
     else:
         coin_count = 0
 
@@ -64,7 +64,7 @@ def message(request):
             change_mark = '▲'
             add_change_mark = '+'
         elif float(percent_change_24h) == 0:
-            change_mark = '-'
+            change_mark = ''
             add_change_mark = ''
         elif float(percent_change_24h) < 0:
             change_mark = '▼'
@@ -74,7 +74,7 @@ def message(request):
         available_supply = float(coin_data[i]['available_supply'])
         # 회전율
         circul_rate = format(float(volume_usd/available_supply/float(price_usd)*100),'.2f')
-        message_this_coin = str(rank) + '위\n ' + name +' - '+ str_price_usd +'$/' + str_price_krw + '원\n 변화율 - ' + add_change_mark + percent_change_24h + change_mark + '\n - 회전율:' + circul_rate + '%\n'
+        message_this_coin = str(rank) + '위\n ' + name +' - '+ str_price_usd +'$/' + str_price_krw + '원\n변화율:' + add_change_mark + percent_change_24h + change_mark + '%\n회전율:' + circul_rate + '%\n'
 
         response_message += message_this_coin
         response_1 = str(response_message)
