@@ -115,9 +115,9 @@ def message(request):
             cym_ETH_Ratio = float(cym_ETH_Ratio)
 
             if cym_ETH_gap > 0:
-                plusminus = "이익이다.^^"
+                plusminus = "아직은 이익이다.^^"
             elif cym_ETH_gap < 0:
-                plusminus = "꼴았다. ㅜㅜ"
+                plusminus = "아직은 꼴아있다. ㅜㅜ"
             elif cym_ETH_gap == 0:
                 plusminus = "똔똔이다.ㅡㅡ"
 
