@@ -91,7 +91,7 @@ def message(request):
                 },
                 "keyboard": {
                     "type": "buttons",
-                    "buttons": ['Bab?','Coin_Rank_Top 10', 'Coin_Rank_Top 20','Coin_Rank_Top 40','BTC', 'ETH', 'XRP']
+                    "buttons": ['Bab?','Coin_Rank_Top 5', 'Coin_Rank_Top 10','Coin_Rank_Top 100','BTC', 'ETH', 'XRP']
                 }
 
             })
@@ -102,7 +102,7 @@ def message(request):
                 },
                 "keyboard": {
                     "type": "buttons",
-                    "buttons": ['Bab?','Coin_Rank_Top 10', 'Coin_Rank_Top 20','Coin_Rank_Top 40','BTC', 'ETH', 'XRP']
+                    "buttons": ['Bab?','Coin_Rank_Top 5', 'Coin_Rank_Top 10','Coin_Rank_Top 100','BTC', 'ETH', 'XRP']
                 }
 
             })
