@@ -77,6 +77,8 @@ def message(request):
         message_this_coin = str(rank) + '위: ' + name +' - '+ str_price_usd +'$/' + str_price_krw + '원 (' + change_mark + percent_change_24h + change_mark + ') - 회전율:' + circul_rate + '%\n'
 
         response_message += message_this_coin
+        response_1 = response_message
+
 
 
 
@@ -111,11 +113,11 @@ def message(request):
     if data in coin_rate_selector:
         return JsonResponse({
                 "message": {
-                    "text": response_message
+                    "text": response_1
                 },
                 "keyboard": {
                     "type": "buttons",
-                    "buttons": ['밥뭐먹지?','BTC', 'ETH', 'EOS', 'XRP', 'IOTA', 'BCH', 'NEO', 'QTUM']
+                    "buttons": ['밥뭐먹지?','Coin 순위(1~10위)', 'Coin 순위(1~20위)','Coin 순위(1~50위)','BTC', 'ETH', 'XRP']
                 }
 
             })
@@ -126,7 +128,7 @@ def message(request):
                 },
                 "keyboard": {
                     "type": "buttons",
-                    "buttons": ['밥뭐먹지?','BTC', 'ETH', 'EOS', 'XRP', 'IOTA', 'BCH', 'NEO', 'QTUM']
+                    "buttons": ['밥뭐먹지?','Coin 순위(1~10위)', 'Coin 순위(1~20위)','Coin 순위(1~50위)','BTC', 'ETH', 'XRP']
                 }
 
             })
