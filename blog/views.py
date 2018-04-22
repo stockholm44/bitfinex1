@@ -77,7 +77,7 @@ def message(request):
         message_this_coin = str(rank) + '위: ' + name +' - '+ str_price_usd +'$/' + str_price_krw + '원 (' + change_mark + percent_change_24h + change_mark + ') - 회전율:' + circul_rate + '%\n'
 
         response_message += message_this_coin
-        response_1 = response_message
+        response_1 = str(response_message)
 
 
 
