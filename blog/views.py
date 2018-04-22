@@ -16,7 +16,7 @@ def keyboard(request):
 
     return JsonResponse({
         'type' : 'buttons',
-        'buttons' : ['밥뭐먹지?','Coin 순위(1~10위)', 'Coin 순위(1~20위)','Coin 순위(1~50위)','BTC', 'ETH', 'XRP']
+        'buttons' : ['Bab?','Coin_Rank_Top 10', 'Coin_Rank_Top 20','Coin_Rank_Top 50','BTC', 'ETH', 'XRP']
     })
 @csrf_exempt
 def message(request):
@@ -30,19 +30,19 @@ def message(request):
     # response_message를 만들기 전까지 준비데이터들을 아래와 같이 만든다.
 
     # 1. 밥뭐먹지의 Data
-    if data == "밥뭐먹지?":
+    if data == "Bab?":
         bab_list = ['볶음밥','짜장면','짬뽕','간짜장','양념치킨','걍치킨','순살치킨','신라면','진라면','컵라면큰사발','컵라면','불닭볶음밥','굶어시바라','닭도리탕','새우깡','보쌈','고르곤졸라피자','불고기피자','김치에계란','계란말이','회','스시','초밥','간장게장','양념게장']
         bab_select = random.choice(bab_list)
 
     # 2. 코인순위의 Data
     # 원하는 코인순위 범위 정하기
-    coin_rate_selector = ['Coin 순위(1~10위)', 'Coin 순위(1~20위)','Coin 순위(1~50위)']
+    coin_rate_selector = ['Coin_Rank_Top 10', 'Coin_Rank_Top 20','Coin_Rank_Top 50']
 
-    if data == 'Coin 순위(1~10위)':
+    if data == 'Coin_Rank_Top 10':
         coin_count = 9
-    elif data == 'Coin 순위(1~20위)':
+    elif data == 'Coin_Rank_Top 20':
         coin_coint = 19
-    elif data == 'Coin 순위(1~50위)':
+    elif data == 'Coin_Rank_Top 50':
         coin_count = 49
     else:
         coin_count = 0
@@ -81,6 +81,35 @@ def message(request):
 
 
 
+    today_date = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    # today_date = datetime.date.today().strftime("%m월 %d일")
+
+    if data in coin_rate_selector:
+        return JsonResponse({
+                "message": {
+                    "text": response_1
+                },
+                "keyboard": {
+                    "type": "buttons",
+                    "buttons": ['Bab?','Coin_Rank_Top 10', 'Coin_Rank_Top 20','Coin_Rank_Top 50','BTC', 'ETH', 'XRP']
+                }
+
+            })
+    elif data == "Bab?":
+        return JsonResponse({
+                "message": {
+                    "text": "오늘 먹을 식사는 아래와 같습니다.\n★★★★★★★★★★★★★\n" + bab_select + "\n★★★★★★★★★★★★★"
+                },
+                "keyboard": {
+                    "type": "buttons",
+                    "buttons": ['Bab?','Coin_Rank_Top 10', 'Coin_Rank_Top 20','Coin_Rank_Top 50','BTC', 'ETH', 'XRP']
+                }
+
+            })
+
+
+
+
 
 
 
@@ -103,35 +132,6 @@ def message(request):
     #         cym_ETH_Ratio = format(cym_ETH_Ratio, '.1f')
     #         cym_ETH = format(cym_ETH, ',')
     #         cym_ETH_gap = format(cym_ETH_gap, ',')
-
-
-
-
-    today_date = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-    # today_date = datetime.date.today().strftime("%m월 %d일")
-
-    if data in coin_rate_selector:
-        return JsonResponse({
-                "message": {
-                    "text": response_1
-                },
-                "keyboard": {
-                    "type": "buttons",
-                    "buttons": ['밥뭐먹지?','Coin 순위(1~10위)', 'Coin 순위(1~20위)','Coin 순위(1~50위)','BTC', 'ETH', 'XRP']
-                }
-
-            })
-    elif data == "밥뭐먹지?":
-        return JsonResponse({
-                "message": {
-                    "text": "오늘 먹을 식사는 아래와 같습니다.\n★★★★★★★★★★★★★\n" + bab_select + "\n★★★★★★★★★★★★★"
-                },
-                "keyboard": {
-                    "type": "buttons",
-                    "buttons": ['밥뭐먹지?','Coin 순위(1~10위)', 'Coin 순위(1~20위)','Coin 순위(1~50위)','BTC', 'ETH', 'XRP']
-                }
-
-            })
 
 
 def price_coin(request):
