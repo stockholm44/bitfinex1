@@ -8,6 +8,7 @@ import datetime
 # from django.template.loader import get_template, render_to_string
 from FinexAPI import *
 from cmc import *
+from scrap import *
 # from django.views.decorators.csrf import csrf_exempt
 import json
 import random
@@ -70,7 +71,7 @@ def message(data):
         circul_rate = format(float(volume_usd/available_supply/float(price_usd)*100),'.2f')
 
     # 2. 코인순위의 message_response
-        message_this_coin = str(rank) + '위\n┌ ' + name +' - '+ str_price_usd +'$/' + str_price_krw + '원\n├ 변화율   ' + add_change_mark + percent_change_24h + change_mark + '%\n└ 회전율   ' + circul_rate + '%\n---------------------\n'
+        message_this_coin = str(rank) + '위\n┌ ' + name +' - '+ str_price_usd +'$/' + str_price_krw + '원\n├ 변화율   ' + add_change_mark + percent_change_24h + "% (" +change_mark + ')\n└ 회전율   ' + circul_rate + '%\n---------------------\n'
         response_message += message_this_coin
 
     # 3. 기타 코인관련 잡기능 BTC, ETH, XRP 들의 개별 dATA + 잡 코멘트 넣기.
@@ -98,7 +99,7 @@ def message(data):
     # 회전율
         circul_rate = format(float(volume_usd/available_supply/float(price_usd)*100),'.2f')
 
-        response_message = str(rank) + '위\n┌ ' + name +' - '+ str_price_usd +'$/' + str_price_krw + '원\n├ 변화율   ' + add_change_mark + percent_change_24h + change_mark + '%\n└ 회전율   ' + circul_rate + '%\n---------------------\n'
+        response_message = str(rank) + '위\n┌ ' + name +' - '+ str_price_usd +'$/' + str_price_krw + '원\n├ 변화율   ' + add_change_mark + percent_change_24h + "% (" +change_mark + ')\n└ 회전율   ' + circul_rate + '%\n---------------------\n'
         if data == 'BTC':
             message_this_coin = '\n 기축코인 비트코인 떡락 ㄱ ㄱ'
         elif data == 'ETH':
@@ -109,9 +110,9 @@ def message(data):
             cym_ETH_Ratio = float(cym_ETH_Ratio)
 
             if cym_ETH_gap > 0:
-                plusminus = "이익이다.^^"
+                plusminus = "아직은 이익이다.^^"
             elif cym_ETH_gap < 0:
-                plusminus = "꼴았다. ㅜㅜ"
+                plusminus = "아직은 꼴아있다. ㅜㅜ"
             elif cym_ETH_gap == 0:
                 plusminus = "똔똔이다.ㅡㅡ"
 
@@ -123,6 +124,30 @@ def message(data):
         elif data =='XRP':
             message_this_coin = "\n★★★★★★★★★★★★★★★\n심재리플 리플심재"
 
+    today_date = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    # today_date = datetime.date.today().strftime("%m월 %d일")
+
+    # 4. JPY Exchange_Rates List 보이기 + 최저가격 보여주기
+    if data == 'JPY Exchange_Rates':
+        bank_name, bank_exchange_rate = jpy_rate()
+        response_message = ""
+        # 제일 싼 거래소 보여주기
+        minimum_rate = bank_exchange_rate[0]    # 비교 하기 위한 제일 싼 환율
+        mimimum_rate_exchange = bank_name[0]              # 싼거래소들
+        for i in range(len(bank_name)):
+            if i > 0:
+                if bank_exchange_rate[i] > minimum_rate:
+                    mimimum_rate_exchange += ", " + bank_name[i]
+
+        response_message += '★★★★★★★★★★★★★\n제일 저렴한 환율은 ' + str(minimum_rate) + '엔 이며 저렴한 거래소는 아래거래소들 입니다.\n' + mimimum_rate_exchange + '\n★★★★★★★★★★★★★\n'
+        message_this_rate = ""
+        for i, name in enumerate(bank_name):
+            message_this_rate += str(i + 1) + '. ' + name + ': ' + str(bank_exchange_rate[i]) + '엔\n'
+
+        response_message += message_this_rate
+
+
+
     # 최종 결과 : 카카오톡 플러스로 보내는 output
     if data in coin_rate_selector:
         return response_message
@@ -130,7 +155,8 @@ def message(data):
         return "오늘 먹을 식사는 아래와 같습니다.\n★★★★★★★★★★★★★\n" + bab_select + "\n★★★★★★★★★★★★★"
     elif data in coin_list_top3:
         return response_message + message_this_coin
+    elif data == 'JPY Exchange_Rates':
+        return response_message
 
-
-a = message("BTC")
+a = message('JPY Exchange_Rates')
 print(a)

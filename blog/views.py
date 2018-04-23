@@ -8,6 +8,7 @@ from django.template import Template, Context
 from django.template.loader import get_template, render_to_string
 from blog.FinexAPI import *
 from blog.cmc import *
+from blog.scrap import *
 from django.views.decorators.csrf import csrf_exempt
 import json
 import random
@@ -15,7 +16,7 @@ import random
 def keyboard(request):
     return JsonResponse({
         'type' : 'buttons',
-        'buttons' : ['Bab?','Coin_Rank_Top 5', 'Coin_Rank_Top 10','Coin_Rank_Top 20','BTC', 'ETH', 'XRP']
+        'buttons' : ['Bab?','Coin_Rank_Top 5', 'Coin_Rank_Top 10','Coin_Rank_Top 20','BTC', 'ETH', 'XRP', 'JPY Exchange_Rates']
     })
 
 @csrf_exempt
@@ -132,6 +133,27 @@ def message(request):
     today_date = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     # today_date = datetime.date.today().strftime("%m월 %d일")
 
+    # 4. JPY Exchange_Rates List 보이기 + 최저가격 보여주기
+    if data == 'JPY Exchange_Rates':
+        bank_name, bank_exchange_rate = jpy_rate()
+        response_message = ""
+        # 제일 싼 거래소 보여주기
+        minimum_rate = bank_exchange_rate[0]    # 비교 하기 위한 제일 싼 환율
+        mimimum_rate_exchange = bank_name[0]              # 싼거래소들
+        for i in range(len(bank_name)):
+            if i > 0:
+                if bank_exchange_rate[i] > minimum_rate:
+                    mimimum_rate_exchange += ", " + bank_name[i]
+
+        response_message += '★★★★★★★★★★★★★\n제일 저렴한 환율은 ' + str(minimum_rate) + '엔 이며 저렴한 거래소는 아래거래소들 입니다.\n' + mimimum_rate_exchange + '\n★★★★★★★★★★★★★\n'
+        message_this_rate = ""
+        for i, name in enumerate(bank_name):
+            message_this_rate += str(i + 1) + '. ' + name + ': ' + str(bank_exchange_rate[i]) + '엔\n'
+
+        response_message += message_this_rate
+
+
+
     # 최종 결과 : 카카오톡 플러스로 보내는 output
     if data in coin_rate_selector:
         return JsonResponse({
@@ -140,7 +162,7 @@ def message(request):
                 },
                 "keyboard": {
                     "type": "buttons",
-                    "buttons": ['Bab?','Coin_Rank_Top 5', 'Coin_Rank_Top 10','Coin_Rank_Top 20','BTC', 'ETH', 'XRP']
+                    "buttons": ['Bab?','Coin_Rank_Top 5', 'Coin_Rank_Top 10','Coin_Rank_Top 20','BTC', 'ETH', 'XRP','JPY Exchange_Rates']
                 }
 
             })
@@ -151,7 +173,7 @@ def message(request):
                 },
                 "keyboard": {
                     "type": "buttons",
-                    "buttons": ['Bab?','Coin_Rank_Top 5', 'Coin_Rank_Top 10','Coin_Rank_Top 20','BTC', 'ETH', 'XRP']
+                    "buttons": ['Bab?','Coin_Rank_Top 5', 'Coin_Rank_Top 10','Coin_Rank_Top 20','BTC', 'ETH', 'XRP','JPY Exchange_Rates']
                 }
 
             })
@@ -162,11 +184,21 @@ def message(request):
                 },
                 "keyboard": {
                     "type": "buttons",
-                    "buttons": ['Bab?','Coin_Rank_Top 5', 'Coin_Rank_Top 10','Coin_Rank_Top 20','BTC', 'ETH', 'XRP']
+                    "buttons": ['Bab?','Coin_Rank_Top 5', 'Coin_Rank_Top 10','Coin_Rank_Top 20','BTC', 'ETH', 'XRP','JPY Exchange_Rates']
                 }
 
             })
+    elif data == 'JPY Exchange_Rates':
+        return JsonResponse({
+                "message": {
+                    "text": response_message
+                },
+                "keyboard": {
+                    "type": "buttons",
+                    "buttons": ['Bab?','Coin_Rank_Top 5', 'Coin_Rank_Top 10','Coin_Rank_Top 20','BTC', 'ETH', 'XRP','JPY Exchange_Rates']
+                }
 
+            })
 
 
 
