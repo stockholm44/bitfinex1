@@ -142,7 +142,7 @@ def message(request):
         mimimum_rate_exchange = bank_name[0]              # 싼거래소들
         for i in range(len(bank_name)):
             if i > 0:
-                if bank_exchange_rate[i] > minimum_rate:
+                if bank_exchange_rate[i] == minimum_rate:
                     mimimum_rate_exchange += ", " + bank_name[i]
 
         response_message += '★★★★★★★★★★★★★\n제일 저렴한 환율은 ' + str(minimum_rate) + '엔 이며 저렴한 거래소는 아래거래소들 입니다.\n' + mimimum_rate_exchange + '\n★★★★★★★★★★★★★\n'
