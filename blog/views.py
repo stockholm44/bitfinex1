@@ -12,6 +12,7 @@ from blog.scrap import *
 from django.views.decorators.csrf import csrf_exempt
 import json
 import random
+from urllib.request import urlopen
 
 def keyboard(request):
     return JsonResponse({
