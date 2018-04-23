@@ -151,13 +151,12 @@ def message(request):
         elif data =='XRP':
             message_this_coin = "\n★★★★★★★★★★★★★★★\n심재리플 리플심재"
 
-    today_date = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-    # today_date = datetime.date.today().strftime("%m월 %d일")
-
     # 4. JPY Exchange_Rates List 보이기 + 최저가격 보여주기
     if data == 'JPY Exchange_Rates':
         response_message_jpy = jpy_rate_list()
 
+    today_date = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    # today_date = datetime.date.today().strftime("%m월 %d일")
 
     # 최종 결과 : 카카오톡 플러스로 보내는 output
     if data in coin_rate_selector:
