@@ -133,13 +133,13 @@ def message(data):
         response_message_jpy = ""
         # 제일 싼 거래소 보여주기
         minimum_rate = bank_exchange_rate[0]    # 비교 하기 위한 제일 싼 환율
-        mimimum_rate_exchange = bank_name[0]              # 싼거래소들
+        minimum_rate_exchange = bank_name[0]              # 싼거래소들
         for i in range(len(bank_name)):
             if i > 0:
                 if bank_exchange_rate[i] == minimum_rate:
-                    mimimum_rate_exchange += ", " + bank_name[i]
+                    minimum_rate_exchange += ", " + bank_name[i]
 
-        response_message_jpy += '★★★★★★★★★★★★★\n제일 저렴한 환율은 ' + str(minimum_rate) + '엔 이며 저렴한 거래소는 아래거래소들 입니다.\n' + mimimum_rate_exchange + '\n★★★★★★★★★★★★★\n'
+        response_message_jpy += '★★★★★★★★★★★★★\n제일 저렴한 환율은 ' + str(minimum_rate) + '엔 이며 저렴한 거래소는 아래거래소들 입니다.\n' + minimum_rate_exchange + '\n★★★★★★★★★★★★★\n'
         message_this_rate = ""
         for i, name in enumerate(bank_name):
             message_this_rate += str(i + 1) + '. ' + name + ': ' + str(bank_exchange_rate[i]) + '엔\n'
