@@ -188,7 +188,7 @@ def message(request):
                 }
 
             })
-    elif data == 'JPY Exchange_Rates':
+    elif data == "JPY Exchange_Rates":
         return JsonResponse({
                 "message": {
                     "text": response_message_jpy
