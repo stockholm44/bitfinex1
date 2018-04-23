@@ -209,7 +209,7 @@ def message(request):
 
 
 
-
+#
     #
     # if data == "ETH":
     #         cym_ETH = 20.86 * int(bid_bithumb("ETH"))/3
