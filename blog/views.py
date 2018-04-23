@@ -151,6 +151,7 @@ def message(request):
             message_this_rate += str(i + 1) + '. ' + name + ': ' + str(bank_exchange_rate[i]) + '엔\n'
 
         response_message_jpy += message_this_rate
+        response_message_jpy_1 = str(response_message_jpy)
 
 
 
@@ -191,7 +192,7 @@ def message(request):
     elif data == "JPY Exchange_Rates":
         return JsonResponse({
                 "message": {
-                    "text": response_message_jpy
+                    "text": response_message_jpy_1
                 },
                 "keyboard": {
                     "type": "buttons",
