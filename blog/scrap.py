@@ -70,6 +70,9 @@ def jpy_rate_list():
 
     # return "SSORI ZEALOT!!!!!!!!!!!!!"
     return response_message
+def jpy_test():
+    return "jpy_test function"
+
 # a = jpy_rate_list()
 # print(a)
 # print(type(a))
