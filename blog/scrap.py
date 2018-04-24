@@ -52,7 +52,7 @@ def jpy_rate():
 def jpy_rate_list():
     # 4. JPY Exchange_Rates List 보이기 + 최저가격 보여주기
     bank_name, bank_exchange_rate = jpy_rate()
-    response_message_jpy = ""
+    response_message = ""
     # 제일 싼 거래소 보여주기
     minimum_rate = bank_exchange_rate[0]    # 비교 하기 위한 제일 싼 환율
     minimum_rate_exchange = bank_name[0]              # 싼거래소들
@@ -61,14 +61,14 @@ def jpy_rate_list():
             if bank_exchange_rate[i] == minimum_rate:
                 minimum_rate_exchange += ", " + bank_name[i]
 
-    response_message_jpy += '★★★★★★★★★★★★★\n제일 저렴한 환율은 ' + str(minimum_rate) + '엔 이며 저렴한 거래소는 아래거래소들 입니다.\n' + minimum_rate_exchange + '\n★★★★★★★★★★★★★\n'
+    response_message += '★★★★★★★★★★★★★\n제일 저렴한 환율은 ' + str(minimum_rate) + '엔 이며 저렴한 거래소는 아래거래소들 입니다.\n' + minimum_rate_exchange + '\n★★★★★★★★★★★★★\n'
     message_this_rate = ""
     for i, name in enumerate(bank_name):
         message_this_rate += str(i + 1) + '. ' + name + ': ' + str(bank_exchange_rate[i]) + '엔\n'
 
-    response_message_jpy += message_this_rate
+    response_message += message_this_rate
 
-    return response_message_jpy
+    return str(response_message)
 
 # a = jpy_rate_list()
 # print(a)
