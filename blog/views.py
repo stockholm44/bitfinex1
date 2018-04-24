@@ -18,7 +18,7 @@ from bs4 import BeautifulSoup
 def keyboard(request):
     return JsonResponse({
         'type' : 'buttons',
-        'buttons' : ['Bab?','Coin_Rank_Top 5', 'Coin_Rank_Top 10','Coin_Rank_Top 20','BTC', 'ETH', 'XRP', 'JPY_Exchange_Rates']
+        'buttons' : ['Bab?','Coin_Rank_Top 5', 'Coin_Rank_Top 10','Coin_Rank_Top 20','BTC', 'ETH', 'XRP', 'JPY_Exchange']
     })
 
 @csrf_exempt
@@ -115,6 +115,7 @@ def message(request):
         str_price_usd = format(float(coin_data['price_usd']),',.2f') # str_1000단위 + 소수점2자리
         str_price_krw = format(float(coin_data['price_krw']),',.0f') # str_1000단위 + 소수점 0자리
         percent_change_24h = format(float(coin_data['percent_change_24h']),'.2f')
+        gimp = format((1-price_krw/price_usd/1077*100), '.2f')
         if float(percent_change_24h) > 0:
             change_mark = '▲'
             add_change_mark = '+'
@@ -155,21 +156,21 @@ def message(request):
             message_this_coin = "\n★★★★★★★★★★★★★★★\n심재리플 리플심재"
 
     # 4. JPY Exchange_Rates List 보이기 + 최저가격 보여주기
-    if data == 'JPY_Exchange_Rates':
+    if data == 'JPY_Exchange':
         response_message_jpy = jpy_rate_list()
 
     today_date = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     # today_date = datetime.date.today().strftime("%m월 %d일")
 
     # 최종 결과 : 카카오톡 플러스로 보내는 output
-    if data == "JPY_Exchange_Rates":
+    if data == "JPY_Exchange":
         return JsonResponse({
                 "message": {
                     "text": "FUck"
                 },
                 "keyboard": {
                     "type": "buttons",
-                    "buttons": ['Bab?','Coin_Rank_Top 5', 'Coin_Rank_Top 10','Coin_Rank_Top 20','BTC', 'ETH', 'XRP','JPY_Exchange_Rates']
+                    "buttons": ['Bab?','Coin_Rank_Top 5', 'Coin_Rank_Top 10','Coin_Rank_Top 20','BTC', 'ETH', 'XRP','JPY_Exchange']
                 }
 
                 })
@@ -180,7 +181,7 @@ def message(request):
                 },
                 "keyboard": {
                     "type": "buttons",
-                    "buttons": ['Bab?','Coin_Rank_Top 5', 'Coin_Rank_Top 10','Coin_Rank_Top 20','BTC', 'ETH', 'XRP','JPY_Exchange_Rates']
+                    "buttons": ['Bab?','Coin_Rank_Top 5', 'Coin_Rank_Top 10','Coin_Rank_Top 20','BTC', 'ETH', 'XRP','JPY_Exchange']
                 }
 
                 })
@@ -191,7 +192,7 @@ def message(request):
                 },
                 "keyboard": {
                     "type": "buttons",
-                    "buttons": ['Bab?','Coin_Rank_Top 5', 'Coin_Rank_Top 10','Coin_Rank_Top 20','BTC', 'ETH', 'XRP','JPY_Exchange_Rates']
+                    "buttons": ['Bab?','Coin_Rank_Top 5', 'Coin_Rank_Top 10','Coin_Rank_Top 20','BTC', 'ETH', 'XRP','JPY_Exchange']
                 }
 
                 })
@@ -202,7 +203,7 @@ def message(request):
                 },
                 "keyboard": {
                     "type": "buttons",
-                    "buttons": ['Bab?','Coin_Rank_Top 5', 'Coin_Rank_Top 10','Coin_Rank_Top 20','BTC', 'ETH', 'XRP','JPY_Exchange_Rates']
+                    "buttons": ['Bab?','Coin_Rank_Top 5', 'Coin_Rank_Top 10','Coin_Rank_Top 20','BTC', 'ETH', 'XRP','JPY_Exchange']
                 }
 
                 })
@@ -213,7 +214,7 @@ def message(request):
                 },
                 "keyboard": {
                     "type": "buttons",
-                    "buttons": ['Bab?','Coin_Rank_Top 5', 'Coin_Rank_Top 10','Coin_Rank_Top 20','BTC', 'ETH', 'XRP','JPY_Exchange_Rates']
+                    "buttons": ['Bab?','Coin_Rank_Top 5', 'Coin_Rank_Top 10','Coin_Rank_Top 20','BTC', 'ETH', 'XRP','JPY_Exchange']
                 }
 
                 })
