@@ -141,7 +141,7 @@ def message(request):
             cym_ETH_Ratio = float(cym_ETH_Ratio)
 
             if cym_ETH_gap > 0:
-                plusminus = "아직은 이익이다.^^ " + format(cym_ETH_gap, ',') + "원 이익이다! \n◇◇◇◇◇◇◇◇◇◇\n18,000원 치킨 " + str(int(cym_ETH_gap/18000)) + "마리를 쳐먹을 수 있다. \n\n●● 쏘리 지이이일럿!!!!●●\n\n●●아이라이포 아이어!!!!●●"
+                plusminus = "아직은 이익이다.^^ " + format(cym_ETH_gap, ',') + "원 이익이다! \n●●●●●●●●●●●●●●●●●●●●\n18,000원 치킨 ▶" + str(int(cym_ETH_gap/18000)) + "마리◀를 쳐먹을 수 있다. \n\n●●●● 쏘리 지이이일럿!!!!●●●●\n\n●●●아이라이포 아이어!!!!●●●"
             elif cym_ETH_gap < 0:
                 plusminus = "아직은 꼴아있다. ㅜㅜ"
             elif cym_ETH_gap == 0:
@@ -157,7 +157,7 @@ def message(request):
 
     # 4. JPY Exchange_Rates List 보이기 + 최저가격 보여주기
     if data == 'JPY_Exchange':
-        response_message_jpy = jpy_rate_list()
+        response_message_jpy = jpy_rate()
 
     today_date = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     # today_date = datetime.date.today().strftime("%m월 %d일")
