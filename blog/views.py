@@ -18,7 +18,7 @@ from bs4 import BeautifulSoup
 def keyboard(request):
     return JsonResponse({
         'type' : 'buttons',
-        'buttons' : ['Bab?','Coin_Rank_Top 5', 'Coin_Rank_Top 10','Coin_Rank_Top 20','BTC', 'ETH', 'XRP', 'zzzz']
+        'buttons' : ['Bab?','Coin_Rank_Top 5', 'Coin_Rank_Top 10','Coin_Rank_Top 20','BTC', 'ETH', 'XRP', 'JPY_Exchange_Rates']
     })
 
 @csrf_exempt
@@ -154,7 +154,7 @@ def message(request):
             message_this_coin = "\n★★★★★★★★★★★★★★★\n심재리플 리플심재"
 
     # 4. JPY Exchange_Rates List 보이기 + 최저가격 보여주기
-    if data == 'zzzz':
+    if data == 'JPY_Exchange_Rates':
         response_message_jpy = jpy_rate_list()
 
     today_date = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
@@ -179,7 +179,7 @@ def message(request):
                 },
                 "keyboard": {
                     "type": "buttons",
-                    "buttons": ['Bab?','Coin_Rank_Top 5', 'Coin_Rank_Top 10','Coin_Rank_Top 20','BTC', 'ETH', 'XRP','zzzz']
+                    "buttons": ['Bab?','Coin_Rank_Top 5', 'Coin_Rank_Top 10','Coin_Rank_Top 20','BTC', 'ETH', 'XRP','JPY_Exchange_Rates']
                 }
 
             })
@@ -190,22 +190,21 @@ def message(request):
                 },
                 "keyboard": {
                     "type": "buttons",
-                    "buttons": ['Bab?','Coin_Rank_Top 5', 'Coin_Rank_Top 10','Coin_Rank_Top 20','BTC', 'ETH', 'XRP','zzzz']
+                    "buttons": ['Bab?','Coin_Rank_Top 5', 'Coin_Rank_Top 10','Coin_Rank_Top 20','BTC', 'ETH', 'XRP','JPY_Exchange_Rates']
                 }
 
             })
-    elif data == "zzzz":
+    elif data == "JPY_Exchange_Rates":
         return JsonResponse({
                 "message": {
-                    "text": "몰러 씌부럴"
+                    "text": "FUCK IT ALL"
                 },
                 "keyboard": {
                     "type": "buttons",
-                    "buttons": ['Bab?','Coin_Rank_Top 5', 'Coin_Rank_Top 10','Coin_Rank_Top 20','BTC', 'ETH', 'XRP','zzzz']
+                    "buttons": ['Bab?','Coin_Rank_Top 5', 'Coin_Rank_Top 10','Coin_Rank_Top 20','BTC', 'ETH', 'XRP','JPY Exchange_Rates']
                 }
 
             })
-
 
 
 
