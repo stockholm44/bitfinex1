@@ -141,17 +141,17 @@ def message(request):
             cym_ETH_Ratio = float(cym_ETH_Ratio)
 
             if cym_ETH_gap > 0:
-                plusminus = "아직은 이익이다.^^"
+                plusminus = "아직은 이익이다.^^ " + format(cym_ETH_gap, ',') + "원 이익이다! \n18,000원 치킨 " + int(cym_ETH_gap/18000) + "마리를 쳐먹을 수 있다. \n●●●● 쏘리 지이이일럿!!!!●●●●\n●●●●아이라이포 아이어!!!!●●●●"
             elif cym_ETH_gap < 0:
                 plusminus = "아직은 꼴아있다. ㅜㅜ"
             elif cym_ETH_gap == 0:
                 plusminus = "똔똔이다.ㅡㅡ"
 
-            cym_ETH_Ratio = format(cym_ETH_Ratio, '.1f')
+            cym_ETH_Ratio_str = format(cym_ETH_Ratio, '.1f')
             cym_ETH = format(cym_ETH, ',')
             cym_ETH_gap = format(cym_ETH_gap, ',')
 
-            message_this_coin = "\n★★★★★★★★★★★★★★★★★★\n현재 심봉&진우의 ETH는 각각\n" + str(cym_ETH) + "원이다 십생키들아.\n" + "즉 초기 대비 현재 " + cym_ETH_Ratio + "% 인것이다.\n그래서 현재 투자 결과는 " + plusminus
+            message_this_coin = "\n★★★★★★★★★★★★★★★★★★\n현재 심봉&진우의 ETH는 각각\n" + str(cym_ETH) + "원이다 십생키들아.\n" + "즉 초기 대비 현재 " + cym_ETH_Ratio_str + "% 인것이다.\n그래서 현재 투자 결과는 " + plusminus
         elif data =='XRP':
             message_this_coin = "\n★★★★★★★★★★★★★★★\n심재리플 리플심재"
 
