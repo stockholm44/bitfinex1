@@ -162,7 +162,7 @@ def message(data):
     elif data in coin_list_top3:
         return response_message + message_this_coin
     elif data == 'JPY_Exchange_Rates':
-        return response_message_jpy
+        return 'I DONT KNOW FUC'
 
 a = message('JPY_Exchange_Rates')
 print(a)

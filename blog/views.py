@@ -197,7 +197,7 @@ def message(request):
     elif data == "JPY_Exchange_Rates":
         return JsonResponse({
                 "message": {
-                    "text": response_message_jpy
+                    "text": "몰러 씌부럴"
                 },
                 "keyboard": {
                     "type": "buttons",
