@@ -68,7 +68,7 @@ def jpy_rate_list():
 
     response_message += message_this_rate
 
-    return str(response_message)
+    return "scrap에서 그냥 글로 리턴"
 
 # a = jpy_rate_list()
 # print(a)
