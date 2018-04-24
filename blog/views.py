@@ -84,7 +84,7 @@ def message(request):
         str_price_usd = format(float(coin_data[i]['price_usd']),',.2f') # str_1000단위 + 소수점2자리
         str_price_krw = format(float(coin_data[i]['price_krw']),',.0f') # str_1000단위 + 소수점 0자리
         percent_change_24h = format(float(coin_data[i]['percent_change_24h']),'.2f')
-        gimp = format((1-price_krw/price_usd/1077*100), '.2f')
+        gimp = format(((1-price_krw/price_usd/1077)*100), '.2f')
         if float(percent_change_24h) > 0:
             change_mark = '▲'
             add_change_mark = '+'
@@ -115,7 +115,7 @@ def message(request):
         str_price_usd = format(float(coin_data['price_usd']),',.2f') # str_1000단위 + 소수점2자리
         str_price_krw = format(float(coin_data['price_krw']),',.0f') # str_1000단위 + 소수점 0자리
         percent_change_24h = format(float(coin_data['percent_change_24h']),'.2f')
-        gimp = format((1-price_krw/price_usd/1077*100), '.2f')
+        gimp = format(((1-price_krw/price_usd/1077)*100), '.2f')
         if float(percent_change_24h) > 0:
             change_mark = '▲'
             add_change_mark = '+'
@@ -156,8 +156,8 @@ def message(request):
             message_this_coin = "\n★★★★★★★★★★★★★★★\n심재리플 리플심재"
 
     # 4. JPY Exchange_Rates List 보이기 + 최저가격 보여주기
-    if data == 'JPY_Exchange':
-        response_message_jpy = jpy_rate_list()
+    # if data == 'JPY_Exchange':
+    #     response_message_jpy = jpy_rate_list()
 
     today_date = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     # today_date = datetime.date.today().strftime("%m월 %d일")
