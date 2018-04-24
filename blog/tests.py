@@ -15,7 +15,7 @@ import random
 
 def message(data):
     if data == 'JPY_Exchange':
-        response_message_jpy = jpy_rate_list()
+        response_message_jpy = jpy_test()
 
     if data == 'JPY_Exchange':
         return response_message_jpy

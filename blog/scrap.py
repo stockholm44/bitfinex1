@@ -71,8 +71,13 @@ def jpy_rate_list():
     # return "SSORI ZEALOT!!!!!!!!!!!!!"
     return response_message
 def jpy_test():
-    return "jpy_test function"
-
+    bank_name, bank_exchange_rate = jpy_rate()
+    a = bank_name[0]
+    b = bank_exchange_rate[0]
+    c = a + b
+    return c
+# d = jpy_test()
+# print(d)
 # a = jpy_rate_list()
 # print(a)
 # print(type(a))
