@@ -84,6 +84,7 @@ def message(request):
         str_price_usd = format(float(coin_data[i]['price_usd']),',.2f') # str_1000단위 + 소수점2자리
         str_price_krw = format(float(coin_data[i]['price_krw']),',.0f') # str_1000단위 + 소수점 0자리
         percent_change_24h = format(float(coin_data[i]['percent_change_24h']),'.2f')
+        gimp = format((price_krw/price_usd/1077*100), '.2f')
         if float(percent_change_24h) > 0:
             change_mark = '▲'
             add_change_mark = '+'
@@ -100,7 +101,7 @@ def message(request):
         circul_rate = format(float(volume_usd/available_supply/float(price_usd)*100),'.2f')
 
     # 2. 코인순위의 message_response
-        message_this_coin = str(rank) + '위\n┌ ' + name +'   '+ str_price_usd +'$/' + str_price_krw + '원\n├ 변화율   ' + add_change_mark + percent_change_24h + "% (" +change_mark + ')\n└ 회전율   ' + circul_rate + '%\n---------------------\n'
+        message_this_coin = str(rank) + '위\n┌ ' + name +'   '+ str_price_usd +'$/' + str_price_krw + '원\n├ 김프    ' + gimp + '%\n├ 변화율   ' + add_change_mark + percent_change_24h + "% (" +change_mark + ')\n└ 회전율   ' + circul_rate + '%\n---------------------\n'
         response_message += message_this_coin
 
     # 3. 기타 코인관련 잡기능 BTC, ETH, XRP 들의 개별 dATA + 잡 코멘트 넣기.
@@ -128,7 +129,7 @@ def message(request):
     # 회전율
         circul_rate = format(float(volume_usd/available_supply/float(price_usd)*100),'.2f')
 
-        response_message = str(rank) + '위\n┌ ' + name +'   '+ str_price_usd +'$/' + str_price_krw + '원\n├ 변화율   ' + add_change_mark + percent_change_24h + "% (" +change_mark + ')\n└ 회전율   ' + circul_rate + '%\n---------------------\n'
+        response_message = str(rank) + '위\n┌ ' + name +'   '+ str_price_usd +'$/' + str_price_krw + '원\n├ 김프    ' + gimp + '%\n├ 변화율   ' + add_change_mark + percent_change_24h + "% (" +change_mark + ')\n└ 회전율   ' + circul_rate + '%\n---------------------\n'
         if data == 'BTC':
             message_this_coin = '\n 기축코인 비트코인 떡락 ㄱ ㄱ'
         elif data == 'ETH':
@@ -161,7 +162,18 @@ def message(request):
     # today_date = datetime.date.today().strftime("%m월 %d일")
 
     # 최종 결과 : 카카오톡 플러스로 보내는 output
-    if data in coin_rate_selector:
+    if data == "JPY_Exchange_Rates":
+        return JsonResponse({
+                "message": {
+                    "text": "FUck"
+                },
+                "keyboard": {
+                    "type": "buttons",
+                    "buttons": ['Bab?','Coin_Rank_Top 5', 'Coin_Rank_Top 10','Coin_Rank_Top 20','BTC', 'ETH', 'XRP','JPY Exchange_Rates']
+                }
+
+            })
+    elif data in coin_rate_selector:
         return JsonResponse({
                 "message": {
                     "text": response_message
@@ -194,17 +206,7 @@ def message(request):
                 }
 
             })
-    elif data == "JPY_Exchange_Rates":
-        return JsonResponse({
-                "message": {
-                    "text": "FUCK IT ALL"
-                },
-                "keyboard": {
-                    "type": "buttons",
-                    "buttons": ['Bab?','Coin_Rank_Top 5', 'Coin_Rank_Top 10','Coin_Rank_Top 20','BTC', 'ETH', 'XRP','JPY Exchange_Rates']
-                }
 
-            })
 
 
 
