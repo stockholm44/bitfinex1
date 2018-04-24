@@ -84,7 +84,7 @@ def message(request):
         str_price_usd = format(float(coin_data[i]['price_usd']),',.2f') # str_1000단위 + 소수점2자리
         str_price_krw = format(float(coin_data[i]['price_krw']),',.0f') # str_1000단위 + 소수점 0자리
         percent_change_24h = format(float(coin_data[i]['percent_change_24h']),'.2f')
-        gimp = format(((1-price_krw/price_usd/1077*100), '.2f')
+        gimp = format((1-price_krw/price_usd/1077*100), '.2f')
         if float(percent_change_24h) > 0:
             change_mark = '▲'
             add_change_mark = '+'
@@ -172,7 +172,7 @@ def message(request):
                     "buttons": ['Bab?','Coin_Rank_Top 5', 'Coin_Rank_Top 10','Coin_Rank_Top 20','BTC', 'ETH', 'XRP','JPY_Exchange_Rates']
                 }
 
-            })
+                })
     elif data in coin_rate_selector:
         return JsonResponse({
                 "message": {
@@ -183,7 +183,7 @@ def message(request):
                     "buttons": ['Bab?','Coin_Rank_Top 5', 'Coin_Rank_Top 10','Coin_Rank_Top 20','BTC', 'ETH', 'XRP','JPY_Exchange_Rates']
                 }
 
-            })
+                })
     elif data == "Bab?":
         return JsonResponse({
                 "message": {
@@ -194,7 +194,7 @@ def message(request):
                     "buttons": ['Bab?','Coin_Rank_Top 5', 'Coin_Rank_Top 10','Coin_Rank_Top 20','BTC', 'ETH', 'XRP','JPY_Exchange_Rates']
                 }
 
-            })
+                })
     elif data in coin_list_top3:
         return JsonResponse({
                 "message": {
@@ -205,7 +205,7 @@ def message(request):
                     "buttons": ['Bab?','Coin_Rank_Top 5', 'Coin_Rank_Top 10','Coin_Rank_Top 20','BTC', 'ETH', 'XRP','JPY_Exchange_Rates']
                 }
 
-            })
+                })
     else:
         return JsonResponse({
                 "message": {
@@ -216,7 +216,7 @@ def message(request):
                     "buttons": ['Bab?','Coin_Rank_Top 5', 'Coin_Rank_Top 10','Coin_Rank_Top 20','BTC', 'ETH', 'XRP','JPY_Exchange_Rates']
                 }
 
-            })
+                })
 
 
 
