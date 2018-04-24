@@ -141,7 +141,7 @@ def message(request):
             cym_ETH_Ratio = float(cym_ETH_Ratio)
 
             if cym_ETH_gap > 0:
-                plusminus = "아직은 이익이다.^^ " + format(cym_ETH_gap, ',') + "원 이익이다! \n18,000원 치킨 " + str(int(cym_ETH_gap/18000)) + "마리를 쳐먹을 수 있다. \n●●●● 쏘리 지이이일럿!!!!●●●●\n●●●●아이라이포 아이어!!!!●●●●"
+                plusminus = "아직은 이익이다.^^ " + format(cym_ETH_gap, ',') + "원 이익이다! \n◇◇◇◇◇◇◇◇◇◇\n18,000원 치킨 " + str(int(cym_ETH_gap/18000)) + "마리를 쳐먹을 수 있다. \n\n●● 쏘리 지이이일럿!!!!●●\n\n●●아이라이포 아이어!!!!●●"
             elif cym_ETH_gap < 0:
                 plusminus = "아직은 꼴아있다. ㅜㅜ"
             elif cym_ETH_gap == 0:
@@ -166,7 +166,7 @@ def message(request):
     if data == "JPY_Exchange":
         return JsonResponse({
                 "message": {
-                    "text": "FUck"
+                    "text": response_message_jpy
                 },
                 "keyboard": {
                     "type": "buttons",
@@ -210,7 +210,7 @@ def message(request):
     else:
         return JsonResponse({
                 "message": {
-                    "text": response_message_jpy
+                    "text": "뭘쳐누른거냐."
                 },
                 "keyboard": {
                     "type": "buttons",
