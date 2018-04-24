@@ -178,7 +178,7 @@ def message(request):
     elif data in coin_rate_selector:
         return JsonResponse({
                 "message": {
-                    "text": response_message
+                    "text": "SEX"
                 },
                 "keyboard": {
                     "type": "buttons",
