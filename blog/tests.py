@@ -24,24 +24,25 @@ def message(data):
     # 전체적으로 1. 밥뭐먹지 2.코인순위(10,20,50단위) 3. 개별코인정보(BTC,ETH,XRP)
     # response_message를 만들기 전까지 준비데이터들을 아래와 같이 만든다.
 
-    # 4. JPY Exchange_Rates List 보이기 + 최저가격 보여주기
-    if data == 'JPY Exchange_Rates':
-        bank_name, bank_exchange_rate = jpy_rate()
-        response_message_jpy = ""
-        # 제일 싼 거래소 보여주기
-        minimum_rate = bank_exchange_rate[0]    # 비교 하기 위한 제일 싼 환율
-        minimum_rate_exchange = bank_name[0]              # 싼거래소들
-        for i in range(len(bank_name)):
-            if i > 0:
-                if bank_exchange_rate[i] == minimum_rate:
-                    minimum_rate_exchange += ", " + bank_name[i]
+    # # 4. JPY Exchange_Rates List 보이기 + 최저가격 보여주기
+    # if data == 'JPY Exchange_Rates':
+    #     bank_name, bank_exchange_rate = jpy_rate()
+    #     response_message_jpy = ""
+    #     # 제일 싼 거래소 보여주기
+    #     minimum_rate = bank_exchange_rate[0]    # 비교 하기 위한 제일 싼 환율
+    #     minimum_rate_exchange = bank_name[0]              # 싼거래소들
+    #     for i in range(len(bank_name)):
+    #         if i > 0:
+    #             if bank_exchange_rate[i] == minimum_rate:
+    #                 minimum_rate_exchange += ", " + bank_name[i]
+    #
+    #     response_message_jpy += '★★★★★★★★★★★★★\n제일 저렴한 환율은 ' + str(minimum_rate) + '엔 이며 저렴한 거래소는 아래거래소들 입니다.\n' + minimum_rate_exchange + '\n★★★★★★★★★★★★★\n'
+    #     message_this_rate = ""
+    #     for i, name in enumerate(bank_name):
+    #         message_this_rate += str(i + 1) + '. ' + name + ': ' + str(bank_exchange_rate[i]) + '엔\n'
+    #
+    #     response_message_jpy += message_this_rate
 
-        response_message_jpy += '★★★★★★★★★★★★★\n제일 저렴한 환율은 ' + str(minimum_rate) + '엔 이며 저렴한 거래소는 아래거래소들 입니다.\n' + minimum_rate_exchange + '\n★★★★★★★★★★★★★\n'
-        message_this_rate = ""
-        for i, name in enumerate(bank_name):
-            message_this_rate += str(i + 1) + '. ' + name + ': ' + str(bank_exchange_rate[i]) + '엔\n'
-
-        response_message_jpy += message_this_rate
 
 
     # 1. 밥뭐먹지의 Data
@@ -119,7 +120,7 @@ def message(data):
     # 회전율
         circul_rate = format(float(volume_usd/available_supply/float(price_usd)*100),'.2f')
 
-        response_message = str(rank) + '위\n┌ ' + name +' - '+ str_price_usd +'$/' + str_price_krw + '원\n├ 변화율   ' + add_change_mark + percent_change_24h + "% (" +change_mark + ')\n└ 회전율   ' + circul_rate + '%\n---------------------\n'
+        response_message = str(rank) + '위\n┌ ' + name +'   '+ str_price_usd +'$/' + str_price_krw + '원\n├ 변화율   ' + add_change_mark + percent_change_24h + "% (" +change_mark + ')\n└ 회전율   ' + circul_rate + '%\n---------------------\n'
         if data == 'BTC':
             message_this_coin = '\n 기축코인 비트코인 떡락 ㄱ ㄱ'
         elif data == 'ETH':
@@ -144,11 +145,12 @@ def message(data):
         elif data =='XRP':
             message_this_coin = "\n★★★★★★★★★★★★★★★\n심재리플 리플심재"
 
+    # 4. JPY Exchange_Rates List 보이기 + 최저가격 보여주기
+    if data == 'JPY_Exchange_Rates':
+        response_message_jpy = jpy_rate_list()
+
     today_date = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     # today_date = datetime.date.today().strftime("%m월 %d일")
-
-
-
 
 
 
@@ -159,8 +161,8 @@ def message(data):
         return "오늘 먹을 식사는 아래와 같습니다.\n★★★★★★★★★★★★★\n" + bab_select + "\n★★★★★★★★★★★★★"
     elif data in coin_list_top3:
         return response_message + message_this_coin
-    elif data == 'JPY Exchange_Rates':
+    elif data == 'JPY_Exchange_Rates':
         return response_message_jpy
 
-a = message('JPY Exchange_Rates')
+a = message('JPY_Exchange_Rates')
 print(a)
