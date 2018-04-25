@@ -157,8 +157,11 @@ def message(request):
 
     # 4. JPY Exchange_Rates List 보이기 + 최저가격 보여주기
     if data == 'JPY_Exchange':
-        response_message_jpy = jpy_test()
-        
+        response_message_jpy, b = jpy_rate()
+        # response_message_jpy = jpy_test()
+        response_message_jpy = response_message_jpy[0]
+
+
 
     today_date = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     # today_date = datetime.date.today().strftime("%m월 %d일")

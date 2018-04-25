@@ -70,14 +70,21 @@ def jpy_rate_list():
 
     # return "SSORI ZEALOT!!!!!!!!!!!!!"
     return response_message
+def jpy_test2():
+    a = ['aa','bb','cc']
+    b = ['dd','ee','ff']
+    return a, b
 def jpy_test():
-    bank_name, bank_exchange_rate = jpy_rate()
+    bank_name, bank_exchange_rate = jpy_test2()
     a = bank_name[0]
     b = bank_exchange_rate[0]
     c = a + b
     return c
-# d = jpy_test()
+# d ,e = jpy_rate()
+# f = jpy_rate_list()
+g = jpy_test()
+print(g)
 # print(d)
-# a = jpy_rate_list()
-# print(a)
-# print(type(a))
+# print(e)
+# print(f)
+# print(g)

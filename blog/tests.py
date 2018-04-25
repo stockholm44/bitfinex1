@@ -15,10 +15,10 @@ import random
 
 def message(data):
     if data == 'JPY_Exchange':
-        response_message_jpy = jpy_test()
-
+        response_message_jpy = jpy_rate()
+        response_message_jpy_1 = response_message_jpy[0]
     if data == 'JPY_Exchange':
-        return response_message_jpy
+        return response_message_jpy_1
 
 a = message('JPY_Exchange')
 print(a)
