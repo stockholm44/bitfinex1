@@ -272,7 +272,7 @@ def price_coin(request):
 
     return render(request, 'blog/price_coin.html', context)
     # return HttpResponse("BTC is %d$" % volume)
-def jpy_rate(request):
+def jpy_list(request):
     jpy_list = jpy_rate_list()
     return render(request, 'blog/jpy_list.html', {'jpy_list':jpy_list})
 def post_list(request):
