@@ -10,4 +10,5 @@ urlpatterns = [
     url(r'^post/(?P<pk>\d+)/edit/$', views.post_edit, name='post_edit'),
     url(r'^keyboard/', views.keyboard),
     url(r'^message', views.message),
+    url(r'^jpy_list/', views.jpy_list, name='jpy_list'),
 ]
