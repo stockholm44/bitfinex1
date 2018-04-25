@@ -157,9 +157,9 @@ def message(request):
 
     # 4. JPY Exchange_Rates List 보이기 + 최저가격 보여주기
     if data == 'JPY_Exchange':
-        response_message_jpy, b = jpy_rate()
-        # response_message_jpy = jpy_test()
-        response_message_jpy = response_message_jpy[0]
+        # response_message_jpy, b = jpy_rate()
+        response_message_jpy = jpy_test2()
+        response_message_jpy_1 = response_message_jpy[0]
 
 
 
@@ -170,7 +170,7 @@ def message(request):
     if data == "JPY_Exchange":
         return JsonResponse({
                 "message": {
-                    "text": response_message_jpy
+                    "text": response_message_jpy_1
                 },
                 "keyboard": {
                     "type": "buttons",
