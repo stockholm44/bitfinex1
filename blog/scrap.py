@@ -75,7 +75,6 @@ def jpy_rate_kakao():
 def jpy_rate_min():
     # 4. JPY Exchange_Rates List 보이기 + 최저가격 보여주기
     bank_name, bank_exchange_rate = jpy_rate()
-    response_message = ""
     # 제일 싼 거래소 보여주기
     minimum_rate = bank_exchange_rate[0]    # 비교 하기 위한 제일 싼 환율
     minimum_rate_exchange = bank_name[0]              # 싼거래소들
