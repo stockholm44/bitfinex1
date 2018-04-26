@@ -276,7 +276,7 @@ def price_coin(request):
 
 
 def jpy_list(request):
-    aa= jpy_rate_list()
+    minimum_rate, minimum_rate_exchange = jpy_rate_list()
 
     return render(request, 'blog/jpy_list.html', {'jpy_list':aa})
 
