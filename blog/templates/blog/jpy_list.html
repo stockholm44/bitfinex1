@@ -4,9 +4,7 @@
         <div>
             <h2>★★JPY Minimum Rate & Exchange★★</h2>
               <h3>제일 저렴한 환율은 {{ minimum_rate }}엔이며 저렴한 거래소는 아래와 같습니다.</h3>
-              {% for list in jpy_rate_list %}
-                <p>{{ list }}</p>
-              {% endfor %}
+              <h3>{{ minimum_rate_exchange }}</h3>
         </div>
         <div>
             <h2>★JPY Exchange Price in Seoul</h2>
