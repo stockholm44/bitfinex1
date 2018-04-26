@@ -1,7 +1,7 @@
 from bs4 import BeautifulSoup
 from urllib.request import urlopen
 
-__all__ = ['jpy_rate','jpy_rate_list','jpy_test']
+__all__ = ['jpy_rate','jpy_rate_list','jpy_test','jpy_test2']
 
 def jpy_rate():
     html = urlopen('https://www.mibank.me/exchange/saving/index.php?currency=JPY')
