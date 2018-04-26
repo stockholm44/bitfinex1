@@ -80,10 +80,14 @@ def jpy_test():
     b = bank_exchange_rate[0]
     c = a + b
     return c
+
+aa, bb = jpy_test2()
+cc = aa[0]
+print(cc)
 # d ,e = jpy_rate()
-# f = jpy_rate_list()
-g = jpy_test()
-print(g)
+# # f = jpy_rate_list()
+# g = jpy_test()
+# print(g)
 # print(d)
 # print(e)
 # print(f)

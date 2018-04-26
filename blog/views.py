@@ -160,7 +160,7 @@ def message(request):
         # response_message_jpy, b = jpy_rate()
         # response_message_jpy = jpy_test2()
         aa, bb = jpy_test2()
-        cc = aa[0]
+        cc = str(aa[0])
 
 
 
