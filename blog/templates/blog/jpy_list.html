@@ -3,9 +3,17 @@
 {% block content %}
         <div>
             <h2>★★JPY Minimum Rate & Exchange★★</h2>
-            <h3>제일 저렴한 환율은 {{ minimum_rate }}엔이며 저렴한 거래소는 아래와 같습니다.</h3>
-            {% for list in jpy_list %}
-              <h3></h3>
-            <h2>{{ jpy_list }}
+              <h3>제일 저렴한 환율은 {{ minimum_rate }}엔이며 저렴한 거래소는 아래와 같습니다.</h3>
+              {% for list in jpy_rate_list %}
+                <p>{{ list }}</p>
+              {% endfor %}
+        </div>
+        <div>
+            <h2>★JPY Exchange Price in Seoul</h2>
+              <ul>
+                {% for key, value in jpy_exchange_list.items %}
+                  <h3><li>{{ key }}: {{ value }}엔</li></h3>
+                {% endfor %}
+              </ul>
         </div>
 {% endblock %}

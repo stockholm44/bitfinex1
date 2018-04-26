@@ -1,7 +1,7 @@
 from bs4 import BeautifulSoup
 from urllib.request import urlopen
 
-__all__ = ['jpy_rate','jpy_rate_list','jpy_test','jpy_test2']
+__all__ = ['jpy_rate','jpy_rate_kakao','jpy_rate_list','jpy_rate_min','jpy_test','jpy_test2']
 
 def jpy_rate():
     html = urlopen('https://www.mibank.me/exchange/saving/index.php?currency=JPY')
@@ -89,12 +89,12 @@ def jpy_rate_list():
     # 4. JPY Exchange_Rates List 보이기 + 최저가격 보여주기
     bank_name, bank_exchange_rate = jpy_rate()
     jpy_list = {}
-    for i in range(len(bank_name):
-        jpy_list[bank_name] = bank_exchange_rate
+    for i in range(len(bank_name)):
+        jpy_list[bank_name[i]] = bank_exchange_rate[i]
     return jpy_list
 
     # return "SSORI ZEALOT!!!!!!!!!!!!!"
-    return response_message
+    # return response_message
 def jpy_test2():
     a = ['aa','bb','cc']
     b = ['dd','ee','ff']
@@ -106,11 +106,17 @@ def jpy_test():
     c = a + b
     return c
 
+
+# a= jpy_rate_list()
+# b=type(a)
+# print(a)
+# print(b)
+
 # aa, bb = jpy_test2()
 # cc = aa[0]
 # print(cc)
 # d ,e = jpy_rate()
-# # f = jpy_rate_list()
+# f = jpy_rate_list()
 # g = jpy_test()
 # print(g)
 # print(d)

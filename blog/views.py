@@ -276,9 +276,17 @@ def price_coin(request):
 
 
 def jpy_list(request):
-    minimum_rate, minimum_rate_exchange = jpy_rate_list()
-
-    return render(request, 'blog/jpy_list.html', {'jpy_list':aa})
+    minimum_rate, minimum_rate_exchange = jpy_rate_min()
+    bank_name, bank_exchange_rate = jpy_rate()
+    jpy_exchange_list = {}
+    for i in range(len(bank_name)):
+        jpy_exchange_list[bank_name[i]] = bank_exchange_rate[i]
+    context = {
+        'minimum_rate': minimum_rate,
+        'minimum_rate_exchange': minimum_rate_exchange,
+        'jpy_exchange_list': jpy_exchange_list
+        }
+    return render(request, 'blog/jpy_list.html', context)
 
 
 def post_list(request):
