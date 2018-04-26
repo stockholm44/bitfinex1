@@ -273,9 +273,14 @@ def price_coin(request):
 
     return render(request, 'blog/price_coin.html', context)
     # return HttpResponse("BTC is %d$" % volume)
+
+
 def jpy_list(request):
-    jpy_list = jpy_rate_list()
-    return render(request, 'blog/jpy_list.html', {'jpy_list':jpy_list})
+    aa= jpy_rate_list()
+
+    return render(request, 'blog/jpy_list.html', {'jpy_list':aa})
+
+
 def post_list(request):
     posts = Post.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
     return render(request, 'blog/post_list.html', {'posts': posts})
