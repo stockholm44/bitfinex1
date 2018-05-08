@@ -5,6 +5,8 @@ import hmac
 import hashlib
 import time
 from urllib.request import urlopen, Request
+
+
 #
 # url = "https://api.bitfinex.com/v1/pubticker/btcusd"
 #
