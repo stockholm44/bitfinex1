@@ -204,7 +204,7 @@ def message(request):
     #             }
     #
     #             })
-elif data == "지금 뭐먹지?":
+    elif data == "지금 뭐먹지?":
         return JsonResponse({
                 "message": {
                     "text": "지역을 선택해주십시오.\n★★★★★★★★★★★★★\n0. 파주\n1. 고양\n2. 서울\n★★★★★★★★★★★★★"
