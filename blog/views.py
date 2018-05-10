@@ -193,17 +193,6 @@ def message(request):
                 }
 
                 })
-    # elif data == "지금 뭐먹지?":
-    #     return JsonResponse({
-    #             "message": {
-    #                 "text": "오늘 먹을 식사는 아래와 같습니다.\n★★★★★★★★★★★★★\n" + bab_select + "\n★★★★★★★★★★★★★"
-    #             },
-    #             "keyboard": {
-    #                 "type": "buttons",
-    #                 "buttons": ['지금 뭐먹지?','Coin_Rank_Top 5', 'Coin_Rank_Top 10','Coin_Rank_Top 20','BTC', 'ETH', 'XRP','JPY_Exchange']
-    #             }
-    #
-    #             })
     elif data == '지금 뭐먹지?':
         return JsonResponse({
                 "message": {
@@ -281,33 +270,6 @@ def message(request):
                 }
 
                 })
-
-
-
-
-
-
-#
-    #
-    # if data == "ETH":
-    #         cym_ETH = 20.86 * int(bid_bithumb("ETH"))/3
-    #         cym_ETH = int(cym_ETH)
-    #         cym_ETH_Ratio = cym_ETH / 5000000 * 100
-    #         cym_ETH_gap = cym_ETH-5000000
-    #         cym_ETH_Ratio = float(cym_ETH_Ratio)
-    #
-    #         if cym_ETH_gap > 0:
-    #             plusminus = "이익이다.^^"
-    #         elif cym_ETH_gap < 0:
-    #             plusminus = "꼴았다. ㅜㅜ"
-    #         elif cym_ETH_gap == 0:
-    #             plusminus = "똔똔이다.ㅡㅡ"
-    #
-    #         cym_ETH_Ratio = format(cym_ETH_Ratio, '.1f')
-    #         cym_ETH = format(cym_ETH, ',')
-    #         cym_ETH_gap = format(cym_ETH_gap, ',')
-
-
 
 def price_coin(request):
     symbol_list_bitfinex = symbol_list()
