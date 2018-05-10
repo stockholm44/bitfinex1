@@ -1,258 +1,202 @@
-import requests
+# from django.utils import timezone
+# from .models import Post
+# from django.shortcuts import render, get_object_or_404, redirect
+# from .forms import PostForm
+# from django.http import HttpResponse, JsonResponse
+import datetime
+# from django.template import Template, Context
+# from django.template.loader import get_template, render_to_string
+from FinexAPI import *
+from cmc import *
+from scrap import *
+from bab import *
+# from django.views.decorators.csrf import csrf_exempt
 import json
-import base64
-import hmac
-import hashlib
-import time
-from datetime import date
-from urllib.request import urlopen, Request
-from datetime import date
-from datetime import datetime
-from datetime import timedelta
-from time import mktime
+import random
+from urllib.request import urlopen
+from bs4 import BeautifulSoup
+
+def keyboard(request):
+    return JsonResponse({
+        'type' : 'buttons',
+        'buttons' : ['지금 뭐먹지?','Coin_Rank_Top 5', 'Coin_Rank_Top 10','Coin_Rank_Top 20','BTC', 'ETH', 'XRP', 'JPY_Exchange']
+    })
+
+# @csrf_exempt
+def message(request):
+
+    # # Kakao 플러스친구에서의 input Data
+    # json_str = ((request.body).decode('utf-8'))
+    # received_json_data = json.loads(json_str)
+    data = request    # 카카오 플러스친구가 받는 input 값.
+
+    # 전체적으로 1. 밥뭐먹지 2.코인순위(10,20,50단위) 3. 개별코인정보(BTC,ETH,XRP)
+    # response_message를 만들기 전까지 준비데이터들을 아래와 같이 만든다.
+
+    # # 4. JPY Exchange_Rates List 보이기 + 최저가격 보여주기
+    # if data == 'JPY Exchange_Rates':
+    #     bank_name, bank_exchange_rate = jpy_rate()
+    #     response_message_jpy = ""
+    #     # 제일 싼 거래소 보여주기
+    #     minimum_rate = bank_exchange_rate[0]    # 비교 하기 위한 제일 싼 환율
+    #     minimum_rate_exchange = bank_name[0]              # 싼거래소들
+    #     for i in range(len(bank_name)):
+    #         if i > 0:
+    #             if bank_exchange_rate[i] == minimum_rate:
+    #                 minimum_rate_exchange += ", " + bank_name[i]
+    #
+    #     response_message_jpy += '★★★★★★★★★★★★★\n제일 저렴한 환율은 ' + str(minimum_rate) + '엔 이며 저렴한 거래소는 아래거래소들 입니다.\n' + minimum_rate_exchange + '\n★★★★★★★★★★★★★\n'
+    #     message_this_rate = ""
+    #     for i, name in enumerate(bank_name):
+    #         message_this_rate += str(i + 1) + '. ' + name + ': ' + str(bank_exchange_rate[i]) + '엔\n'
+    #
+    #     response_message_jpy += message_this_rate
 
 
-# Bitcoinchart로부터 URL 받기(시간제한을 URL + a 로 붙게 지정)
-URL = "http://api.bitcoincharts.com/v1/trades.csv?symbol=bitstampUSD&start="
 
-# 위 URL 설명
-# 위와 같이 그냥 symbol만 입력되있으면 response로 큰숫자부터 시작하는 내림차순으로 받아짐.
-# &start= 을 붙이기만 한 것은 위의 결과와 동일
-# 하지만 &start= + str(숫자)가 들어 가게 되면 해당 숫자부터 최근날짜 방향으로 20000개가 오름차순으로 받아짐.
-# 즉 처음은 그냥 내림차순 그대로 받아서 아래의 RSI 받는 거 그대로 하면 되고
-# 그 이후에 첫 timestamp의 끝에거 기준으로 20000개를 받게되니까 대략적인 예측으로 떄려맞춰야하나....
-# 보통 20000개 timestamp에 몇시간정도인지 보자. 대충보니 16시간정도. 12시간 단위로 불러내면 10개정도면 충분.
+    # 1. 밥뭐먹지의 Data
+    # if data == "지금 뭐먹지?":
+    #     bab_list = ['볶음밥','짜장면','짬뽕','간짜장','양념치킨','걍치킨','순살치킨','신라면','진라면','컵라면큰사발','컵라면','불닭볶음밥','굶어시바라','닭도리탕','새우깡','보쌈','고르곤졸라피자','불고기피자','김치에계란','계란말이','회','스시','초밥','간장게장','양념게장']
+    #     bab_select = random.choice(bab_list)
+    bab_response, bab_place = bab(data)
 
 
+    # 2. 코인순위의 Data
+    # 원하는 코인순위 범위 정하기
+    coin_rate_selector = ['Coin_Rank_Top 5', 'Coin_Rank_Top 10','Coin_Rank_Top 20']
 
-# 각 시간간격을 Unixtime으로 표현
-time_delta_15min = 60*15
-time_delta_1hr = 60*60
-time_delta_2hr = 60*60*2
-time_delta_6hr = 60*60*6
-time_delta_10hr = 60*60*10
-time_delta_10hr = 60*60*12
-time_delta_1day = 60*60*24
+    if data == 'Coin_Rank_Top 5':
+        coin_count = 5
+    elif data == 'Coin_Rank_Top 10':
+        coin_count = 10
+    elif data == 'Coin_Rank_Top 20':
+        coin_count = 20
+    else:
+        coin_count = 0
+
+    # coinmarketcap 에서 Data 끌어오기.
+    coin_data = ticker1(coin_count)
+
+    # 2. 코인순위의 response_message
+    response_message = ""
+    for i in range(coin_count):
+        rank = int(coin_data[i]['rank'])
+        name = coin_data[i]['name']
+        price_usd = float(coin_data[i]['price_usd']) # float
+        price_krw = float(coin_data[i]['price_krw']) # float
+        str_price_usd = format(float(coin_data[i]['price_usd']),',.2f') # str_1000단위 + 소수점2자리
+        str_price_krw = format(float(coin_data[i]['price_krw']),',.0f') # str_1000단위 + 소수점 0자리
+        percent_change_24h = format(float(coin_data[i]['percent_change_24h']),'.2f')
+        gimp = format(((1-price_krw/price_usd/1077)*100), '.2f')
+        if float(percent_change_24h) > 0:
+            change_mark = '▲'
+            add_change_mark = '+'
+        elif float(percent_change_24h) == 0:
+            change_mark = ''
+            add_change_mark = ''
+        elif float(percent_change_24h) < 0:
+            change_mark = '▼'
+            add_change_mark = ''
+
+        volume_usd = float(coin_data[i]['24h_volume_usd'])
+        available_supply = float(coin_data[i]['available_supply'])
+    # 회전율
+        circul_rate = format(float(volume_usd/available_supply/float(price_usd)*100),'.2f')
+
+    # 2. 코인순위의 message_response
+        message_this_coin = str(rank) + '위\n┌ ' + name +'   '+ str_price_usd +'$/' + str_price_krw + '원\n├ 김프    ' + gimp + '%\n├ 변화율   ' + add_change_mark + percent_change_24h + "% (" +change_mark + ')\n└ 회전율   ' + circul_rate + '%\n---------------------\n'
+        response_message += message_this_coin
+
+    # 3. 기타 코인관련 잡기능 BTC, ETH, XRP 들의 개별 dATA + 잡 코멘트 넣기.
+    coin_list_top3 = ['BTC', 'ETH', 'XRP']
+    if data in coin_list_top3:
+        coin_data = ticker2(data)[0]
+        rank = int(coin_data['rank'])
+        name = coin_data['name']
+        price_usd = float(coin_data['price_usd']) # float
+        price_krw = float(coin_data['price_krw']) # float
+        str_price_usd = format(float(coin_data['price_usd']),',.2f') # str_1000단위 + 소수점2자리
+        str_price_krw = format(float(coin_data['price_krw']),',.0f') # str_1000단위 + 소수점 0자리
+        percent_change_24h = format(float(coin_data['percent_change_24h']),'.2f')
+        gimp = format(((1-price_krw/price_usd/1077)*100), '.2f')
+        if float(percent_change_24h) > 0:
+            change_mark = '▲'
+            add_change_mark = '+'
+        elif float(percent_change_24h) == 0:
+            change_mark = ''
+            add_change_mark = ''
+        elif float(percent_change_24h) < 0:
+            change_mark = '▼'
+            add_change_mark = ''
+        volume_usd = float(coin_data['24h_volume_usd'])
+        available_supply = float(coin_data['available_supply'])
+    # 회전율
+        circul_rate = format(float(volume_usd/available_supply/float(price_usd)*100),'.2f')
+
+        response_message = str(rank) + '위\n┌ ' + name +'   '+ str_price_usd +'$/' + str_price_krw + '원\n├ 김프    ' + gimp + '%\n├ 변화율   ' + add_change_mark + percent_change_24h + "% (" +change_mark + ')\n└ 회전율   ' + circul_rate + '%\n---------------------\n'
+        if data == 'BTC':
+            message_this_coin = '\n 기축코인 비트코인 떡락 ㄱ ㄱ'
+        elif data == 'ETH':
+            cym_ETH = 20.86 /3 * price_krw
+            cym_ETH = int(cym_ETH)
+            cym_ETH_Ratio = cym_ETH / 5000000 * 100
+            cym_ETH_gap = cym_ETH-5000000
+            cym_ETH_Ratio = float(cym_ETH_Ratio)
+
+            if cym_ETH_gap > 0:
+                plusminus = "아직은 이익이다.^^ " + format(cym_ETH_gap, ',') + "원 이익이다! \n●●●●●●●●●●●●●●●●●●●●\n18,000원 치킨 ▶" + str(int(cym_ETH_gap/18000)) + "마리◀를 쳐먹을 수 있다. \n\n●●●● 쏘리 지이이일럿!!!!●●●●\n\n●●●아이라이포 아이어!!!!●●●"
+            elif cym_ETH_gap < 0:
+                plusminus = "아직은 꼴아있다. ㅜㅜ"
+            elif cym_ETH_gap == 0:
+                plusminus = "똔똔이다.ㅡㅡ"
+
+            cym_ETH_Ratio_str = format(cym_ETH_Ratio, '.1f')
+            cym_ETH = format(cym_ETH, ',')
+            cym_ETH_gap = format(cym_ETH_gap, ',')
+
+            message_this_coin = "\n★★★★★★★★★★★★★★★★★★\n현재 심봉&진우의 ETH는 각각\n" + str(cym_ETH) + "원이다 십생키들아.\n" + "즉 초기 대비 현재 " + cym_ETH_Ratio_str + "% 인것이다.\n그래서 현재 투자 결과는 " + plusminus
+        elif data =='XRP':
+            message_this_coin = "\n★★★★★★★★★★★★★★★\n심재리플 리플심재"
+
+    # 4. JPY Exchange_Rates List 보이기 + 최저가격 보여주기
+    if data == 'JPY_Exchange':
+        response_message_jpy = jpy_rate_kakao()
+        # response_message_jpy = jpy_test2()
+        # aa, bb = jpy_test2()
+        # cc = aa[0]
 
 
-# response 받는곳 부터 for 문으로 5일치를 받아놓자.
-# 5일치가 그냥 넘어가버릴수도 있으니까 0으로 했을때의 timestamp를 저장해서 그시점이 왔을떄 정지 시키든가.
-# 20000개씩밖에 못받으니까 나눠서 5일치를 받아보자.
 
+    today_date = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    # today_date = datetime.date.today().strftime("%m월 %d일")
 
+    # 최종 결과 : 카카오톡 플러스로 보내는 output
+    if data == "JPY_Exchange":
+        return response_message_jpy
 
-def raw_data():
+    elif data in coin_rate_selector:
+        return response_message
 
-    splitline = []
+    elif data == '지금 뭐먹지?':
+        return "지역을 선택해주십시오.\n★★★★★★★★★★★★★\n0. 파주\n1. 고양\n2. 서울\n★★★★★★★★★★★★★"
 
-    timestamps_sum = []
-    prices_sum = []
-    amounts_sum = []
+    elif data in bab_place:
+        return bab_response
 
-    for j in range(1,20):
-        adjustedTime = int(time.time()) - time_delta_10hr * j
-        response = requests.get(URL + str(adjustedTime))
-        splitResponse = response.text.splitlines()
-        # splitResponse = splitResponse[::30] # 30 step 단위만 저장.(너무 Data가 비슷/중복되게 많아서 step 넣음.)
+    elif data == "파주":
+        return "상세지역을 선택해 주십숑.\n★★★★★★★★★★★★★\n1. 파주 P8공장뒤\n2. 파주 LGD기숙사뒤\n3. 파주 내 그외지역\n★★★★★★★★★★★★★"
 
-        timestamps = []
-        prices = []
-        amounts = []
+    elif data == "서울":
+        return "상세지역을 선택해 주십숑.\n★★★★★★★★★★★★★\n1. 홍대\n2. 연희동\n★★★★★★★★★★★★★"
 
-        # timestamp, price, amount 리스트에저장(날짜 내림차순으로)
-        for i, line in enumerate(splitResponse):
+    elif data == "고양":
+        return "상세지역을 선택해 주십숑.\n★★★★★★★★★★★★★\n1. 화정\n2. 일산\n3. 관산동\n★★★★★★★★★★★★★"
 
-            splitline = splitResponse[i].split(',')
-            timestamp = int(splitline[0])
-            price = float(splitline[1])
-            amount = float(splitline[2])
+    elif data in coin_list_top3:
+        return response_message + message_this_coin
 
-            timestamps.insert(0, timestamp)
-            prices.insert(0, price)
-            amounts.insert(0, amount)
-        if j == 1 :
-            # timestamps_last = timestamps[-1]
-            timestamps_last_list = timestamps[-31:-1]
-                # print(timestamps_last)
-        # print(j, timestamps)
-        # print(timestamps[-31:-1])
-        if j > 1:
-            for i, line in enumerate(timestamps_last_list):
-                try:
-                    timestamps_last_index = timestamps.index(timestamps_last_list[i])
-                except Exception:
-                    pass
-            # timestamps_last_index = timestamps.index(timestamps_last)
-            # print(j,'timestamps_last_index', timestamps_last_index)
-            timestamps = timestamps[timestamps_last_index:]
-            # print(j,'timestamps[-1]',timestamps[-1])
-            timestamps_last_list = timestamps[-31:-1]
-        timestamps_sum += timestamps
-        prices_sum += prices
-        amounts_sum += amounts
+    else:
+        return "뭘쳐누른거냐."
 
-        return timestamps_sum, prices_sum, amounts_sum
-
-
-timestamps_sum, prices_sum, amounts_sum = raw_data()
-print("Raw Data Function Result**********************")
-for i, line in enumerate(timestamps_sum):
-    print(i, timestamps_sum[i], prices_sum[i])
-
-#
-
-
-# open, close, high, low +(날짜) 설정을 위한 리스트 작성.
-# def ochl_data(period):
-#
-#     timestamps_sum, prices_sum, amounts_sum = raw_data()
-#     time_delta= period  # 여러개의 period를 받아서 date_div_ts에서 시간간격을 뺴주는 time_delta를 정의함.
-#
-#     year = int(datetime.fromtimestamp(timestamps_sum[0]).strftime('%Y'))
-#     month = int(datetime.fromtimestamp(timestamps_sum[0]).strftime('%m'))
-#     day = int(datetime.fromtimestamp(timestamps_sum[0]).strftime('%d'))
-#     hour = int(datetime.fromtimestamp(timestamps_sum[0]).strftime('%H'))
-#     minute = int(datetime.fromtimestamp(timestamps_sum[0]).strftime('%M'))
-#     second = int(datetime.fromtimestamp(timestamps_sum[0]).strftime('%S'))
-#
-#     date_div = datetime(year, month, day, hour)
-#     date_div_ts = int(mktime(date_div.timetuple()))
-#
-#
-#     dates = []
-#     opens = []
-#     closes = []
-#     highs = []
-#     lows = []
-#
-#     open = close = high = low = prices_sum[0]
-#     dates.append(date_div_ts)
-#     j = 0
-#
-#
-#
-#     # timestamp[0]의 시간중 시간까지만 끌어오기위해 임시로 사용.
-#     # 나중에는 아래것을 따로 함수로 하나 만들어서 처리하자.
-#
-#     # print("****Collecting open, close, high low ****************************")
-#     for i in range(len(timestamps_sum)):
-#         if timestamps_sum[i] < date_div_ts:  # timestamp기준 하루이전이라면?
-#             j += 1
-#             date_div_ts -= time_delta  # 기준일을 하루 낮추기
-#             open = prices_sum[i-1]
-#             dates.insert(0, date_div_ts)       # 기준일을 date list에 추가
-#             opens.insert(0, open)
-#             closes.insert(0, close)
-#             highs.insert(0, high)
-#             lows.insert(0, low)
-#             close = high = low = prices_sum[i]               # 하루전되기 마지막 거래가격을 close로 등록(?)
-#
-#         if prices_sum[i] > high:
-#             high = prices_sum[i]
-#
-#         if prices_sum[i] < low:
-#             low = prices_sum[i]
-#
-#     del dates[1]
-#
-#     return dates, opens, closes, highs, lows
-#
-#
-# # for i in range(len(dates)):
-# #     print(i, dates[i], opens[i], closes[i], highs[i], lows[i])
-#
-#
-#
-# # RSI 계산을 위한 함수. 단 ochl_data와 동일하게 period 호출값을 받아서 retrun 시킴.
-# def rsi(period):
-#
-#     dates, opens, closes, highs, lows = ochl_data(period)
-#     # RSI 계산을 위한
-#     #1. AU, AD산출 후
-#     #2. 14일간 rolling mean 구하기
-#     #3. 14일째 후부터 RSI 산출
-#
-#     #1. AU, AD 산출
-#     # print("****Calculate dUp, dDown ****************************")
-#     rsi = []
-#     dUp = []
-#     dDown = []
-#     for i in range(len(dates)):
-#         if i > 0:
-#             if closes[i] >= closes[i-1]:
-#                 dUp.append(closes[i]-closes[i-1])
-#                 dDown.append(0)
-#                 # print(i, ' dUp, dDown ',dUp[i], dDown[i])
-#             elif closes[i] < closes[i-1]:
-#                 dUp.append(0)
-#                 dDown.append(closes[i-1]-closes[i])
-#                 # print(i, ' dUp, dDown ',dUp[i], dDown[i])
-#         elif i == 0:
-#             dUp.append(0)
-#             dDown.append(0)
-#             # print(i, ' dUp, dDown ',dUp[i], dDown[i])
-#
-#     # for i in range(len(dates)):
-#     #     print(i, ' dUp, dDown ',dUp[i], dDown[i])
-#     au = []
-#     ad = []
-#     rs = []
-#     # print("****Calculate au, ad, rs ****************************")
-#     for i in range(len(dates)):
-#         if i < 14:
-#             au.append(0)
-#             ad.append(0)
-#             rs.append(0)
-#             rsi.append(50)
-#             # print(i, 'i < 14', au[i], ad[i], rs[i],rsi[i])
-#         elif i == 14:
-#             dUp_Sum = dUp[1:15]
-#             # print('dUp_Sum', dUp_Sum)
-#             dDown_Sum = dDown[1:15]
-#             # print('dDown_Sum', dDown_Sum)
-#             au.append(sum(dUp_Sum)/len(dUp_Sum))
-#             ad.append(sum(dDown_Sum)/len(dDown_Sum))
-#             # print(i, 'au[i], ad[i]', au[i], ad[i])
-#             rs.append(au[i]/ad[i])
-#             rsi.append(100.0 - (100.0 / (1.0 + rs[i])))
-#
-#         elif i > 14:
-#             au.append((au[i-1]*13+dUp[i])/14)
-#             ad.append((ad[i-1]*13+dDown[i])/14)
-#             rs.append(au[i]/ad[i])
-#             rsi.append(100.0 - (100.0 / (1.0 + rs[i])))
-#     #
-#     # for i, line in enumerate(dates):
-#     #     print(i, dates[i], closes[i], rsi[i])
-#     # print(len(dates))
-#     # print(len(closes))
-#     # print(len(rsi))
-#
-#     return dates, closes, rsi
-#
-# timestamps_sum, prices_sum, amounts_sum = raw_data()
-# print("Raw Data Function Result**********************")
-# for i, line in enumerate(timestamps_sum):
-#     print(i, timestamps_sum[i], prices_sum[i])
-#
-# dates1, opens1, closes1, highs1, lows1 = ochl_data(time_delta_1day)
-# print("OCHL Data Function Result**********************")
-# for i, line in enumerate(dates1):
-#     print(i, dates1[i], closes1[i])
-#
-#
-#
-# dates2, closes2, rsi2 = rsi(time_delta_1day)
-# print("RSI Function Result**********************")
-# for i, line in enumerate(dates2):
-#     print(i, dates2[i], closes2[i], rsi2[i])
-#
-#
-#
-# # 각인덱스별로 읽어서 현재의 날짜기준으로 timestmap가 큰지 작은지 작으면 그 보다 아래 index를 만들어서 그다음엔 그날짜랑 비교하는 for문을 만들어야함.
-# # 그래서 일단 제일 마지막 행이 제일위로 오게 index sorting해야하고.
-# # 그리고 index 값 비교가능하게 if문 구성 -> if 기준날짜면 해당 시세를 open/close/high/low에 맞게 들어가게 다시 검사
-# #                                      -> if 기준날짜 아래면 기준날짜 - 1day에 해당하는 60*60*24f를 뺸 timestamp로
-#
-# # df = pd.DataFrame({'Price' : float(splitline[1]), 'Amount' : float(splitline[2])}, index = [0]}, index = float(splitline[0]))
-# # print(df)
+a = message("파주")
+print(a)

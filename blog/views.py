@@ -58,7 +58,9 @@ def message(request):
     # if data == "지금 뭐먹지?":
     #     bab_list = ['볶음밥','짜장면','짬뽕','간짜장','양념치킨','걍치킨','순살치킨','신라면','진라면','컵라면큰사발','컵라면','불닭볶음밥','굶어시바라','닭도리탕','새우깡','보쌈','고르곤졸라피자','불고기피자','김치에계란','계란말이','회','스시','초밥','간장게장','양념게장']
     #     bab_select = random.choice(bab_list)
-    bab_response, bab_place = bab(data)
+    bab_place = bab_place_list()
+    if data in bab_place:
+        bab_response = bab(data)
 
 
     # 2. 코인순위의 Data

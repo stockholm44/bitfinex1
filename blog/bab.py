@@ -1,6 +1,6 @@
 import random
 
-__all__ = ['bab']
+__all__ = ['bab','bab_place_list']
 
 def bab(data):
     if data == '화정':
@@ -56,4 +56,7 @@ def bab(data):
     bab_select = random.choice(list(bab_list.items()))
     bab_response = data + ' 지역에서 고를수 있는 \n♥랜덤맛집♥ 은 다음과 같습니다.\n★★★★★★★★★★★★★\n\n 맛집이름 : ' + str(bab_select[0]) + '\n\n네이버 지도 링크 ↓↓↓↓\n' + str(bab_select[1]) + '\n\n★★★★★★★★★★★★★'
 
-    return bab_response, bab_place
+    return bab_response
+def bab_place_list():
+    bab_place = ['화정','일산','관산동','연희동','홍대','파주 P8공장뒤','파주 LGD기숙사뒤','파주 내 그외지역']
+    return bab_place
