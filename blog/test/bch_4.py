@@ -11,7 +11,7 @@ from datetime import datetime
 from datetime import timedelta
 from time import mktime
 
-
+class
 # Bitcoinchart로부터 URL 받기(시간제한을 URL + a 로 붙게 지정)
 URL = "http://api.bitcoincharts.com/v1/trades.csv?symbol=bitstampUSD&start="
 

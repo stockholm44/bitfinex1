@@ -49,7 +49,7 @@ for j in range(1,5):
     adjustedTime = int(time.time()) - time_delta_10hr * j
     response = requests.get(URL + str(adjustedTime))
     splitResponse = response.text.splitlines()
-    # splitResponse = splitResponse[::30] # 30 step 단위만 저장.(너무 Data가 비슷/중복되게 많아서 step 넣음.)
+    splitResponse = splitResponse[::30] # 30 step 단위만 저장.(너무 Data가 비슷/중복되게 많아서 step 넣음.)
 
     timestamps = []
     prices = []
@@ -88,8 +88,8 @@ for j in range(1,5):
     amounts_sum += amounts
 
 
-# for i, line in enumerate(timestamps_sum):
-#     print(i, timestamps_sum[i])
+for i, line in enumerate(timestamps_sum):
+    print(i, timestamps_sum[i], prices_sum[i])
 #
 #
 
@@ -204,11 +204,11 @@ for i in range(len(dates)):
         rs.append(au[i]/ad[i])
         rsi.append(100.0 - (100.0 / (1.0 + rs[i])))
 #
-for i, line in enumerate(dates):
-    print(i, dates[i], closes[i], rsi[i])
-print(len(dates))
-print(len(closes))
-print(len(rsi))
+# for i, line in enumerate(dates):
+#     print(i, dates[i], closes[i], rsi[i])
+# print(len(dates))
+# print(len(closes))
+# print(len(rsi))
 
 
 # 각인덱스별로 읽어서 현재의 날짜기준으로 timestmap가 큰지 작은지 작으면 그 보다 아래 index를 만들어서 그다음엔 그날짜랑 비교하는 for문을 만들어야함.

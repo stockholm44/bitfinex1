@@ -49,11 +49,11 @@ def raw_data():
     prices_sum = []
     amounts_sum = []
 
-    for j in range(1,3):
+    for j in range(1,10):
         adjustedTime = int(time.time()) - time_delta_10hr * j
         response = requests.get(URL + str(adjustedTime))
         splitResponse = response.text.splitlines()
-        splitResponse = splitResponse[::10] # 30 step 단위만 저장.(너무 Data가 비슷/중복되게 많아서 step 넣음.)
+        splitResponse = splitResponse[::30] # 30 step 단위만 저장.(너무 Data가 비슷/중복되게 많아서 step 넣음.)
 
         timestamps = []
         prices = []
@@ -73,7 +73,7 @@ def raw_data():
         if j == 1 :
             # timestamps_last = timestamps[-1]
             timestamps_last_list = timestamps[-31:-1]
-            # print("timestamps_last_list",j, timestamps_last_list)
+                # print(timestamps_last)
         # print(j, timestamps)
         # print(timestamps[-31:-1])
         if j > 1:
@@ -90,20 +90,20 @@ def raw_data():
         timestamps_sum += timestamps
         prices_sum += prices
         amounts_sum += amounts
-        # print("timestamps_sum",j, timestamps_sum)
 
-    return timestamps_sum, prices_sum, amounts_sum
+        return timestamps_sum, prices_sum, amounts_sum
 
-
-
+# for i, line in enumerate(timestamps_sum):
+#     print(i, timestamps_sum[i])
+#
 
 
 # open, close, high, low +(날짜) 설정을 위한 리스트 작성.
 def ochl_data(period):
 
     timestamps_sum, prices_sum, amounts_sum = raw_data()
-    time_delta= period  # 여러개의 period를 받아서 date_div_ts에서 시간간격을 뺴주는 time_delta를 정의함.
-
+    time_delta = period  # 여러개의 period를 받아서 date_div_ts에서 시간간격을 뺴주는 time_delta를 정의함.
+    print(time_delta)
     year = int(datetime.fromtimestamp(timestamps_sum[0]).strftime('%Y'))
     month = int(datetime.fromtimestamp(timestamps_sum[0]).strftime('%m'))
     day = int(datetime.fromtimestamp(timestamps_sum[0]).strftime('%d'))
@@ -226,26 +226,10 @@ def rsi(period):
 
     return dates, closes, rsi
 
+dates, closes, rsi = rsi(time_delta_1hr)
 
-
-# timestamps_sum, prices_sum, amounts_sum = raw_data()
-# print("Raw Data Function Result**********************")
-# for i, line in enumerate(timestamps_sum):
-#     print(i, timestamps_sum[i], prices_sum[i])
-
-# dates1, opens1, closes1, highs1, lows1 = ochl_data(time_delta_1day)
-# print("OCHL Data Function Result**********************")
-# for i, line in enumerate(dates1):
-#     print(i, dates1[i], closes1[i])
-#
-#
-#
-dates2, closes2, rsi2 = rsi(time_delta_15min)
-print("RSI Function Result**********************")
-for i, line in enumerate(dates2):
-    print(i, dates2[i], closes2[i], rsi2[i])
-#
-
+for i, line in enumerate(dates):
+    print(i, dates[i], closes[i], rsi[i])
 
 # 각인덱스별로 읽어서 현재의 날짜기준으로 timestmap가 큰지 작은지 작으면 그 보다 아래 index를 만들어서 그다음엔 그날짜랑 비교하는 for문을 만들어야함.
 # 그래서 일단 제일 마지막 행이 제일위로 오게 index sorting해야하고.
