@@ -23,7 +23,10 @@ def bab(data):
                     '레게치킨':'http://naver.me/Gzu2VkIm',
                     '국시집':'http://naver.me/5CE48jmL'}
 
-        bab_select = random.choice(list(bab_list.items()))
-    bab_response = data + ' 지역에서 고를수 있는 ♥랜덤맛집♥은 다음과 같습니다.\n★★★★★★★★★★★★★\n\n●●● 맛집이름 : ' + bab_select[0] + '\n네이버 지도 링크 ↓↓↓↓\n' + bab_select[1] + '\n★★★★★★★★★★★★★'
+    bab_select = random.choice(list(bab_list.items()))
+    bab_response = data + ' 지역에서 고를수 있는 ♥랜덤맛집♥은 다음과 같습니다.\n★★★★★★★★★★★★★\n\n●●● 맛집이름 : ' + str(bab_select[0]) + '\n네이버 지도 링크 ↓↓↓↓\n' + str(bab_select[1]) + '\n★★★★★★★★★★★★★'
 
     return bab_response
+
+bab_response = bab('화정')
+print(bab_response)
