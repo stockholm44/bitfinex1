@@ -22,14 +22,14 @@ def bab(data):
         bab_list = {'김진환제과점': 'http://naver.me/5AJ8cWMj',
                     '레게치킨':'http://naver.me/Gzu2VkIm',
                     '국시집':'http://naver.me/5CE48jmL'}
-    elif data == '파주 P8공장뒤'
+    elif data == '파주 P8공장뒤':
         bab_list = {'기린(짱깨)': 'http://naver.me/FfpYq6GQ',
                     '신돼야지 두루치기':'http://naver.me/xNv2h4Je',
                     '한양짬뽕 파주LCD점':'http://naver.me/Gd3ujXKK',
                     '닐리 LCD산업단지점':'http://naver.me/F5erJhzc',
                     '옛날전통육개장(육대장(?))':'http://naver.me/xwbsOPwQ',
                     '전계능식당 파주LCD점 ':'http://naver.me/GoaXtNkI'}
-    elif data == '파주 LGD기숙사뒤'
+    elif data == '파주 LGD기숙사뒤':
         bab_list = {'깜쪽':'http://naver.me/GNj6goyh',
                     '대판 숯불구이':'http://naver.me/5oI4YOVU',
                     '맘보집파주LCD점':'http://naver.me/xrgMNx4G',
@@ -42,7 +42,7 @@ def bab(data):
                     '토평한우소곱창':'http://naver.me/Gu9jgGcw',
                     '초원':'http://naver.me/GEfvb5ng',
                     '신의주찹쌀순대 파주LG디스플레이점':'http://naver.me/F2tbfYKo'}
-    elif data == '파주 내 그외지역'
+    elif data == '파주 내 그외지역':
         bab_list = {'갈릴리농원': 'http://naver.me/FRdn4vAf',
                     '파주닭국수 파주본점':'http://naver.me/51c0FiF9',
                     '신간짬뽕':'http://naver.me/FYpzdeOO',
