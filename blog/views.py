@@ -19,7 +19,7 @@ from bs4 import BeautifulSoup
 def keyboard(request):
     return JsonResponse({
         'type' : 'buttons',
-        'buttons' : ['Bab?','Coin_Rank_Top 5', 'Coin_Rank_Top 10','Coin_Rank_Top 20','BTC', 'ETH', 'XRP', 'JPY_Exchange']
+        'buttons' : ['지금 뭐먹지?','Coin_Rank_Top 5', 'Coin_Rank_Top 10','Coin_Rank_Top 20','BTC', 'ETH', 'XRP', 'JPY_Exchange']
     })
 
 @csrf_exempt
@@ -55,12 +55,11 @@ def message(request):
 
 
     # 1. 밥뭐먹지의 Data
-    # if data == "Bab?":
+    # if data == "지금 뭐먹지?":
     #     bab_list = ['볶음밥','짜장면','짬뽕','간짜장','양념치킨','걍치킨','순살치킨','신라면','진라면','컵라면큰사발','컵라면','불닭볶음밥','굶어시바라','닭도리탕','새우깡','보쌈','고르곤졸라피자','불고기피자','김치에계란','계란말이','회','스시','초밥','간장게장','양념게장']
     #     bab_select = random.choice(bab_list)
+    bab_response, bab_place = bab(data)
 
-    if data in ['화정','일산','관산동','연희동','홍대']:
-        bab_response = bab(data)
 
     # 2. 코인순위의 Data
     # 원하는 코인순위 범위 정하기
@@ -179,7 +178,7 @@ def message(request):
                 },
                 "keyboard": {
                     "type": "buttons",
-                    "buttons": ['Bab?','Coin_Rank_Top 5', 'Coin_Rank_Top 10','Coin_Rank_Top 20','BTC', 'ETH', 'XRP','JPY_Exchange']
+                    "buttons": ['지금 뭐먹지?','Coin_Rank_Top 5', 'Coin_Rank_Top 10','Coin_Rank_Top 20','BTC', 'ETH', 'XRP','JPY_Exchange']
                 }
 
                 })
@@ -190,80 +189,58 @@ def message(request):
                 },
                 "keyboard": {
                     "type": "buttons",
-                    "buttons": ['Bab?','Coin_Rank_Top 5', 'Coin_Rank_Top 10','Coin_Rank_Top 20','BTC', 'ETH', 'XRP','JPY_Exchange']
+                    "buttons": ['지금 뭐먹지?','Coin_Rank_Top 5', 'Coin_Rank_Top 10','Coin_Rank_Top 20','BTC', 'ETH', 'XRP','JPY_Exchange']
                 }
 
                 })
-    # elif data == "Bab?":
+    # elif data == "지금 뭐먹지?":
     #     return JsonResponse({
     #             "message": {
     #                 "text": "오늘 먹을 식사는 아래와 같습니다.\n★★★★★★★★★★★★★\n" + bab_select + "\n★★★★★★★★★★★★★"
     #             },
     #             "keyboard": {
     #                 "type": "buttons",
-    #                 "buttons": ['Bab?','Coin_Rank_Top 5', 'Coin_Rank_Top 10','Coin_Rank_Top 20','BTC', 'ETH', 'XRP','JPY_Exchange']
+    #                 "buttons": ['지금 뭐먹지?','Coin_Rank_Top 5', 'Coin_Rank_Top 10','Coin_Rank_Top 20','BTC', 'ETH', 'XRP','JPY_Exchange']
     #             }
     #
     #             })
-    elif data == "Bab?":
+elif data == "지금 뭐먹지?":
         return JsonResponse({
                 "message": {
-                    "text": "고를수 있는 지역은 다음과 같습니다.\n★★★★★★★★★★★★★\n1. 고양\n2. 서울\n★★★★★★★★★★★★★"
+                    "text": "지역을 선택해주십시오.\n★★★★★★★★★★★★★\n0. 파주\n1. 고양\n2. 서울\n★★★★★★★★★★★★★"
                 },
                 "keyboard": {
                     "type": "buttons",
-                    "buttons": ['고양','서울']
+                    "buttons": ['파주','고양','서울']
                 }
 
                 })
-    elif data == "고양":
-        return JsonResponse({
-                "message": {
-                    "text": "\n★★★★★★★★★★★★★\n선택할 수 있는 지역은\n1. 화정\n2. 일산\n3. 관산동\n★★★★★★★★★★★★★"
-                },
-                "keyboard": {
-                    "type": "buttons",
-                    "buttons": ['화정','일산','관산동']
-                }
-
-                })
-    elif data == "화정":
+    elif data in bab_place:
         return JsonResponse({
                 "message": {
                     "text": bab_response
                 },
                 "keyboard": {
                     "type": "buttons",
-                    "buttons": ['Bab?','Coin_Rank_Top 5', 'Coin_Rank_Top 10','Coin_Rank_Top 20','BTC', 'ETH', 'XRP','JPY_Exchange']
+                    "buttons": ['지금 뭐먹지?','Coin_Rank_Top 5', 'Coin_Rank_Top 10','Coin_Rank_Top 20','BTC', 'ETH', 'XRP','JPY_Exchange']
                 }
 
                 })
-    elif data == "일산":
+    elif data == "파주":
         return JsonResponse({
                 "message": {
-                    "text": bab_response
+                    "text": "상세지역을 선택해 주십숑.\n★★★★★★★★★★★★★\n1. 파주 P8공장뒤\n2. 파주 LGD기숙사뒤\n3. 파주 내 그외지역\n★★★★★★★★★★★★★"
                 },
                 "keyboard": {
                     "type": "buttons",
-                    "buttons": ['Bab?','Coin_Rank_Top 5', 'Coin_Rank_Top 10','Coin_Rank_Top 20','BTC', 'ETH', 'XRP','JPY_Exchange']
-                }
-
-                })
-    elif data == "관산동":
-        return JsonResponse({
-                "message": {
-                    "text": bab_response
-                },
-                "keyboard": {
-                    "type": "buttons",
-                    "buttons": ['Bab?','Coin_Rank_Top 5', 'Coin_Rank_Top 10','Coin_Rank_Top 20','BTC', 'ETH', 'XRP','JPY_Exchange']
+                    "buttons": ['파주 P8공장뒤','파주 LGD기숙사뒤','파주 내 그외지역']
                 }
 
                 })
     elif data == "서울":
         return JsonResponse({
                 "message": {
-                    "text": "\n★★★★★★★★★★★★★\n선택할 수 있는 지역은\n1. 홍대\n2. 연희동\n★★★★★★★★★★★★★"
+                    "text": "상세지역을 선택해 주십숑.\n★★★★★★★★★★★★★\n1. 홍대\n2. 연희동\n★★★★★★★★★★★★★"
                 },
                 "keyboard": {
                     "type": "buttons",
@@ -271,25 +248,14 @@ def message(request):
                 }
 
                 })
-    elif data == "연희동":
+    elif data == "고양":
         return JsonResponse({
                 "message": {
-                    "text": bab_response
+                    "text": "상세지역을 선택해 주십숑.\n★★★★★★★★★★★★★\n1. 화정\n2. 일산\n3. 관산동\n★★★★★★★★★★★★★"
                 },
                 "keyboard": {
                     "type": "buttons",
-                    "buttons": ['Bab?','Coin_Rank_Top 5', 'Coin_Rank_Top 10','Coin_Rank_Top 20','BTC', 'ETH', 'XRP','JPY_Exchange']
-                }
-
-                })
-    elif data == "홍대":
-        return JsonResponse({
-                "message": {
-                    "text": bab_response
-                },
-                "keyboard": {
-                    "type": "buttons",
-                    "buttons": ['Bab?','Coin_Rank_Top 5', 'Coin_Rank_Top 10','Coin_Rank_Top 20','BTC', 'ETH', 'XRP','JPY_Exchange']
+                    "buttons": ['화정','일산','관산동']
                 }
 
                 })
@@ -300,7 +266,7 @@ def message(request):
                 },
                 "keyboard": {
                     "type": "buttons",
-                    "buttons": ['Bab?','Coin_Rank_Top 5', 'Coin_Rank_Top 10','Coin_Rank_Top 20','BTC', 'ETH', 'XRP','JPY_Exchange']
+                    "buttons": ['지금 뭐먹지?','Coin_Rank_Top 5', 'Coin_Rank_Top 10','Coin_Rank_Top 20','BTC', 'ETH', 'XRP','JPY_Exchange']
                 }
 
                 })
@@ -311,7 +277,7 @@ def message(request):
                 },
                 "keyboard": {
                     "type": "buttons",
-                    "buttons": ['Bab?','Coin_Rank_Top 5', 'Coin_Rank_Top 10','Coin_Rank_Top 20','BTC', 'ETH', 'XRP','JPY_Exchange']
+                    "buttons": ['지금 뭐먹지?','Coin_Rank_Top 5', 'Coin_Rank_Top 10','Coin_Rank_Top 20','BTC', 'ETH', 'XRP','JPY_Exchange']
                 }
 
                 })
