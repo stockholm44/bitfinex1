@@ -10,7 +10,7 @@ from datetime import date
 from datetime import datetime
 from datetime import timedelta
 from time import mktime
-from coin_raw_data_cmc import *
+from blog.coin_raw_data_cmc import *
 
 # Bitcoinchart로부터 URL 받기(시간제한을 URL + a 로 붙게 지정)
 URL = "http://api.bitcoincharts.com/v1/trades.csv?symbol=bitstampUSD&start="
@@ -309,9 +309,9 @@ def rsi_values():
 
     return time_delta_list, time_delta_list_name, rsi_value_list
 
-time_delta_list, time_delta_list_name, rsi_value_list = rsi_values()
-for i, line in enumerate(time_delta_list):
-    print(i, time_delta_list_name[i] + 'bong', 'rsi = ', rsi_value_list[i])
+# time_delta_list, time_delta_list_name, rsi_value_list = rsi_values()
+# for i, line in enumerate(time_delta_list):
+#     print(i, 'time_delta_list_name = ', time_delta_list_name[i], 'rsi = ', rsi_value_list[i])
 
 #
 # a, b, c = raw_data()
