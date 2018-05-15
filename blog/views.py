@@ -140,7 +140,7 @@ def message(request):
         if data == 'BTC':
             time_delta_list, time_delta_list_name, rsi_value_list = rsi_values()
             for i, line in enumerate(time_delta_list):
-                message_this_coin += str(i + time_delta_list_name[i] +'분봉 : ' + 'rsi = ' + rsi_value_list[i])
+                message_this_coin += str(i) + time_delta_list_name[i] +'분봉 : ' + 'rsi = ' + str(rsi_value_list[i])
             message_this_coin += '\n 기축코인 비트코인 떡락 ㄱ ㄱ'
         elif data == 'ETH':
             cym_ETH = 20.86 /3 * price_krw
