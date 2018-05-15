@@ -11,7 +11,7 @@ from blog.cmc import *
 from blog.scrap import *
 from blog.bab import *
 from blog.coin_index import *
-from django.views.decosrators.csrf import csrf_exempt
+from django.views.decorators.csrf import csrf_exempt
 import json
 import random
 from urllib.request import urlopen
@@ -298,7 +298,7 @@ def price_coin(request):
 
     time_delta_list, time_delta_list_name, rsi_value_list = rsi_values()
     rsi_list = {}
-    for i, time_delta in time_delta_list_name:
+    for i, time_delta in enumerate(time_delta_list_name):
         rsi_list[time_delta] = rsi_value_list[i]
 
     context = {'coin_price': coin_price, 'coin_price_bithumb': coin_price_bithumb,

@@ -27,7 +27,7 @@ def ticker2(data):
 	rep = response.json()
 	# bid = rep['bid']
 	return rep
-# 
+#
 # a = ticker2('BTC')
 # print(a)
 # print(a[0])
