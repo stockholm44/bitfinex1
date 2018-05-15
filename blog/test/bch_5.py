@@ -128,9 +128,9 @@ def raw_data():
 
 # open, close, high, low +(날짜) 설정을 위한 리스트 작성.
 # 날짜를 오름차순으로 정렬
-def ochl_data(period, timestamps_sum, prices_sum, amounts_sum):
+def ochl_data(period):
 
-    # timestamps_sum, prices_sum, amounts_sum = raw_data()
+    timestamps_sum, prices_sum, amounts_sum = raw_data()
     time_delta= period  # 여러개의 period를 받아서 date_div_ts에서 시간간격을 뺴주는 time_delta를 정의함.
 
     year = int(datetime.fromtimestamp(timestamps_sum[0]).strftime('%Y'))
@@ -190,7 +190,7 @@ def ochl_data(period, timestamps_sum, prices_sum, amounts_sum):
 
 # RSI 계산을 위한 함수. 단 ochl_data와 동일하게 period 호출값을 받아서 retrun 시킴.
 # 날짜를 오름차순으로 정렬
-def rsi(period, a=False, b=False, c=False): # ★★★★★★180514 하려는건 rsi에 option으로 a, b, c 리스트를 넣으려고하는거, 왜냐면 1day면 아예 필요없고 그이외일때만 필요하므로.
+def rsi(period):
     if period == time_delta_1day:
         dates, opens, closes, highs, lows = raw_data_1day()
         # print('raw_data_1day')
@@ -198,7 +198,7 @@ def rsi(period, a=False, b=False, c=False): # ★★★★★★180514 하려는
         #     print(i, dates[i], opens[i], closes[i], highs[i], lows[i])
     elif period in [time_delta_15min, time_delta_1hr, time_delta_2hr]:
         # print('ochl_data')
-        dates, opens, closes, highs, lows = ochl_data(period, a, b, c)
+        dates, opens, closes, highs, lows = ochl_data(period)
     else:
         print("what the fuck")
     # RSI 계산을 위한
@@ -248,13 +248,13 @@ def rsi(period, a=False, b=False, c=False): # ★★★★★★180514 하려는
             ad.append(sum(dDown_Sum)/len(dDown_Sum))
             # print(i, 'au[i], ad[i]', au[i], ad[i])
             rs.append(au[i]/ad[i])
-            rsi.append(format(100.0 - (100.0 / (1.0 + rs[i])),'.2f'))
+            rsi.append(100.0 - (100.0 / (1.0 + rs[i])))
 
         elif i > 14:
             au.append((au[i-1]*13+dUp[i])/14)
             ad.append((ad[i-1]*13+dDown[i])/14)
             rs.append(au[i]/ad[i])
-            rsi.append(format(100.0 - (100.0 / (1.0 + rs[i])),'.2f'))
+            rsi.append(100.0 - (100.0 / (1.0 + rs[i])))
     #
     # for i, line in enumerate(dates):
     #     print(i, dates[i], closes[i], rsi[i])
@@ -263,88 +263,6 @@ def rsi(period, a=False, b=False, c=False): # ★★★★★★180514 하려는
     # print(len(rsi))
 
     return dates, closes, rsi
-
-# def rsi_values():
-#     timestamps_sum, prices_sum, amounts_sum = raw_data()
-#     rsi_value_list = []
-#     time_delta_list = [time_delta_15min, time_delta_1hr, time_delta_2hr, time_delta_1day]
-#     for i, rsi in enumerate(time_delta_list):
-#         if rsi == time_delta_1day:
-#             dates, closes, rsi = rsi(rsi)
-#         else:
-#             dates, closes, rsi = rsi(rsi, timestamps_sum, prices_sum, amounts_sum)
-#         rsi_value_list.append(rsi[-1])
-#     for i, line in enumerate(time_delta_list):
-#         print('time_delta = ', time_delta_list[i], 'rsi = ', rsi_value_list[i])
-#
-#     return time_delta_list, rsi_value_list
-#
-# a, b = rsi_values()
-
-
-def rsi_values():
-    timestamps_sum, prices_sum, amounts_sum = raw_data()
-    rsi_value_list = []
-    time_delta_list = [time_delta_15min, time_delta_1hr, time_delta_2hr, time_delta_1day]
-    time_delta_list_name = ['15min', '1hr', '2hr', '1day']
-
-    # print(time_delta_list)
-    for i, time_delta in enumerate(time_delta_list):
-        # print('time_delta',time_delta)
-        if time_delta == time_delta_1day:
-            dates, closes, rsi_list = rsi(time_delta)   # 여가서 원래 rsi_list를 rsi라고 해서 TypeError: 'list' object is not callable 에러떴었음. 아마 함수 rsi 와 이름이 동일해서 그런듯.
-
-            # for i, line in enumerate(dates):
-            #     print(i, dates[i], closes[i], rsi_list[i])
-        else:
-            dates, closes, rsi_list = rsi(time_delta, timestamps_sum, prices_sum, amounts_sum)
-            # for i, line in enumerate(dates):
-            #     print(i, dates[i], closes[i], rsi_list[i])
-        rsi_value_list.append(rsi_list[-1])
-
-
-
-    # for i, line in enumerate(time_delta_list):
-    #     print('time_delta = ', time_delta_list, 'rsi = ', rsi_value_list)
-
-    return time_delta_list, time_delta_list_name, rsi_value_list
-
-time_delta_list, time_delta_list_name, rsi_value_list = rsi_values()
-for i, line in enumerate(time_delta_list):
-    print(i, 'time_delta_list_name = ', time_delta_list_name[i], 'rsi = ', rsi_value_list[i])
-
-#
-# a, b, c = raw_data()
-#
-# dates2, closes2, rsi2 = rsi(time_delta_15min,a,b,c)
-# print("RSI Function Result**********************")
-# for i, line in enumerate(dates2):
-#     print(i, dates2[i], closes2[i], rsi2[i])
-#
-# dates3, closes3, rsi3 = rsi(time_delta_1hr,a,b,c)
-# print("RSI Function Result**********************")
-# for i, line in enumerate(dates3):
-#     print(i, dates3[i], closes3[i], rsi3[i])
-#
-
-
-# timestamps_sum, prices_sum, amounts_sum = raw_data()
-#
-# dates2, closes2, rsi2 = rsi(time_delta_15min,timestamps_sum, prices_sum, amounts_sum)
-# print('time_delta_15min : ',time_delta_15min)
-# print("RSI Function Result**********************")
-# for i, line in enumerate(dates2):
-#     print(i, dates2[i], closes2[i], rsi2[i])
-# dates3, closes3, rsi3 = rsi(time_delta_1hr,timestamps_sum, prices_sum, amounts_sum)
-# print('time_delta_1hr : ',time_delta_1hr)
-# print("RSI Function Result**********************")
-# for i, line in enumerate(dates3):
-#     print(i, dates3[i], closes3[i], rsi3[i])
-# dates4, closes4, rsi4 = rsi(time_delta_1day)
-# print('time_delta_1day : ',time_delta_1day)
-# print("RSI Function Result**********************")
-# for i, line in enumerate(dates4):
-#     print(i, dates4[i], closes4[i], rsi4[i])
 
 
 
@@ -360,15 +278,11 @@ for i, line in enumerate(time_delta_list):
 #
 #
 # #
-# a, b, c = raw_data()
-# dates2, closes2, rsi2 = rsi(time_delta_15min,a,b,c)
-# print("RSI Function Result**********************")
-# for i, line in enumerate(dates2):
-#     print(i, dates2[i], closes2[i], rsi2[i])
-# dates3, closes3, rsi3 = rsi(time_delta_1hr,a,b,c)
-# print("RSI Function Result**********************")
-# for i, line in enumerate(dates2):
-#     print(i, dates2[i], closes2[i], rsi2[i])
+dates2, closes2, rsi2 = rsi(time_delta_1day)
+print("RSI Function Result**********************")
+for i, line in enumerate(dates2):
+    print(i, dates2[i], closes2[i], rsi2[i])
+
 
 
 # 각인덱스별로 읽어서 현재의 날짜기준으로 timestmap가 큰지 작은지 작으면 그 보다 아래 index를 만들어서 그다음엔 그날짜랑 비교하는 for문을 만들어야함.

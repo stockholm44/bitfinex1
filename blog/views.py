@@ -291,8 +291,14 @@ def price_coin(request):
     # coin_price_bithumb = sorted(coin_price_bithumb.item)
     # gimp = gimp()
     # context = {'coin_price': coin_price, 'volume': volume, 'gimp':gimp}
-    context = {'coin_price': coin_price, 'coin_price_bithumb': coin_price_bithumb}
 
+    time_delta_list, time_delta_list_name, rsi_value_list = rsi_values()
+    rsi_list = {}
+    for i, time_delta in time_delta_list_name:
+        rsi_list[time_delta] = rsi_value_list[i]
+
+    context = {'coin_price': coin_price, 'coin_price_bithumb': coin_price_bithumb,
+               'rsi_list': rsi_list}
     return render(request, 'blog/price_coin.html', context)
     # return HttpResponse("BTC is %d$" % volume)
 
