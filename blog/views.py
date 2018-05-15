@@ -10,7 +10,8 @@ from blog.FinexAPI import *
 from blog.cmc import *
 from blog.scrap import *
 from blog.bab import *
-from django.views.decorators.csrf import csrf_exempt
+from blog.coin_index import *
+from django.views.decosrators.csrf import csrf_exempt
 import json
 import random
 from urllib.request import urlopen
@@ -137,7 +138,10 @@ def message(request):
 
         response_message = str(rank) + '위\n┌ ' + name +'   '+ str_price_usd +'$/' + str_price_krw + '원\n├ 김프    ' + gimp + '%\n├ 변화율   ' + add_change_mark + percent_change_24h + "% (" +change_mark + ')\n└ 회전율   ' + circul_rate + '%\n---------------------\n'
         if data == 'BTC':
-            message_this_coin = '\n 기축코인 비트코인 떡락 ㄱ ㄱ'
+            time_delta_list, time_delta_list_name, rsi_value_list = rsi_values()
+            for i, line in enumerate(time_delta_list):
+                message_this_coin += str(i, time_delta_list_name[i] +'분봉 : ', 'rsi = ', rsi_value_list[i])
+            message_this_coin += '\n 기축코인 비트코인 떡락 ㄱ ㄱ'
         elif data == 'ETH':
             cym_ETH = 20.86 /3 * price_krw
             cym_ETH = int(cym_ETH)

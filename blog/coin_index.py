@@ -311,7 +311,7 @@ def rsi_values():
 
 time_delta_list, time_delta_list_name, rsi_value_list = rsi_values()
 for i, line in enumerate(time_delta_list):
-    print(i, 'time_delta_list_name = ', time_delta_list_name[i], 'rsi = ', rsi_value_list[i])
+    print(i, time_delta_list_name[i] + 'bong', 'rsi = ', rsi_value_list[i])
 
 #
 # a, b, c = raw_data()
