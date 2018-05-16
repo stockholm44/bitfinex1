@@ -173,7 +173,7 @@ def message(request):
 
 
 
-    today_date = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    # today_date = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
     # today_date = datetime.date.today().strftime("%m월 %d일")
 
     # 최종 결과 : 카카오톡 플러스로 보내는 output
