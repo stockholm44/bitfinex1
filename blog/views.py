@@ -307,7 +307,7 @@ def price_coin(request):
     time_delta_list, time_delta_list_name, rsi_btc_value_list = rsi_btc_values()
     rsi_btc_list = {}
     for i, time_delta in enumerate(time_delta_list_name):
-        rsi_btc_list[time_delta] = rsi_value_list[i]
+        rsi_btc_list[time_delta] = rsi_btc_value_list[i]
 
     # 180519_Coin별 1일봉 RSI리스트 dict화
     symbols, rsi_coin_value_list = rsi_coin_values()
@@ -318,7 +318,7 @@ def price_coin(request):
 
 
     context = {'coin_price': coin_price, 'coin_price_bithumb': coin_price_bithumb,
-               'rsi_list': rsi_list}
+               'rsi_btc_list': rsi_btc_list,'rsi_coin_list': rsi_coin_list}
     return render(request, 'blog/price_coin.html', context)
     # return HttpResponse("BTC is %d$" % volume)
 

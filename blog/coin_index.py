@@ -193,7 +193,7 @@ def ochl_data(period, timestamps_sum, prices_sum, amounts_sum):
 # 180518_추가 : BTC의 RSI는 rsi_btc로 따로 빼고 나머지 코인들의 RSI계산은 rsi_coin으로 뺌.
 def rsi_btc(period, a=False, b=False, c=False): # ★★★★★★180514 하려는건 rsi에 option으로 a, b, c 리스트를 넣으려고하는거, 왜냐면 1day면 아예 필요없고 그이외일때만 필요하므로.
     if period == time_delta_1day:
-        dates, opens, closes, highs, lows = raw_data_1day()
+        dates, opens, closes, highs, lows = raw_data_1day('BTC')
         # print('raw_data_1day')
         # for i in range(len(dates)):
         #     print(i, dates[i], opens[i], closes[i], highs[i], lows[i])
@@ -357,7 +357,7 @@ def rsi_btc_values():
 def rsi_coin_values():
     symbol_name, symbol, symbol_site, symbol_market_cap, symbol_circulating_supply, symbol_price_usd, symbol_volume_usd = cmc_data()
 
-    rsi_value_list = []
+    rsi_coin_value_list = []
 
     # print(time_delta_list)
     for i, symbol_temp in enumerate(symbol):
