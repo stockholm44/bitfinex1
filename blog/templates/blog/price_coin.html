@@ -2,22 +2,6 @@
 
 {% block content %}
         <div>
-            <h2>Bitcoin 봉별 RSI</a></h2>
-            <ul>
-            {% for key, value in rsi_btc_list.items %}
-              <h3><li>RSI {{ key|upper }}봉 : {{ value }}.</li></h3>
-            {% endfor %}
-            </ul>
-        </div>
-        <div>
-            <h2>Coin 종류별 1일봉 RSI</a></h2>
-            <ul>
-            {% for key, value in rsi_coin_list.items %}
-              <h3><li>RSI 1일봉 {{ key }} : {{ value }}.</li></h3>
-            {% endfor %}
-            </ul>
-        </div>
-        <div>
             <h2><a href="http://bitfinex.com">Price List in Bitfinex.com</a></h2>
             <ul>
             {% for key, value in coin_price.items %}

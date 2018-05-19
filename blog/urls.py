@@ -11,4 +11,6 @@ urlpatterns = [
     url(r'^keyboard/', views.keyboard),
     url(r'^message', views.message),
     url(r'^jpy_list/', views.jpy_list, name='jpy_list'),
+    url(r'^rsi_list/', views.rsi_list, name='rsi_list'),
+
 ]

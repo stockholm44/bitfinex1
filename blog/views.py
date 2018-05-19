@@ -303,6 +303,11 @@ def price_coin(request):
     # gimp = gimp()
     # context = {'coin_price': coin_price, 'volume': volume, 'gimp':gimp}
 
+    context = {'coin_price': coin_price, 'coin_price_bithumb': coin_price_bithumb}
+    return render(request, 'blog/price_coin.html', context)
+    # return HttpResponse("BTC is %d$" % volume)
+
+def rsi_list(request):
     # 180519_BTC의 time봉별 RSI리스트 dict화
     time_delta_list, time_delta_list_name, rsi_btc_value_list = rsi_btc_values()
     rsi_btc_list = {}
@@ -315,13 +320,8 @@ def price_coin(request):
     for i, symbol_temp in enumerate(symbols):
         rsi_coin_list[symbol_temp] = rsi_coin_value_list[i]
 
-
-
-    context = {'coin_price': coin_price, 'coin_price_bithumb': coin_price_bithumb,
-               'rsi_btc_list': rsi_btc_list,'rsi_coin_list': rsi_coin_list}
-    return render(request, 'blog/price_coin.html', context)
-    # return HttpResponse("BTC is %d$" % volume)
-
+    context = {'rsi_btc_list': rsi_btc_list,'rsi_coin_list': rsi_coin_list}
+    return render(request, 'blog/rsi_list.html', context)
 
 def jpy_list(request):
     minimum_rate, minimum_rate_exchange = jpy_rate_min()
