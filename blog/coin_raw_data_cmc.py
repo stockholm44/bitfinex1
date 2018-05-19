@@ -33,7 +33,7 @@ day = int(datetime.fromtimestamp(time.time()).strftime('%d'))
 # url 불러올때 기간설정을 위한 str구현
 now = datetime(year, month, day)
 nowDate = now.strftime('%Y%m%d')
-past = now - timedelta(days = 16)
+past = now - timedelta(days = 30)
 pastDate = past.strftime('%Y%m%d')
 period_str = 'start=' + pastDate + '&end=' + nowDate
 # print(period_str)
