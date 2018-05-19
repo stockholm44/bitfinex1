@@ -20,7 +20,7 @@ from bs4 import BeautifulSoup
 def keyboard(request):
     return JsonResponse({
         'type' : 'buttons',
-        'buttons' : ['지금 뭐먹지?','Coin_Rank_Top 5', 'Coin_Rank_Top 10','Coin_Rank_Top 20','BTC', 'ETH', 'XRP', 'JPY_Exchange']
+        'buttons' : ['지금 뭐먹지?','Coin_Rank_Top 10','BTC', 'ETH', 'XRP', 'JPY_Exchange']
     })
 
 @csrf_exempt
@@ -66,16 +66,23 @@ def message(request):
 
     # 2. 코인순위의 Data
     # 원하는 코인순위 범위 정하기
-    coin_rate_selector = ['Coin_Rank_Top 5', 'Coin_Rank_Top 10','Coin_Rank_Top 20']
+    coin_rate_selector = ['Coin_Rank_Top 10']
 
-    if data == 'Coin_Rank_Top 5':
-        coin_count = 5
-    elif data == 'Coin_Rank_Top 10':
+    if data == 'Coin_Rank_Top 10':
         coin_count = 10
-    elif data == 'Coin_Rank_Top 20':
-        coin_count = 20
-    else:
-        coin_count = 0
+
+
+    # 10위만 남기고 지움. 백업용으로 주석으로 남김.
+    # coin_rate_selector = ['Coin_Rank_Top 5', 'Coin_Rank_Top 10','Coin_Rank_Top 20']
+    #
+    # if data == 'Coin_Rank_Top 5':
+    #     coin_count = 5
+    # elif data == 'Coin_Rank_Top 10':
+    #     coin_count = 10
+    # elif data == 'Coin_Rank_Top 20':
+    #     coin_count = 20
+    # else:
+    #     coin_count = 0
 
     # coinmarketcap 에서 Data 끌어오기.
     coin_data = ticker1(coin_count)
@@ -184,7 +191,7 @@ def message(request):
                 },
                 "keyboard": {
                     "type": "buttons",
-                    "buttons": ['지금 뭐먹지?','Coin_Rank_Top 5', 'Coin_Rank_Top 10','Coin_Rank_Top 20','BTC', 'ETH', 'XRP','JPY_Exchange']
+                    "buttons": ['지금 뭐먹지?','Coin_Rank_Top 10','BTC', 'ETH', 'XRP','JPY_Exchange']
                 }
 
                 })
@@ -195,7 +202,7 @@ def message(request):
                 },
                 "keyboard": {
                     "type": "buttons",
-                    "buttons": ['지금 뭐먹지?','Coin_Rank_Top 5', 'Coin_Rank_Top 10','Coin_Rank_Top 20','BTC', 'ETH', 'XRP','JPY_Exchange']
+                    "buttons": ['지금 뭐먹지?','Coin_Rank_Top 10','BTC', 'ETH', 'XRP','JPY_Exchange']
                 }
 
                 })
@@ -217,7 +224,7 @@ def message(request):
                 },
                 "keyboard": {
                     "type": "buttons",
-                    "buttons": ['지금 뭐먹지?','Coin_Rank_Top 5', 'Coin_Rank_Top 10','Coin_Rank_Top 20','BTC', 'ETH', 'XRP','JPY_Exchange']
+                    "buttons": ['지금 뭐먹지?','Coin_Rank_Top 10','BTC', 'ETH', 'XRP','JPY_Exchange']
                 }
 
                 })
@@ -261,7 +268,7 @@ def message(request):
                 },
                 "keyboard": {
                     "type": "buttons",
-                    "buttons": ['지금 뭐먹지?','Coin_Rank_Top 5', 'Coin_Rank_Top 10','Coin_Rank_Top 20','BTC', 'ETH', 'XRP','JPY_Exchange']
+                    "buttons": ['지금 뭐먹지?','Coin_Rank_Top 10','BTC', 'ETH', 'XRP','JPY_Exchange']
                 }
 
                 })
@@ -272,7 +279,7 @@ def message(request):
                 },
                 "keyboard": {
                     "type": "buttons",
-                    "buttons": ['지금 뭐먹지?','Coin_Rank_Top 5', 'Coin_Rank_Top 10','Coin_Rank_Top 20','BTC', 'ETH', 'XRP','JPY_Exchange']
+                    "buttons": ['지금 뭐먹지?','Coin_Rank_Top 10','BTC', 'ETH', 'XRP','JPY_Exchange']
                 }
 
                 })
@@ -296,10 +303,19 @@ def price_coin(request):
     # gimp = gimp()
     # context = {'coin_price': coin_price, 'volume': volume, 'gimp':gimp}
 
-    time_delta_list, time_delta_list_name, rsi_value_list = rsi_values()
-    rsi_list = {}
+    # 180519_BTC의 time봉별 RSI리스트 dict화
+    time_delta_list, time_delta_list_name, rsi_btc_value_list = rsi_btc_values()
+    rsi_btc_list = {}
     for i, time_delta in enumerate(time_delta_list_name):
-        rsi_list[time_delta] = rsi_value_list[i]
+        rsi_btc_list[time_delta] = rsi_value_list[i]
+
+    # 180519_Coin별 1일봉 RSI리스트 dict화
+    symbols, rsi_coin_value_list = rsi_coin_values()
+    rsi_coin_list = {}
+    for i, symbol_temp in enumerate(symbols):
+        rsi_coin_list[symbol_temp] = rsi_coin_value_list[i]
+
+
 
     context = {'coin_price': coin_price, 'coin_price_bithumb': coin_price_bithumb,
                'rsi_list': rsi_list}

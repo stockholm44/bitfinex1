@@ -15,7 +15,7 @@ from calendar import *
 from bs4 import BeautifulSoup
 from urllib.request import urlopen
 
-__all__ = ['raw_data_1day']
+__all__ = ['cmc_data', 'raw_data_1day']
 
 # 오로지 url불러올때 현재날짜와 1달전날짜를 소환하기위한 변수들임.
 # (시간뒤부분빼려고 한거이므로 나중에 시간이후를 빼는 식이있으면 그걸로 대체가능)
@@ -40,40 +40,115 @@ period_str = 'start=' + pastDate + '&end=' + nowDate
 # date_div = datetime(year, month, day, hour)
 # date_div_ts = int(mktime(date_div.timetuple()))
 
-URL_cmc = "https://coinmarketcap.com/currencies/bitcoin/historical-data/?"
+# URL1 = "https://coinmarketcap.com/currencies/bitcoin/historical-data/?"
+URL1 = "https://coinmarketcap.com/currencies/"
+URL3 = "/historical-data/?"
+
 # # https://coinmarketcap.com/currencies/bitcoin/historical-data/?start=20180413&end=20180513
 # print('URL_cmc', URL_cmc)
 # print('period_str', period_str)
 
-def cmc_coin_list():
+def cmc_data():
     html = urlopen('https://coinmarketcap.com/')
     source = html.read()
     html.close()
     soup = BeautifulSoup(source, "html.parser")
 
     symbol = []
+    symbol_name = []
     symbol_site = []
+    symbol_market_cap = []
+    symbol_circulating_supply = []
+    symbol_percent_change = []
+    symbol_price_usd = []
+    symbol_volume_usd = []
     tbody_div = soup.find("tbody")
     tr_div = tbody_div.find_all("tr")
+
+    #1
     for i, tr in enumerate(tr_div):
-        span_div = tr.find("span",{"class":"currency-symbol"})
-    # span_div = tr_div.find("span",{"class":"currency-symbol"})
+        td_name_div = tr.find("td",{"class":"no-wrap currency-name"})
+        span_div = td_name_div.find("span",{"class":"currency-symbol"})
         symbol.append(span_div.text)
+
         a_div = span_div.find("a")
         href = a_div['href']
         href_split = href.split('/')
         symbol_site.append(href_split[2])
-    for i, tr in enumerate(tr_div):
-        td_div = td.find_all("td")
-        td_a_div = td_div.find("a")
-        print(td_a_div)
 
-    return
+        symbol_name_temp = td_name_div.find("a",{'class':'currency-name-container'})
+        symbol_name.append(symbol_name_temp.text)
+
+        td_price_volume_div = tr.find_all("td",{"class":"no-wrap text-right"})
+        # print('**********************************')
+        # print('td_price_volume_div[0]',td_price_volume_div[0])
+        a_price_div = td_price_volume_div[0].find("a",{'class':'price'})
+        price = a_price_div['data-usd']
+        symbol_price_usd.append(float(price))
+
+        a_volume_div = td_price_volume_div[1].find("a",{'class':'volume'})
+        # print('td_price_volume_div[1]',td_price_volume_div[1])
+        volume = a_volume_div['data-usd']
+        symbol_volume_usd.append(float(volume))
+        # for i, td in enumerate(td_price_volume_div):
+        #     print('**********************************')
+        #     print('td',td)
+        #     a_div = td.find("a",{'class':'price'})
+        #     print('a_div',a_div)
+        #     a_div_price = a_div['data-usd']
+        #     print(a_div_price)
+            # if a_div["class"] == 'price':   #여기가 틀렸는데.... 뭐가 틀린거지?
+            #     symbol_price_usd_temp = a_div['data-usd']
+            #     print('symbol_price_usd_temp',symbol_price_usd_temp)
+            #     symbol_price_usd.append(symbol_price_usd_temp)
+            # elif a_div['class'] == 'volume':
+            #     symbol_volume_usd_temp = a_div['data-usd']
+            #     print('symbol_volume_usd_temp',symbol_volume_usd_temp)
+            #     symbol_volume_usd.append(symbol_volume_usd_temp)
+
+        # td_percent_change_div = tr.find("td",{'class':"no-wrap percent-change  text-right negative_change"})
+        # symbol_percent_change_temp = td_percent_change_div['data-percentusd']
+        # symbol_percent_change.append(symbol_percent_change_temp)
+
+        td_market_cap_div = tr.find("td",{'class':"no-wrap market-cap text-right"})
+        symbol_market_cap_temp = td_market_cap_div['data-usd']
+        symbol_market_cap.append(float(symbol_market_cap_temp))
+
+        td_circulating_supply_div = tr.find("td",{'class':"no-wrap text-right circulating-supply"})
+        symbol_circulating_supply_temp = td_circulating_supply_div['data-sort']
+        symbol_circulating_supply.append(float(symbol_circulating_supply_temp))
 
 
-# 여기부터 뷰티풀 숲을 이용한 웹페이지 크롤링(코인마켓캡 BTC 1일봉 30일데이타.)
-def raw_data_1day():
-    html = urlopen(URL_cmc + period_str)
+
+    # for i, line in enumerate(symbol):
+    #     print(i+1, symbol_name[i], symbol[i], symbol_site[i])
+
+    #2
+    # for i, tr in enumerate(tr_div):
+
+    #
+    #
+    #
+    # for i, line in enumerate(symbol):
+    #     print(i+1, symbol_name[i], symbol[i], symbol_site[i], symbol_market_cap[i], symbol_circulating_supply[i], symbol_price_usd[i], symbol_volume_usd[i])
+    # print(i+1, type(symbol_name[i]), type(symbol[i]), type(symbol_site[i]), type(symbol_market_cap[i]), type(symbol_circulating_supply[i]), type(symbol_price_usd[i]), type(symbol_volume_usd[i]))
+
+    return symbol_name, symbol, symbol_site, symbol_market_cap, symbol_circulating_supply, symbol_price_usd, symbol_volume_usd
+
+# 여기부터 뷰티풀 숲을 이용한 웹페이지 크롤링(코인마켓캡 coin별 1일봉 30일데이타.)
+def raw_data_1day(coin):
+    # 불러오기 위한 coin list를 cmc_data에서 불러오자.
+    # 구지 아래와 같이 전부를 불러올 필요는 없지만 따로 함수를 구축해야하는건가 아니면 일부 list 만 뽑아올 수 있는게 있으면 나중에 수정.
+    # 아래들중 원래는 symbol_site만 필요했지만 부가로 나머지들을 구축함self.
+    symbol_name, symbol, symbol_site, symbol_market_cap, symbol_circulating_supply, symbol_price_usd, symbol_volume_usd = cmc_data()
+
+    # 임시로 하는거 parameter인 coin에 해당하는 site symbol 찾기.(array쓰면 쉬웠을 것을 list로 일단 구현.)
+    for i, symbol_site_temp in enumerate(symbol_site):
+        if symbol[i] == coin:
+            URL2 = symbol_site_temp
+            break
+
+    html = urlopen(URL1 + URL2 + URL3 + period_str)
     source = html.read()
     html.close()
     soup = BeautifulSoup(source, "html.parser")
@@ -88,6 +163,7 @@ def raw_data_1day():
     highs=[]
     lows=[]
     volumes=[]
+
     # 나중에는 아래와 같은 태그들을 이용해서 각 테이블의 열이 어떤건지도 검사하려고함.
     # 지금은 빠르게 코딩하는게 나으니까 아래것들은 나중에 추가하자.
     # <th class="text-left">Date</th>
@@ -159,84 +235,7 @@ def raw_data_1day():
 # e = {}
 # print(type(e))
 
-html = urlopen('https://coinmarketcap.com/')
-source = html.read()
-html.close()
-soup = BeautifulSoup(source, "html.parser")
 
-symbol = []
-symbol_name = []
-symbol_site = []
-symbol_market_cap = []
-symbol_circulating_supply = []
-symbol_percent_change = []
-symbol_price_usd = []
-symbol_volume_usd = []
-tbody_div = soup.find("tbody")
-tr_div = tbody_div.find_all("tr")
-
-#1
-for i, tr in enumerate(tr_div):
-    td_name_div = tr.find("td",{"class":"no-wrap currency-name"})
-    span_div = td_name_div.find("span",{"class":"currency-symbol"})
-    symbol.append(span_div.text)
-
-    a_div = span_div.find("a")
-    href = a_div['href']
-    href_split = href.split('/')
-    symbol_site.append(href_split[2])
-
-    symbol_name_temp = td_name_div.find("a",{'class':'currency-name-container'})
-    symbol_name.append(symbol_name_temp.text)
-
-    td_price_volume_div = tr.find_all("td",{"class":"no-wrap text-right"})
-    print('**********************************')
-    print('td_price_volume_div[0]',td_price_volume_div[0])
-    a_price_div = td_price_volume_div[0].find("a",{'class':'price'})
-    price = a_price_div['data-usd']
-    print('price',price)
-    print('td_price_volume_div[1]',td_price_volume_div[1])
-    # for i, td in enumerate(td_price_volume_div):
-    #     print('**********************************')
-    #     print('td',td)
-    #     a_div = td.find("a",{'class':'price'})
-    #     print('a_div',a_div)
-    #     a_div_price = a_div['data-usd']
-    #     print(a_div_price)
-        # if a_div["class"] == 'price':   #여기가 틀렸는데.... 뭐가 틀린거지?
-        #     symbol_price_usd_temp = a_div['data-usd']
-        #     print('symbol_price_usd_temp',symbol_price_usd_temp)
-        #     symbol_price_usd.append(symbol_price_usd_temp)
-        # elif a_div['class'] == 'volume':
-        #     symbol_volume_usd_temp = a_div['data-usd']
-        #     print('symbol_volume_usd_temp',symbol_volume_usd_temp)
-        #     symbol_volume_usd.append(symbol_volume_usd_temp)
-
-    # td_percent_change_div = tr.find("td",{'class':"no-wrap percent-change  text-right negative_change"})
-    # symbol_percent_change_temp = td_percent_change_div['data-percentusd']
-    # symbol_percent_change.append(symbol_percent_change_temp)
-
-    td_market_cap_div = tr.find("td",{'class':"no-wrap market-cap text-right"})
-    symbol_market_cap_temp = td_market_cap_div['data-usd']
-    symbol_market_cap.append(symbol_market_cap_temp)
-
-    td_circulating_supply_div = tr.find("td",{'class':"no-wrap text-right circulating-supply"})
-    symbol_circulating_supply_temp = td_circulating_supply_div['data-sort']
-    symbol_circulating_supply.append(symbol_circulating_supply_temp)
-
-
-
-# for i, line in enumerate(symbol):
-#     print(i+1, symbol_name[i], symbol[i], symbol_site[i])
-
-#2
-# for i, tr in enumerate(tr_div):
-
-#
-#
-#
-# for i, line in enumerate(symbol):
-    # print(i+1, symbol_name[i], symbol[i], symbol_market_cap[i], symbol_circulating_supply[i], symbol_price_usd[i], symbol_volume_usd[i])
 # , symbol_percent_change[i]
 # print(symbol_name)
 # print(symbol)
@@ -244,3 +243,11 @@ for i, tr in enumerate(tr_div):
 # print(symbol_circulating_supply)
 # print(symbol_price_usd)
 # print(symbol_volume_usd)
+
+
+
+# symbol_name, symbol, symbol_site, symbol_market_cap, symbol_circulating_supply, symbol_price_usd, symbol_volume_usd = cmc_data()
+#
+# for i, line in enumerate(symbol):
+#     print(i+1, symbol_name[i], symbol[i], symbol_site[i], symbol_market_cap[i], symbol_circulating_supply[i], symbol_price_usd[i], symbol_volume_usd[i])
+# print(i+1, type(symbol_name[i]), type(symbol[i]), type(symbol_site[i]), type(symbol_market_cap[i]), type(symbol_circulating_supply[i]), type(symbol_price_usd[i]), type(symbol_volume_usd[i]))

@@ -1,0 +1,1259 @@
+UZBEKISTAN GAS TO LIQUID PROJECT (UZGTL) 
+
+HAZOP ACTION CLOSE -OUT REGISTER FOR MAKE -UP H2 
+
+COMPRESSOR PACKAGE 
+
+UZGTL-HDC-HSE-RP-50-0-0004 
+
+01 
+
+E 
+
+Rev 
+
+00 
+
+01 
+
+Revision Description 
+
+Issue for Information 
+
+Issue for Information 
+
+Date 
+
+16-Mar-2018 
+
+04-May-2018 
+
+By 
+
+T.H.Hong 
+
+T.H.Hong 
+
+Checked 
+
+W .S.Jung 
+
+W .S.Jung 
+
+Approved 
+
+C.K.Han 
+
+C.K.Han 
+
+` 
+
+` 
+
+This document and its attachments, if any, contain confidential and proprietary information belonging or entrusted to 
+
+UZBEKISTAN GTL LLC. The intended recipient(s) will not divulge this information to any third party or sell, trade, 
+
+publish, reproduce or reverse engineer any of the information contained herein, in any manner, without UZBEKISTAN 
+
+GTL LLC¡¯s prior written consent, and will not put in use the information for any purpose unrelated to that for which it 
+
+has been provided. Any disclosure and use of 
+
+the contents hereof will be 
+
+further subject 
+
+to any subsisting 
+
+confidentiality undertakings between UZBEKISTAN GTL LLC and the intended recipient(s).  The copyright in this 
+
+document and its attachments, if any, is owned by UZBEKISTAN GTL LLC or its licensors, and any reproduction or 
+
+adaptation thereof will require UZBEKISTAN GTL LLC¡®s express prior written approval. 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+HAZOP ACTION CLOSE-OUT REGISTER FOR 
+
+MAKE-UP H2 COMPRESSOR PACKAGE 
+
+Doc. No.: UZGTL-HDC-HSE-RP-50-0-0004 
+
+01 
+
+E 
+
+Date : 
+
+04-May-2018 
+
+Page 2 of 2 
+
+REVISION LOG 
+
+REV. NO. 
+
+REV. DATE 
+
+REVISED PAGE 
+
+REVISION DESCRIPTION 
+
+00 
+
+01 
+
+16-Mar-2018 
+
+04-May-2018 
+
+- 
+
+- 
+
+Issue for Information 
+
+Issue for Information 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+HAZOP Recommendations
+
+Unit 50: Product Work-up Unit
+
+O
+
+To be incorporated
+
+¡Ü
+
+Incorporated
+
+¡â
+
+HOLD
+
+Related Documentation
+
+Unit
+
+Rec. No.
+
+Recommendations
+
+Remarks
+
+PFD
+
+H&MB
+
+P&ID
+
+C&E
+
+MDS / Eq
+list
+
+Line List
+
+IDS / Instr
+Index
+
+alarm&trip
+list
+
+Util/Chem
+Consumpt
+ion
+
+DB /
+Description
+
+Control
+Narrative
+
+Plot Plan
+
+Operating
+Manual
+
+MSD
+(Material
+Selection
+Diagram)
+
+Others
+
+50
+
+150-CR-104/204/304-17
+
+Address compressor 150-CR-104/204/304 trip signal to Unit
+20 and Unit 60
+
+50
+
+150-CR-104/204/304-18
+
+Configure deviation alarm on DCS between 150-PT-0170,
+150-PT-0171 and 150-PT-0838A
+
+50
+
+150-CR-104/204/304-21
+
+Provide check valve on 1st stage discharge of Compressor to
+Unit 20, 60, 50
+
+50
+
+150-CR-104/204/304-22
+
+Provide check valve on 2nd stage discharge of Compressor
+(upstream manual isolation valve on 2nd stage discharge line)
+
+50
+
+150-CR-104/204/304-23
+
+Provide manual valve (LO) downstream of check valve on
+Drain Pot 150-CR-104-XX-01/02 vent line
+
+50
+
+150-CR-104/204/304-24
+
+Provide check valve on cooling water supply line for Make-up
+H2 1st Stage Water Cooler
+
+50
+
+150-CR-104/204/304-25
+
+Provide High/Low Temperature Alarm on 150-TI-0831A on
+DCS
+
+50
+
+150-CR-104/204/304-30
+
+Provide check valve on H2 make-up line from Unit 60
+(downstream isolation valve at BL)
+
+50
+
+150-CR-104/204/304-33
+
+Provide vent connection on high point of compressor suction
+piping
+
+50
+
+150-CR-104/204/304-51
+
+Evaluate discharge collection of 150-PSV-0834A/0835A to
+Oily Water Sewer (OWS)
+
+50
+
+150-CR-104/204/304-83
+
+50
+
+150-CR-104/204/304-85
+
+Configure 150-LAH-0838A on DCS
+
+Configure 150-TAL-0867A/0868A on DCS
+
+O
+
+O
+
+O
+
+O
+
+O
+
+O
+
+O
+
+O
+
+O
+
+O
+
+O
+
+O
+
+HAZOP ACTION CLOSE-OUT REGISTER
+FOR ERG COMPRESSOR PACKAGE
+
+Action No.
+
+Action By
+
+Node No.
+
+150-CR-104/204/304-17
+
+PR
+
+1
+
+Node Description
+
+1. Compressor Process Gas / Compressor Vent & Drain / Compressor Unloader
+
+Cause
+
+1.2.2. More Flow of process gas via 1st stage spillback line due to PIC control
+malfunction (1st stage spill back line malfunction open) (Refer to Unit 50 Process
+HAZOP)
+
+Consequence
+
+1.2.2.1. 1st Stage suction pressure increase leading to potential compressor 1st stage
+discharge overpressure resulting in Compressor damage and gas leakage
+
+1.2.2.1.1. 150-PDAH-0835A
+
+1.2.2.1.2. 150-PDSHH-0836A initiates 150-IS-0612 to trip Compressor
+
+1.2.2.1.3. 150-TAH-0832A
+
+Safeguards
+
+1.2.2.1.4. 150-TSHH-0833A initiates 150-IS-0612 to trip Compressor
+
+1.2.2.1.5. Compressor, 1st Stage Discharge Volume Bottle 150-CR-104-VD-72 and
+piping design condition
+
+1.2.2.1.6. PSV on 1st stage discharge (set at 53.1 barg) (Process side)
+
+Action
+
+Address compressor 150-CR-104/204/304 trip signal to Unit 20 and Unit 60
+
+Response
+
+Incorporated on P&ID (50-0-0065/66/67-8, 20-0-0001, 60-0-0004).
+Compressor 150-CR-104/204/304 trip signal will be provided to Unit 20 and Unit 60.
+
+(Please refer to attached P&ID, UZGTL-HDC-PRO-07-50-0-0065/66/67-8, 20-0-0001, 60-
+0-0004)
+
+CONTRACTOR
+
+Position
+
+Signature
+
+Date
+
+Position
+
+OWNER
+
+Signature
+
+Date
+
+Process Engineer
+
+10-Apr-2018
+
+B.M.Hwang
+
+HAZOP ACTION CLOSE-OUT REGISTER
+FOR ERG COMPRESSOR PACKAGE
+
+Action No.
+
+Action By
+
+Node No.
+
+150-CR-104/204/304-18
+
+PR
+
+1
+
+Node Description
+
+1. Compressor Process Gas / Compressor Vent & Drain / Compressor Unloader
+
+Cause
+
+1.2.4. More Flow of process gas via H2 make-up line to Unit 20 / Unit 60 (Refer to Unit
+50 Process HAZOP)
+
+Consequence
+
+1.2.4.2. 2nd stage suction pressure decrease leading to compression ratio increase on
+2nd stage resulting in mechanical damage of compressor. Increase of vibration.
+
+Safeguards
+
+1.2.4.2.1. 150-PAL-0838A
+
+1.2.4.2.2. 150-PSLL-0837A initiates 150-IS-0612 to trip Compressor (SIL rated)
+
+1.2.4.2.3. 150-PDAH-0841A
+
+1.2.4.2.4. 150-PDSHH-0842A initiates 150-IS-0612 to trip Compressor
+
+1.2.4.2.5. 150-VAH-0831A (MMS)
+
+1.2.4.2.6. 150-VSHH-0832A initiates MMS interlock to trip Compressor
+
+Action
+
+Configure deviation alarm on DCS between 150-PT-0170, 150-PT-0171 and 150-PT-
+0838A
+
+Response
+
+Incorporated on P&ID (50-0-0065/66/67-1/2).
+Deviation alarm on DCS between 150-PT-0170, 150-PT-0171 and 150-PT-0838A will be
+provided.
+
+(Please refer to attached P&ID, UZGTL-HDC-PRO-07-50-0-0065/66/67-1/2)
+
+CONTRACTOR
+
+Position
+
+Signature
+
+Date
+
+Position
+
+OWNER
+
+Signature
+
+Date
+
+Process Engineer
+
+10-Apr-2018
+
+B.M.Hwang
+
+HAZOP ACTION CLOSE-OUT REGISTER
+FOR ERG COMPRESSOR PACKAGE
+
+Action No.
+
+Action By
+
+Node No.
+
+150-CR-104/204/304-21
+
+PR
+
+1
+
+Node Description
+
+1. Compressor Process Gas / Compressor Vent & Drain / Compressor Unloader
+
+Cause
+
+1.3.4. Reverse Flow of process gas from train 2 to train 1 due to train 1 Compressor trip
+(or vice versa)
+
+Consequence
+
+1.3.4.1. Potential blow back of process gas into interstage section leading to potential
+overpressure
+
+Safeguards
+
+1.3.4.1.1. PSV on 1st stage discharge (set at 53.1 barg) (Process side)
+
+Action
+
+Provide check valve on 1st stage discharge of Compressor to Unit 20, 60, 50
+
+Response
+
+Incorporated on P&ID (50-0-0068).
+Check valves are provided on 1st stage discharge of compressor.
+
+(Please refer to attached P&ID, UZGTL-HDC-PRO-07-50-0-0068)
+
+CONTRACTOR
+
+Position
+
+Signature
+
+Date
+
+Position
+
+OWNER
+
+Signature
+
+Date
+
+Process Engineer
+
+10-Apr-2018
+
+B.M.Hwang
+
+HAZOP ACTION CLOSE-OUT REGISTER
+FOR ERG COMPRESSOR PACKAGE
+
+Action No.
+
+Action By
+
+Node No.
+
+150-CR-104/204/304-22
+
+PR
+
+1
+
+Node Description
+
+1. Compressor Process Gas / Compressor Vent & Drain / Compressor Unloader
+
+Cause
+
+1.3.4. Reverse Flow of process gas from train 2 to train 1 due to train 1 Compressor trip
+(or vice versa)
+
+Consequence
+
+1.3.4.2. Potential blow back of process gas from running Compressor discharge to
+stopped Compressor leading to potential overpressure
+
+Safeguards
+
+Action
+
+Provide check valve on 2nd stage discharge of Compressor (upstream manual isolation
+valve on 2nd stage discharge line)
+
+Response
+
+Incorporated on P&ID (50-0-0068).
+Check valves are provided on 2nd stage discharge of compressor.
+
+(Please refer to attached P&ID, UZGTL-HDC-PRO-07-50-0-0068)
+
+CONTRACTOR
+
+Position
+
+Signature
+
+Date
+
+Position
+
+OWNER
+
+Signature
+
+Date
+
+Process Engineer
+
+10-Apr-2018
+
+B.M.Hwang
+
+HAZOP ACTION CLOSE-OUT REGISTER
+FOR ERG COMPRESSOR PACKAGE
+
+Action No.
+
+Action By
+
+Node No.
+
+150-CR-104/204/304-23
+
+PR
+
+1
+
+Node Description
+
+1. Compressor Process Gas / Compressor Vent & Drain / Compressor Unloader
+
+1.3.6. Reverse Flow of flammable gas from flare into Drain Pot 150-CR-104-XX-01
+
+1.3.7. Reverse Flow of flammable gas from flare into Drain Pot 150-CR-104-XX-02
+
+Cause
+
+Consequence
+
+Safeguards
+
+1.3.6.1.1. Check valve on Drain Pot 150-CR-104-XX-01 vent
+
+1.3.7.1.1. Check valve on Drain Pot 150-CR-104-XX-02 vent
+
+Action
+
+Provide manual valve (LO) downstream of check valve on Drain Pot 150-CR-104-XX-
+01/02 vent line
+
+Response
+
+The vendor confirmed that both lines of the 150-CR-104-XX-01/02 could be released to
+ATM. However, contractor decided to connect the vent line of the Drain Pot for ROD
+Packing (150-CR-104-XX-02) to the LPF by supplying manual valve (LO). Therefore, the
+vent line of 150-CR-002-XX-01 will be connected to ATM, and the vent line of 150-CR-
+002-XX-02 will be connected to LPF by supplying manual valve (LO).
+
+(Please refer to attached E-mail and P&ID, UZGTL-HDC-PRO-07-50-0-0065/66/67-3)
+
+CONTRACTOR
+
+Position
+
+Signature
+
+Date
+
+Position
+
+OWNER
+
+Signature
+
+Date
+
+Process Engineer
+
+10-Apr-2018
+
+B.M.Hwang
+
+HAZOP ACTION CLOSE-OUT REGISTER
+FOR ERG COMPRESSOR PACKAGE
+
+Action No.
+
+Action By
+
+Node No.
+
+150-CR-104/204/304-24
+
+PR
+
+1
+
+Node Description
+
+1. Compressor Process Gas / Compressor Vent & Drain / Compressor Unloader
+
+Cause
+
+1.5.1. Make-up H2 1st Stage Water Cooler tube rupture (Refer to Unit 50 Process
+HAZOP)
+
+Consequence
+
+1.5.1.1. Refer to Unit 50 Process HAZOP
+
+Safeguards
+
+1.5.1.1.1. Emergency procedure for compressor
+
+Action
+
+Provide check valve on cooling water supply line for Make-up H2 1st Stage Water Cooler
+
+Response
+
+In the case of the water cooler tube rupture, it is meaningless to install the check vavle of
+the supply line because the fluid will flow toward the return line according to the pressure
+profile. Hydrogen monitoring is possible via the gas detector on the vent goose neck on
+the cooling tower side and the PT on the cooling water return line. Therefore, check valve
+will not be installed on the cooling water supply line.
+
+CONTRACTOR
+
+Position
+
+Signature
+
+Date
+
+Position
+
+OWNER
+
+Signature
+
+Date
+
+Process Engineer
+
+10-Apr-2018
+
+B.M.Hwang
+
+HAZOP ACTION CLOSE-OUT REGISTER
+FOR ERG COMPRESSOR PACKAGE
+
+Action No.
+
+Action By
+
+Node No.
+
+150-CR-104/204/304-25
+
+PR
+
+1
+
+Node Description
+
+1. Compressor Process Gas / Compressor Vent & Drain / Compressor Unloader
+
+1.8.2. More Temperature of process gas from upstream (Refer to Unit 50 Process
+HAZOP)
+
+Cause
+
+1.9.1. Less Temperature of process gas from upstream (Refer to Unit 50 Process
+HAZOP)
+
+1.9.2. Low ambient temperature (Refer to Unit 50 Process HAZOP)
+
+1.8.2.2. Gas density decrease leading to gas mass flow rate decrease. No significant
+consequence.
+
+Consequence
+
+1.9.1.1. Gas density increase leading to gas mass flow rate increase resulting in potential
+high pressure and compressor overload
+
+1.9.2.1. Gas density increase leading to gas mass flow rate increase resulting in potential
+high pressure and compressor overload
+
+Safeguards
+
+1.9.1.1.1. Motor overload protection
+
+1.9.2.1.1. Motor overload protection
+
+Action
+
+Provide High/Low Temperature Alarm on 150-TI-0831A on DCS
+
+Response
+
+Incorporated on P&ID (50-0-0065/66/67-2).
+High/Low temperature alarm on 150-TI-0831 on DCS will be provided.
+
+(Please refer to attached P&ID, UZGTL-HDC-PRO-07-50-0-0065/66/67-2)
+
+CONTRACTOR
+
+Position
+
+Signature
+
+Date
+
+Position
+
+OWNER
+
+Signature
+
+Date
+
+Process Engineer
+
+10-Apr-2018
+
+B.M.Hwang
+
+HAZOP ACTION CLOSE-OUT REGISTER
+FOR ERG COMPRESSOR PACKAGE
+
+Action No.
+
+Action By
+
+Node No.
+
+150-CR-104/204/304-30
+
+PR
+
+1
+
+Node Description
+
+1. Compressor Process Gas / Compressor Vent & Drain / Compressor Unloader
+
+Cause
+
+1.17.3. Compressor capacity load control malfunction during start-up with N2 run
+
+Consequence
+
+1.17.3.2. In case of incorrect line up, potential overpressure could affect upstream piping
+and equipment
+
+Safeguards
+
+1.17.3.2.1. 150-PCV-0284 (Pressure regulator on N2 line)
+
+Action
+
+Provide check valve on H2 make-up line from Unit 60 (downstream isolation valve at BL)
+
+Response
+
+Since the dissimilar type double check vlaves are installed on the H2 make-up line of Unit
+60 (60-0-0012-1), the check vlave will not be installed on the H2 make-up line of unit 50
+line.
+
+CONTRACTOR
+
+Position
+
+Signature
+
+Date
+
+Position
+
+OWNER
+
+Signature
+
+Date
+
+Process Engineer
+
+10-Apr-2018
+
+B.M.Hwang
+
+HAZOP ACTION CLOSE-OUT REGISTER
+FOR ERG COMPRESSOR PACKAGE
+
+Action No.
+
+Action By
+
+Node No.
+
+150-CR-104/204/304-33
+
+PR
+
+1
+
+Node Description
+
+1. Compressor Process Gas / Compressor Vent & Drain / Compressor Unloader
+
+Cause
+
+1.20.1. Positive isolation
+
+Consequence
+
+Safeguards
+
+1.20.1.1.1. Maintenance Manual (positive isolation)
+
+Action
+
+Provide vent connection on high point of compressor suction piping
+
+Response
+
+Incorporated on P&ID (50-0-0065/66/67-2).
+Vent valves will be provided on high point of compressor suction piping.
+
+(Please refer to attached P&ID, UZGTL-HDC-PRO-07-50-0-0065/66/67-2)
+
+CONTRACTOR
+
+Position
+
+Signature
+
+Date
+
+Position
+
+OWNER
+
+Signature
+
+Date
+
+Process Engineer
+
+10-Apr-2018
+
+B.M.Hwang
+
+HAZOP ACTION CLOSE-OUT REGISTER
+FOR ERG COMPRESSOR PACKAGE
+
+Action No.
+
+Action By
+
+Node No.
+
+150-CR-104/204/304-51
+
+PR
+
+2
+
+Node Description
+
+2. Lube Oil System
+
+Cause
+
+2.6.2. Thermal expansion of cooling water circuit
+
+Consequence
+
+2.6.2.1. Potential overpressure of cooling water circuit
+
+Safeguards
+
+2.6.2.1.1. 150-PSV-0834A/0835A
+
+Action
+
+Evaluate discharge collection of 150-PSV-0834A/0835A to Oily Water Sewer (OWS)
+
+Response
+
+Current scheme of PSV discharge to grade at safe location will be maintained, as this
+PSV is only a thermal relief valve and expected relieving flow and frequency is quite low.
+(i.e., maintenance of PSV) It should be noted that the PSV and line will be located inside
+skid. It is a general practice to route thermal relief outlet inside the skid. If discharge is
+separately routed outside of skid, this line will block open spaces and make maintenance
+works difficult.
+
+CONTRACTOR
+
+Position
+
+Signature
+
+Date
+
+Position
+
+OWNER
+
+Signature
+
+Date
+
+Process Engineer
+
+10-Apr-2018
+
+B.M.Hwang
+
+HAZOP ACTION CLOSE-OUT REGISTER
+FOR ERG COMPRESSOR PACKAGE
+
+Action No.
+
+Action By
+
+Node No.
+
+150-CR-104/204/304-83
+
+PR
+
+3
+
+Node Description
+
+3. Cooling Water / TCW console
+
+Cause
+
+Consequence
+
+Safeguards
+
+3.5.1. Cooling Water Cooler tube rupture
+
+3.10.1. Cooling Water Tank overfilling due to incorrect refilling
+
+3.5.1.1. Cooling water flow from tube side to shell side leading to overfilling of Cooling
+Water Tank. Potential fouling of cooling jackets.
+
+3.10.1.1. Loss of cooling water. No significant issue.
+
+3.5.1.1.1. Vent routed at grade level acting as overflow line (Refer to Recommendation)
+
+3.10.1.1.1. Vent routed at grade level acting as overflow line (Refer to Recommendation)
+
+Action
+
+Configure 150-LAH-0838A on DCS
+
+Response
+
+Incorporated on P&ID (50-0-0065/66/67-7).
+150-LAH-0838A on DCS is provided on AFC P&ID.
+
+(Please refer to attached P&ID, UZGTL-HDC-PRO-07-50-0-0065/66/67-7)
+
+CONTRACTOR
+
+Position
+
+Signature
+
+Date
+
+Position
+
+OWNER
+
+Signature
+
+Date
+
+Process Engineer
+
+10-Apr-2018
+
+B.M.Hwang
+
+HAZOP ACTION CLOSE-OUT REGISTER
+FOR ERG COMPRESSOR PACKAGE
+
+Action No.
+
+Action By
+
+Node No.
+
+150-CR-104/204/304-85
+
+PR
+
+3
+
+Node Description
+
+3. Cooling Water / TCW console
+
+Cause
+
+3.9.1. Less Temperature of Cooling Water due to 150-TIC-0872A control loop
+malfunction or failure (150-TV-0832A close)
+
+Consequence
+
+3.9.1.1. Potential condensate formation of process gas leading to potential piston ring
+lifetime decrease.
+
+Safeguards
+
+Action
+
+Configure 150-TAL-0867A/0868A on DCS
+
+Response
+
+Incorporated on P&ID (50-0-0065/66/67-6).
+150-TAL-0867A/0868A on DCS is provided on AFC P&ID.
+
+(Please refer to attached P&ID, UZGTL-HDC-PRO-07-50-0-0065/66/67-6)
+
+CONTRACTOR
+
+Position
+
+Signature
+
+Date
+
+Position
+
+OWNER
+
+Signature
+
+Date
+
+Process Engineer
+
+10-Apr-2018
+
+B.M.Hwang
+
+
