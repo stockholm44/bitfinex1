@@ -9,7 +9,9 @@ from xlwt import *
 #         return PDF(f)
 
 # def pytest_funcarg__doc():
-with open('1.pdf', 'rb') as f:
+input_pdf = input("Insert PDF File name with '.pdf' : ")
+
+with open(input_pdf, 'rb') as f:
     doc = PDF(f)
 
 action_no_list = []
