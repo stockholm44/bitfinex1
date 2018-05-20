@@ -34,92 +34,70 @@ def message(request):
     # 전체적으로 1. 밥뭐먹지 2.코인순위(10,20,50단위) 3. 개별코인정보(BTC,ETH,XRP)
     # response_message를 만들기 전까지 준비데이터들을 아래와 같이 만든다.
 
-    # # 4. JPY Exchange_Rates List 보이기 + 최저가격 보여주기
-    # if data == 'JPY Exchange_Rates':
-    #     bank_name, bank_exchange_rate = jpy_rate()
-    #     response_message_jpy = ""
-    #     # 제일 싼 거래소 보여주기
-    #     minimum_rate = bank_exchange_rate[0]    # 비교 하기 위한 제일 싼 환율
-    #     minimum_rate_exchange = bank_name[0]              # 싼거래소들
-    #     for i in range(len(bank_name)):
-    #         if i > 0:
-    #             if bank_exchange_rate[i] == minimum_rate:
-    #                 minimum_rate_exchange += ", " + bank_name[i]
-    #
-    #     response_message_jpy += '★★★★★★★★★★★★★\n제일 저렴한 환율은 ' + str(minimum_rate) + '엔 이며 저렴한 거래소는 아래거래소들 입니다.\n' + minimum_rate_exchange + '\n★★★★★★★★★★★★★\n'
-    #     message_this_rate = ""
-    #     for i, name in enumerate(bank_name):
-    #         message_this_rate += str(i + 1) + '. ' + name + ': ' + str(bank_exchange_rate[i]) + '엔\n'
-    #
-    #     response_message_jpy += message_this_rate
+    # 조건문으로 계산 최소화를 해보자.(data 입력값에 따라 다른 입력값들에 따른 계산들을 하지말자.)
+    bab_place = bab_place_list() # 1번용 Data 범위
+    coin_list_top3 = ['BTC', 'ETH', 'XRP']  # 3번 용 Data 범위
 
 
-
-    # 1. 밥뭐먹지의 Data
-    # if data == "지금 뭐먹지?":
-    #     bab_list = ['볶음밥','짜장면','짬뽕','간짜장','양념치킨','걍치킨','순살치킨','신라면','진라면','컵라면큰사발','컵라면','불닭볶음밥','굶어시바라','닭도리탕','새우깡','보쌈','고르곤졸라피자','불고기피자','김치에계란','계란말이','회','스시','초밥','간장게장','양념게장']
-    #     bab_select = random.choice(bab_list)
-    bab_place = bab_place_list()
+    #1. 밥 뭐먹지
     if data in bab_place:
         bab_response = bab(data)
 
 
+        # 10위만 남기고 지움. 백업용으로 주석으로 남김.
+        # coin_rate_selector = ['Coin_Rank_Top 5', 'Coin_Rank_Top 10','Coin_Rank_Top 20']
+        #
+        # if data == 'Coin_Rank_Top 5':
+        #     coin_count = 5
+        # elif data == 'Coin_Rank_Top 10':
+        #     coin_count = 10
+        # elif data == 'Coin_Rank_Top 20':
+        #     coin_count = 20
+        # else:
+        #     coin_count = 0
+
+        # coinmarketcap 에서 Data 끌어오기.
+
     # 2. 코인순위의 Data
     # 원하는 코인순위 범위 정하기
-    coin_rate_selector = ['Coin_Rank_Top 10']
-
-    if data == 'Coin_Rank_Top 10':
+    elif data == 'Coin_Rank_Top 10':
         coin_count = 10
+        coin_data = ticker1(coin_count)
 
-
-    # 10위만 남기고 지움. 백업용으로 주석으로 남김.
-    # coin_rate_selector = ['Coin_Rank_Top 5', 'Coin_Rank_Top 10','Coin_Rank_Top 20']
-    #
-    # if data == 'Coin_Rank_Top 5':
-    #     coin_count = 5
-    # elif data == 'Coin_Rank_Top 10':
-    #     coin_count = 10
-    # elif data == 'Coin_Rank_Top 20':
-    #     coin_count = 20
-    # else:
-    #     coin_count = 0
-
-    # coinmarketcap 에서 Data 끌어오기.
-    coin_data = ticker1(coin_count)
 
     # 2. 코인순위의 response_message
-    response_message = ""
-    for i in range(coin_count):
-        rank = int(coin_data[i]['rank'])
-        name = coin_data[i]['name']
-        price_usd = float(coin_data[i]['price_usd']) # float
-        price_krw = float(coin_data[i]['price_krw']) # float
-        str_price_usd = format(float(coin_data[i]['price_usd']),',.2f') # str_1000단위 + 소수점2자리
-        str_price_krw = format(float(coin_data[i]['price_krw']),',.0f') # str_1000단위 + 소수점 0자리
-        percent_change_24h = format(float(coin_data[i]['percent_change_24h']),'.2f')
-        gimp = format(((1-price_krw/price_usd/1077)*100), '.2f')
-        if float(percent_change_24h) > 0:
-            change_mark = '▲'
-            add_change_mark = '+'
-        elif float(percent_change_24h) == 0:
-            change_mark = ''
-            add_change_mark = ''
-        elif float(percent_change_24h) < 0:
-            change_mark = '▼'
-            add_change_mark = ''
+        response_message = ""
+        for i in range(coin_count):
+            rank = int(coin_data[i]['rank'])
+            name = coin_data[i]['name']
+            price_usd = float(coin_data[i]['price_usd']) # float
+            price_krw = float(coin_data[i]['price_krw']) # float
+            str_price_usd = format(float(coin_data[i]['price_usd']),',.2f') # str_1000단위 + 소수점2자리
+            str_price_krw = format(float(coin_data[i]['price_krw']),',.0f') # str_1000단위 + 소수점 0자리
+            percent_change_24h = format(float(coin_data[i]['percent_change_24h']),'.2f')
+            gimp = format(((1-price_krw/price_usd/1077)*100), '.2f')
+            if float(percent_change_24h) > 0:
+                change_mark = '▲'
+                add_change_mark = '+'
+            elif float(percent_change_24h) == 0:
+                change_mark = ''
+                add_change_mark = ''
+            elif float(percent_change_24h) < 0:
+                change_mark = '▼'
+                add_change_mark = ''
 
-        volume_usd = float(coin_data[i]['24h_volume_usd'])
-        available_supply = float(coin_data[i]['available_supply'])
-    # 회전율
-        circul_rate = format(float(volume_usd/available_supply/float(price_usd)*100),'.2f')
+            volume_usd = float(coin_data[i]['24h_volume_usd'])
+            available_supply = float(coin_data[i]['available_supply'])
+        # 회전율
+            circul_rate = format(float(volume_usd/available_supply/float(price_usd)*100),'.2f')
 
-    # 2. 코인순위의 message_response
-        message_this_coin = str(rank) + '위\n┌ ' + name +'   '+ str_price_usd +'$/' + str_price_krw + '원\n├ 김프    ' + gimp + '%\n├ 변화율   ' + add_change_mark + percent_change_24h + "% (" +change_mark + ')\n└ 회전율   ' + circul_rate + '%\n---------------------\n'
-        response_message += message_this_coin
+        # 2. 코인순위의 message_response
+            message_this_coin = str(rank) + '위\n┌ ' + name +'   '+ str_price_usd +'$/' + str_price_krw + '원\n├ 김프    ' + gimp + '%\n├ 변화율   ' + add_change_mark + percent_change_24h + "% (" +change_mark + ')\n└ 회전율   ' + circul_rate + '%\n---------------------\n'
+            response_message += message_this_coin
 
     # 3. 기타 코인관련 잡기능 BTC, ETH, XRP 들의 개별 dATA + 잡 코멘트 넣기.
-    coin_list_top3 = ['BTC', 'ETH', 'XRP']
-    if data in coin_list_top3:
+
+    elif data in coin_list_top3:
         coin_data = ticker2(data)[0]
         rank = int(coin_data['rank'])
         name = coin_data['name']
@@ -172,7 +150,7 @@ def message(request):
             message_this_coin = "\n★★★★★★★★★★★★★★★\n심재리플 리플심재"
 
     # 4. JPY Exchange_Rates List 보이기 + 최저가격 보여주기
-    if data == 'JPY_Exchange':
+    elif data == 'JPY_Exchange':
         response_message_jpy = jpy_rate_kakao()
         # response_message_jpy = jpy_test2()
         # aa, bb = jpy_test2()
@@ -195,7 +173,7 @@ def message(request):
                 }
 
                 })
-    elif data in coin_rate_selector:
+    elif data == 'Coin_Rank_Top 10':
         return JsonResponse({
                 "message": {
                     "text": response_message
