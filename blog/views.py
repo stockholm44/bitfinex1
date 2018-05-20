@@ -308,6 +308,7 @@ def price_coin(request):
     # return HttpResponse("BTC is %d$" % volume)
 
 def rsi_list(request):
+    start_time = time.time()
     # 180519_BTC의 time봉별 RSI리스트 dict화
     time_delta_list, time_delta_list_name, rsi_btc_value_list = rsi_btc_values()
     rsi_btc_list = {}
@@ -320,19 +321,43 @@ def rsi_list(request):
     for i, symbol_temp in enumerate(symbols):
         rsi_coin_list[symbol_temp] = rsi_coin_value_list[i]
 
-    context = {'rsi_btc_list': rsi_btc_list,'rsi_coin_list': rsi_coin_list}
+    end_time = time.time()
+    elapse_time = int(end_time - start_time)
+    if elapse_time > 20:
+        elapse_time_message = 'Loading이 너무 오래걸렸습니다. 코딩 최적화가 절실합니다.'
+    elif elapse_time > 10:
+        elapse_time_message = 'Loading이 좀 걸렸습니다. 조금 수정이 필요합니다.'
+    else:
+        elapse_time_message = 'Loading이 적당합니다. 냅둬도됩니다.'
+
+    context = {'rsi_btc_list': rsi_btc_list,'rsi_coin_list': rsi_coin_list,'elapse_time':elapse_time,
+               'elapse_time_message':elapse_time_message}
+
     return render(request, 'blog/rsi_list.html', context)
 
 def jpy_list(request):
+    start_time = time.time()
     minimum_rate, minimum_rate_exchange = jpy_rate_min()
     bank_name, bank_exchange_rate = jpy_rate()
     jpy_exchange_list = {}
     for i in range(len(bank_name)):
         jpy_exchange_list[bank_name[i]] = bank_exchange_rate[i]
+
+    end_time = time.time()
+    elapse_time = int(end_time - start_time)
+    if elapse_time > 20:
+        elapse_time_message = 'Loading이 너무 오래걸렸습니다. 코딩 최적화가 절실합니다.'
+    elif elapse_time > 10:
+        elapse_time_message = 'Loading이 좀 걸렸습니다. 조금 수정이 필요합니다.'
+    else:
+        elapse_time_message = 'Loading이 적당합니다. 냅둬도됩니다.'
+
     context = {
         'minimum_rate': minimum_rate,
         'minimum_rate_exchange': minimum_rate_exchange,
-        'jpy_exchange_list': jpy_exchange_list
+        'jpy_exchange_list': jpy_exchange_list,
+        'elapse_time':elapse_time,
+        'elapse_time_message':elapse_time_message
         }
     return render(request, 'blog/jpy_list.html', context)
 

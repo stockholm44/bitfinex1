@@ -133,7 +133,7 @@ def cmc_data():
     #     print(i+1, symbol_name[i], symbol[i], symbol_site[i], symbol_market_cap[i], symbol_circulating_supply[i], symbol_price_usd[i], symbol_volume_usd[i])
     # print(i+1, type(symbol_name[i]), type(symbol[i]), type(symbol_site[i]), type(symbol_market_cap[i]), type(symbol_circulating_supply[i]), type(symbol_price_usd[i]), type(symbol_volume_usd[i]))
 
-    return symbol_name[:20], symbol[:20], symbol_site[:20], symbol_market_cap[:20], symbol_circulating_supply[:20], symbol_price_usd[:20], symbol_volume_usd[:20]
+    return symbol_name[:10], symbol[:10], symbol_site[:10], symbol_market_cap[:10], symbol_circulating_supply[:10], symbol_price_usd[:10], symbol_volume_usd[:10]
 
 # 여기부터 뷰티풀 숲을 이용한 웹페이지 크롤링(코인마켓캡 coin별 1일봉 30일데이타.)
 def raw_data_1day(coin):
