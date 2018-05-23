@@ -45,7 +45,7 @@ def message(request):
 
 
         # 10위만 남기고 지움. 백업용으로 주석으로 남김.
-        # coin_rate_selector = ['Coin_Rank_Top 5', 'Coin_Rank_Top 10','Coin_Rank_Top 20']
+        # coin_rate_selector = ['Coin_Rank_Top 5',Coin_Rank_Top 10','Coin_Rank_Top 20']
         #
         # if data == 'Coin_Rank_Top 5':
         #     coin_count = 5
@@ -282,7 +282,7 @@ def price_coin(request):
     # context = {'coin_price': coin_price, 'volume': volume, 'gimp':gimp}
 
     context = {'coin_price': coin_price, 'coin_price_bithumb': coin_price_bithumb}
-    return render(request, 'blog/price_coin.html', context)
+    return render(request, 'blog/index.html', context)
     # return HttpResponse("BTC is %d$" % volume)
 
 def rsi_list(request):
@@ -311,7 +311,7 @@ def rsi_list(request):
     context = {'rsi_btc_list': rsi_btc_list,'rsi_coin_list': rsi_coin_list,'elapse_time':elapse_time,
                'elapse_time_message':elapse_time_message}
 
-    return render(request, 'blog/rsi_list.html', context)
+    return render(request, 'blog/coin.html', context)
 
 def jpy_list(request):
     start_time = time.time()
@@ -337,7 +337,7 @@ def jpy_list(request):
         'elapse_time':elapse_time,
         'elapse_time_message':elapse_time_message
         }
-    return render(request, 'blog/jpy_list.html', context)
+    return render(request, 'blog/jpy.html', context)
 
 
 def post_list(request):
@@ -372,10 +372,11 @@ def post_edit(request, pk):
         form = PostForm(instance=post)
     return render(request, 'blog/post_edit.html', {'form': form})
 def index(request):
-    person= {'firstname': 'Craig', 'lastname': 'Daniels'}
-    weather= "sunny"
-    context= {
-        'person': person,
-        'weather': weather,
-        }
-    return render(request, 'blog/post_list.html', context)
+    context= {}
+    return render(request, 'blog/index.html', context)
+def about(request):
+    context= {}
+    return render(request, 'blog/about.html', context)
+def contact(request):
+    context= {}
+    return render(request, 'blog/contact.html', context)

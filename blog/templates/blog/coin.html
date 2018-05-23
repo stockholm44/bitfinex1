@@ -1,0 +1,32 @@
+{% extends 'blog/base_new.html' %}
+
+{% block content %}
+<div class="container">
+  <br>
+  <div>
+    <p class="lead">Elapse_time : {{ elapse_time }}초가 걸렸습니다.</p>
+    <p class="lead h6">             → {{ elapse_time_message }}</p>
+
+  <hr class="my-4">
+
+  <div>
+      <h3>Bitcoin 봉별 RSI</h3>
+      <ul class="list-group list-group-flush">
+      {% for key, value in rsi_btc_list.items %}
+        <li class="list-group-item">RSI {{ key|upper }}봉 : {{ value }}.</li>
+      {% endfor %}
+      </ul>
+  </div>
+
+  <hr class="my-4">
+
+  <div>
+      <h3>Coin 종류별 1일봉 RSI</h3>
+      <ul class="list-group list-group-flush">
+      {% for key, value in rsi_coin_list.items %}
+        <li class="list-group-item">RSI 1일봉 {{ key }} : {{ value }}.</li>
+      {% endfor %}
+      </ul>
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,47 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>CYMBALS4 - about</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+    <link rel="stylesheet" href="{% static 'css/blog.css' %}">
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <div class="jumbotron">
+          <h1 class="display-4"><a href = "{% url 'index' %}">CYMBALS4</a></h1>
+        </div>
+      </header>
+
+      <nav class="site-header sticky-top py-1 taesun">
+        <div class="container d-flex flex-column flex-md-row justify-content-between">
+          <a class="py-2" href="#">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="d-block mx-auto"><circle cx="12" cy="12" r="10"></circle><line x1="14.31" y1="8" x2="20.05" y2="17.94"></line><line x1="9.69" y1="8" x2="21.17" y2="8"></line><line x1="7.38" y1="12" x2="13.12" y2="2.06"></line><line x1="9.69" y1="16" x2="3.95" y2="6.06"></line><line x1="14.31" y1="16" x2="2.83" y2="16"></line><line x1="16.62" y1="12" x2="10.88" y2="21.94"></line></svg>
+          </a>
+          <a class="py-1 d-none d-md-inline-block" href="{% url 'about' %}">About</a>
+          <a class="py-1 d-none d-md-inline-block" href="{% url 'coin' %}">Coin Index</a>
+          <a class="py-1 d-none d-md-inline-block" href="{% url 'jpy' %}">JPY Exchange</a>
+          <!-- <a class="py-1 d-none d-md-inline-block" href="">TEMP</a>
+          <a class="py-1 d-none d-md-inline-block" href="">TEMP</a>
+          <a class="py-1 d-none d-md-inline-block" href="">TEMP</a>
+          <a class="py-1 d-none d-md-inline-block" href="">TEMP</a> -->
+        </div>
+      </nav>
+
+      <article>
+        {% block content %}
+        {% endblock %}
+        <!-- index.html은 첫화면이니까 여기에 Coin 시세들 table 로 넣으면 좋을듯.
+              솔직히 아직 이홈페이지가 다른 홈페이지와의 차별화 포인트가 없음
+              그냥 일단 luka7.net 처럼 김프라도 계산해놓음 좋을듯.
+              원화 달러화 차이정도 혹은 거래소별 btc가격차이정도 추가.-->
+      </article>
+      <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+    </div>
+  </body>
+</html>

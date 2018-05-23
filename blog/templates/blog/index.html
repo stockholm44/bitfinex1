@@ -1,0 +1,25 @@
+{% extends 'blog/base_new.html' %}
+
+{% block content %}
+<br>
+
+<div>
+    <h3><a href="http://bitfinex.com">Price List in Bitfinex.com</a></h3>
+    <ul class="list-group list-group-flush">
+    {% for key, value in coin_price.items %}
+      <li class="list-group-item">{{ key|upper }} is {{ value }}.</li>
+    {% endfor %}
+  </ul>
+</div>
+
+<hr class="my-4">
+
+<div>
+  <h3><a href="http://coinone.co.kr/chart/">Price List in Bithumb.com</a></h3>
+  <ul class="list-group list-group-flush">
+    {% for key, value in coin_price_bithumb.items %}
+      <li class="list-group-item">{{ key }} is {{ value }}.</li>    {% endfor %}
+    {% endfor %}
+  </ul>
+</div>
+{% endblock %}

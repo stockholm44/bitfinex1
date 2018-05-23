@@ -1,0 +1,30 @@
+{% extends 'blog/base_new.html' %}
+
+{% block content %}
+<div class="container">
+  <br>
+  <div>
+    <p class="lead">Elapse_time : {{ elapse_time }}초가 걸렸습니다.</p>
+    <p class="lead">             → {{ elapse_time_message }}</p>
+
+  <hr class="my-4">
+
+  <div>
+    <h3>★★JPY Minimum Rate & Exchange★★</h3>
+      <p class="lead">제일 저렴한 환율은 {{ minimum_rate }}엔이며 저렴한 거래소는 아래와 같습니다.</p>
+      <p class="lead">{{ minimum_rate_exchange }}</p>
+  </div>
+  <hr class="my-4">
+  <div>
+    <h3>★JPY Exchange Price in Seoul</h3>
+      <ul class="list-group list-group-flush">
+        {% for key, value in jpy_exchange_list.items %}
+          <li class="list-group-item">{{ key }}: {{ value }}엔</li>
+        {% endfor %}
+      </ul>
+  </div>
+</div>
+
+
+
+{% endblock %}
