@@ -77,7 +77,7 @@ now = pd.to_datetime(today_utc_datetime, format = '%Y%m%d')
 nowDate = now.strftime('%Y%m%d')
 # print('nowDate',nowDate)
 
-
+# past날짜는 if절로 오늘이면 오늘날짜로, 0<x<30 사이면 last_datetime으로, 30< 이면 30으로 설정.
 past = now - pd.Timedelta('30 days')
 # print("past",past)
 pastDate = past.strftime('%Y%m%d')
@@ -85,7 +85,7 @@ pastDate = past.strftime('%Y%m%d')
 period_str = 'start=' + pastDate + '&end=' + nowDate
 print(period_str)
 # date_div = datetime(year, month, day, hour)
-# date_div_ts = int(mktime(date_div.timetuple()))
+# date_div_ts = int(mktime(date_div.timetuple()))   --> 이거 왜있었는지 모르겠음.
 
 # URL1 = "https://coinmarketcap.com/currencies/bitcoin/historical-data/?"
 URL1 = "https://coinmarketcap.com/currencies/"
