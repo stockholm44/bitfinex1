@@ -70,10 +70,14 @@ print("today_utc_epoch",today_utc_epoch)
 
 
 # url 불러올때 기간설정을 위한 str구현
+# nowDate와 pastDate를 각각 구현.
+# 하지만 pastDate는 이전버전에서는 그냥 30일이었지만 이번버전은 database의 마지막날짜를 보고 진행.
 now = pd.to_datetime(today_utc_datetime, format = '%Y%m%d')
 # print("now",now)
 nowDate = now.strftime('%Y%m%d')
 # print('nowDate',nowDate)
+
+
 past = now - pd.Timedelta('30 days')
 # print("past",past)
 pastDate = past.strftime('%Y%m%d')
