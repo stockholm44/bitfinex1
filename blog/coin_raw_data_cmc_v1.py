@@ -1,3 +1,14 @@
+# 버전설명: 최초버전이후로 v1을 작성한다. 현재는 instant식으로 data를 크롤링 + API ticker를 이용해서 계속 raw_data만 갖고 했는데
+#          이제 sqlite로 ohclv를 저장하여 trade data전체를 갖고 for문을 돌리는 시간을 아끼고자한다.
+#          일단 이 파일자체는 coinmarketcap의 각 1일봉들을 가져올건데 database가 없으면 1달치를... 있다면 그 마지막날로부터 현재까지를 업데이트한다.
+#          마지막날이 포함되는 이유는 database상 마지막날은 실시간현재 data가 반영. 그래서 불완전한 data임
+#          그래서 마지막날 포함하여 현재날까지를 업데이트.
+#          예상 막히는점.
+#            1) dataframe을 정렬하기.
+#            2) 마지막날의 ohclv data를 추가가 아닌 update형식으로 되는지 여부.
+#            3) timestamp 다루기.날짜단위로 나와야하는데 애매한 단위가 되어 data를 왜곡시킬우려있음.
+
+
 import requests
 import json
 import base64
@@ -10,7 +21,11 @@ from datetime import datetime
 from datetime import timedelta
 from time import mktime
 from calendar import *
-from cmc import *
+from cmc import * # 현재날짜의 ohcl을 가져오기위함.
+
+import pandas as pd
+import sqlite3
+from pandas import Series, DataFrame
 
 # 크롤링을 위한 뷰티풀숲 소환.
 from bs4 import BeautifulSoup
@@ -18,27 +33,53 @@ from urllib.request import urlopen
 
 __all__ = ['cmc_data', 'raw_data_1day']
 
-# 오로지 url불러올때 현재날짜와 1달전날짜를 소환하기위한 변수들임.
-# (시간뒤부분빼려고 한거이므로 나중에 시간이후를 빼는 식이있으면 그걸로 대체가능)
-# 아마 time.time()으로 초까지 설정하고 분/초 이후 단만 불러내서 그걸 빼는걸로 가능하지 않을까 생각해봄.
-year = int(datetime.fromtimestamp(time.time()).strftime('%Y'))
-month = int(datetime.fromtimestamp(time.time()).strftime('%m'))
-day = int(datetime.fromtimestamp(time.time()).strftime('%d'))
-# hour = int(datetime.fromtimestamp(timestamps_sum[0]).strftime('%H'))
-# minute = int(datetime.fromtimestamp(timestamps_sum[0]).strftime('%M'))
-# second = int(datetime.fromtimestamp(timestamps_sum[0]).strftime('%S'))
 
-# print(year, month, day)
-# print(type(year),type(month),type(day))
+
+# 1. database에 저장된 1일봉중 맨마지막 날에 대한 timestamp 등 data 가져오기위함.
+con = sqlite3.connect("c:/djangocym/bitfinex/blog/db/coin.db")
+# coin.db에 btc_1day database가 btc 1일봉 data를 저장해놓은 databased임.
+# 기존버전의 dates에 utc 기준으로 딱 떨어지는 시간이 아닌 15:00로 되있음-> 한국시간기준으로 utc가 -9니까 그걸로 설정된듯.
+# 그래서 pd.to_datetime으로 utc기준으로 나오게 하고 그것을 epoch unixtime으로 저장하려함.
+df_read = pd.read_sql("SELECT * FROM btc_1day", con, index_col = 'index')
+df_read.index = pd.to_datetime(df_read.index, unit = 's')
+df_read.index = df_read.index.tz_localize('UTC')
+
+# database의 마지막 날짜 확인.
+last_timestamp = df_read.index[-1]
+print("last_timestamp",last_timestamp)
+
+# 마지막날짜의 datetime 확인.
+last_datetime = pd.to_datetime(last_timestamp,unit = 's')
+print("last_datetime",last_datetime)
+
+# 2. 현재날짜의 timestamp와 datetime 계산. 날짜단위 index를 위함.
+#  2-1. 현재 시각의 timestamp와 datetime 계산. to_datetime의 unit = 's'는 epoch time 계산시 ns로 단위가 Default로 되어있어 꼭해줘야함.
+now_datetime = pd.to_datetime(time.time(), unit = 's')
+year = now_datetime.year
+month = now_datetime.month
+day = now_datetime.day
+
+#  2-2. 날짜단위로 오늘날짜의 timestamp와 datetime 계산.
+today_utc_datetime = pd.Timestamp(year,month,day)
+today_utc_epoch = (today_utc_datetime-pd.Timestamp("1970-01-01")) // pd.Timedelta('1s')
+print("today_utc_datetime",today_utc_datetime)
+print("today_utc_epoch",today_utc_epoch)
+
+
+
+
 
 # url 불러올때 기간설정을 위한 str구현
-now = datetime(year, month, day)
-
+now = pd.to_datetime(today_utc_datetime, format = '%Y%m%d')
+# print("now",now)
 nowDate = now.strftime('%Y%m%d')
-past = now - timedelta(days = 30)
+# print('nowDate',nowDate)
+past = now - pd.Timedelta('30 days')
+# print("past",past)
 pastDate = past.strftime('%Y%m%d')
+# print('pastDate',pastDate)
 period_str = 'start=' + pastDate + '&end=' + nowDate
-# print(period_str)
+print(period_str)
 # date_div = datetime(year, month, day, hour)
 # date_div_ts = int(mktime(date_div.timetuple()))
 
@@ -218,6 +259,10 @@ def raw_data_1day(coin):
 
         date_str = datetime(date_year, date_month, date_day)
         date_unix = int(mktime(date_str.timetuple()))
+
+        date_str = pd.Timestamp(date_year, date_month, date_day)
+        date_unix = (date_str-pd.Timestamp("1970-01-01")) // pd.Timedelta('1s')
+
         dates.append(date_unix)
     # for i, line in enumerate(dates):
         # print(dates_str[i], dates[i], closes[i])
