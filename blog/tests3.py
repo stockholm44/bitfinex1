@@ -77,7 +77,6 @@ print("now_utc_epoch", now_utc_epoch)
 
 # print(now_datetime_utc)
 # print(df_read)
-
 # 잠시 주석화
 # print(df_read)
 # last_timestamp = df_read.index[-1]

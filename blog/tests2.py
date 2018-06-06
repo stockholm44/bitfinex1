@@ -35,5 +35,5 @@ df.to_sql('btc2', con)
 df_read = pd.read_sql("SELECT * FROM btc2", con, index_col = 'date')
 df_read.index = pd.to_datetime(df_read.index)
 #
-# print('df_read ******************************')
-# print(df_read)
+print('df_read ******************************')
+print(df_read)

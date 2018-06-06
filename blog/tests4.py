@@ -19,20 +19,6 @@ from datetime import timedelta
 from time import mktime
 from calendar import *
 
-year = int(datetime.fromtimestamp(time.time()).strftime('%Y'))
-month = int(datetime.fromtimestamp(time.time()).strftime('%m'))
-day = int(datetime.fromtimestamp(time.time()).strftime('%d'))
-hour = int(datetime.fromtimestamp(time.time()).strftime('%H'))
-
-print(hour)
-pd_t = pd.Timestamp('20180606')
-print(pd_t)
-minute = int(datetime.fromtimestamp(time.time()).strftime('%M'))
-second = int(datetime.fromtimestamp(time.time()).strftime('%S'))
-
-# print(year, month, day)
-# print(type(year),type(month),type(day))
-
 # url 불러올때 기간설정을 위한 str구현
 now = datetime(year, month, day, hour, minute, second )
 print(now)
